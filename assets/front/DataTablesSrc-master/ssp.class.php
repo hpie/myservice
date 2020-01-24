@@ -49,8 +49,8 @@ class SSP {
      *  @param  array $data    Data from the SQL get
      *  @return array          Formatted data in a row based format
      */
-    static function data_output($columns, $data) {
-//      print_r($columns);die;
+    static function data_output($columns, $data) {  
+//        print_r($columns);die;
         $out = array();
         for ($i = 0, $ien = count($data); $i < $ien; $i++) {
             $row = array();
@@ -214,6 +214,194 @@ class SSP {
      *  @param  array $columns Column information array
      *  @return array          Server-side processing response array
      */
+       static function employeeList($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }
+        
+//        echo "SELECT COUNT({$primaryKey})
+//			 FROM $table
+//                         INNER JOIN service_employee_role ser
+//                         ON se.employee_id=ser.employee_id 
+//			 $where";die;
+        
+//        echo "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+//			 FROM $table
+//                         INNER JOIN service_employee_role ser
+//                         ON se.employee_id=ser.employee_id
+//			 $where
+//			 $order
+//			 $limit";die;
+        
+        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table
+                         INNER JOIN service_employee_role ser
+                         ON se.employee_id=ser.employee_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                         INNER JOIN service_employee_role ser
+                         ON se.employee_id=ser.employee_id 
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                         INNER JOIN service_employee_role ser
+                         ON se.employee_id=ser.employee_id "    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);        
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {  
+                $empId=$row['employee_id'];
+                $row['edit'] = "<a href='".BASE_URL."/edit-employee-form/$empId' class='btn btn-xs btn-warning'>Edit <i class='fa fa-pencil'></i></a>";
+                $row['index'] = '';
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+       static function itemMakeList($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }       
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table                         
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table                         
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);        
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {  
+                $empId=$row['item_make_code'];
+                $row['edit'] = "<a href='".BASE_URL."/edit-item-make-form/$empId' class='btn btn-xs btn-warning'>Edit <i class='fa fa-pencil'></i></a>";
+                $row['index'] = '';
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+    
+        static function itemList($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }       
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table                         
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table                         
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);        
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {  
+                $empId=$row['item_code'];
+                $row['edit'] = "<a href='".BASE_URL."/edit-item-form/$empId' class='btn btn-xs btn-warning'>Edit <i class='fa fa-pencil'></i></a>";
+                $row['index'] = '';
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
     
     static function complainList($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
         $bindings = array();
@@ -258,6 +446,65 @@ class SSP {
                 
                 if($row['ticket_status']){
                       $row['Assign'] = "<a href='".BASE_URL."/assign-executive-form/".$row['ticket_id']."' class='btn btn-xs btn-warning'> Assign <i class='fa fa-check'></i></a>";
+                }
+                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+      static function complainListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }
+                        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table                         
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table                       
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table "    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) { 
+                
+                if($row['ticket_status']){
+                      $row['Assign'] = "<a href='".BASE_URL."/assign-executive-form-manager/".$row['ticket_id']."' class='btn btn-xs btn-warning'> Assign <i class='fa fa-check'></i></a>";
                 }
                 
                 $row['index'] = '';  

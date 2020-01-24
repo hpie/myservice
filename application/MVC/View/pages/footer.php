@@ -55,6 +55,13 @@
 <script src="<?php echo BASE_URL ?>assets/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js" type="text/javascript" ></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
 <!--<script src="<?php echo BASE_URL; ?>/assets/front/js/jquery.dataTables.min.js" type="text/javascript"></script>-->
 <script type="text/javascript" language="javascript" src="<?php echo BASE_URL; ?>/assets/front/js/dataTables.responsive.min.js"></script>
 <!--Slider--> 
@@ -90,10 +97,64 @@
 //        });
 //
 //    });
-
-
-    $(document).ready(function () {
+    $(document).ready(function () {    
         
+        if (<?php if (isset($_SESSION['existrecordMobile'])) {
+    echo $_SESSION['existrecordMobile'];
+} ?> == 1) {
+            var d = new PNotify({
+                title: 'Mobile number allready exist',
+                type: 'error',
+                styling: 'bootstrap3'
+            });
+<?php echo $_SESSION['existrecordMobile'] = 0; ?>;
+        } 
+    if (<?php if (isset($_SESSION['existrecordEmail'])) {
+    echo $_SESSION['existrecordEmail'];
+} ?> == 1) {
+            var d = new PNotify({
+                title: 'Email allready exist',
+                type: 'error',
+                styling: 'bootstrap3'
+            });
+<?php echo $_SESSION['existrecordEmail'] = 0; ?>;
+        }   
+ 
+ 
+ if (<?php if (isset($_SESSION['dataupdate'])) {
+    echo $_SESSION['dataupdate'];
+} ?> == 1) {
+            var d = new PNotify({
+                title: 'Data updated successfully',
+                type: 'success',
+                styling: 'bootstrap3'
+            });
+<?php echo $_SESSION['dataupdate'] = 0; ?>;
+        }
+ 
+ 
+ if (<?php if (isset($_SESSION['addData'])) {
+    echo $_SESSION['addData'];
+} ?> == 1) {
+            var d = new PNotify({
+                title: 'Add data successfully',
+                type: 'success',
+                styling: 'bootstrap3'
+            });
+<?php echo $_SESSION['addData'] = 0; ?>;
+        }
+ 
+ 
+  if (<?php if (isset($_SESSION['addEmployee'])) {
+    echo $_SESSION['addEmployee'];
+} ?> == 1) {
+            var d = new PNotify({
+                title: 'Add data successfully',
+                type: 'success',
+                styling: 'bootstrap3'
+            });
+<?php echo $_SESSION['addEmployee'] = 0; ?>;
+        }  
 if (<?php if (isset($_SESSION['assignComplain'])) {
     echo $_SESSION['assignComplain'];
 } ?> == 1) {
@@ -109,11 +170,22 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
 //            viewMode: 'years', 
 //            minViewMode: 'years'         
 //        }); 
-<?php if ($TITLE === TITLE_COMPLAIN_LIST) { ?>
+<?php if ($TITLE === TITLE_ADD_EMPLOYEE) { ?>
+   $('#dp3').datepicker({
+            format: 'yyyy-mm-dd',            
+            autoclose: true,
+            endDate: new Date()
+        });
+<?php } ?>
+<?php if ($TITLE === TITLE_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE===TITLE_ADD_TICKET) { ?>
         $('#dp4').datepicker({
             format: 'yyyy',
             viewMode: 'years',
             minViewMode: 'years',
+            autoclose: true
+        });
+        $('#dp3').datepicker({
+            format: 'yyyy-mm-dd',            
             autoclose: true
         });
         $('#dp5').datepicker({
@@ -123,6 +195,15 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
             minViewMode: 'months',
             autoclose: true
         });
+            
+        $('#datetimepicker3').datetimepicker({
+            format: 'HH:mm'
+        });
+         $('#datetimepicker4').datetimepicker({
+            format: 'HH:mm'
+        });
+          
+
 <?php } ?>
     });
 </script>
@@ -349,6 +430,139 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
 //                    }
 //                });
 //            });
+        });
+    </script>
+<?php } ?>    
+    <?php if ($TITLE === TITLE_EMPLOYEE_LIST) { ?>
+    <script>
+        $(document).ready(function () {
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/employeeList.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "employee_id"},
+                        {"data": "employee_fname"},
+                        {"data": "employee_mname"},
+                        {"data": "employee_lname"},
+                        {"data": "employee_mobile_number"},
+                        {"data": "employee_email"},                       
+                        {"data": "role_code"},
+                        {"data": "edit"}
+                    ]
+                });
+            }                    
+        });
+    </script>
+<?php } ?>    
+    <?php if ($TITLE === TITLE_ITEM_MAKE_LIST) { ?>
+    <script>
+        $(document).ready(function () {
+            fill_datatable();
+            function fill_datatable()
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/itemMakeList.php' ?>"                        
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "item_make_code"},
+                        {"data": "item_make_description"},
+                        {"data": "item_make_mobile"},
+                        {"data": "item_make_phone"},
+                        {"data": "item_make_email"},
+                        {"data": "item_make_address"},                       
+                        {"data": "item_make_city"},
+                        {"data": "item_make_state"},
+                        {"data": "item_make_country"},                       
+                        {"data": "item_status"},
+                        {"data": "edit"}
+                    ]
+                });
+            }                    
+        });
+    </script>
+<?php } ?>   
+     <?php if ($TITLE === TITLE_ITEM_LIST) { ?>
+    <script>
+        $(document).ready(function () {
+            fill_datatable();
+            function fill_datatable()
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/itemList.php' ?>"                        
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "item_code"},
+                        {"data": "item_make_code"},
+                        {"data": "item_desc"},
+                        {"data": "item_status"},
+                        {"data": "edit"}
+                    ]
+                });
+            }                    
         });
     </script>
 <?php } ?>    

@@ -5,20 +5,38 @@
             <li>
                 <a href="<?php echo ADMIN_DASHBOARD_LINK; ?>"><i class="fa fa-dashboard"></i> Dashboard <span class="fa fa-chevron-right"></span></a>                    
             </li>
+            <li><a><i class="fa fa-users"></i> Employee <span class="fa fa-chevron-right"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo ADMIN_EMPLOYEE_LIST_LINK; ?>">Employee List</a>
+                    </li>
+                    <li><a href="<?php echo ADMIN_ADD_EMPLOYEE_FORM_LINK; ?>">Add Employee</a>
+                    </li>
+                </ul>
+            </li>
             <li><a><i class="fa fa-file"></i> Complain <span class="fa fa-chevron-right"></span></a>
                 <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo ADMIN_ADD_TICKET_FORM_LINK; ?>">Add Complain</a>
+                    </li>
                     <li><a href="<?php echo ADMIN_OPEN_COMPLAIN_LIST_LINK; ?>">Open Complain</a>
                     </li>
-<!--                    <li><a href="<?php //echo ADMIN_COMPLAIN_LIST_LINK; ?>CLOSED">Closed Complain</a>
-                    </li>
-                    <li><a href="<?php //echo ADMIN_COMPLAIN_LIST_LINK; ?>CANCLED">Cancel Complain</a>
-                    </li>                   
-                    <li><a href="<?php //echo ADMIN_COMPLAIN_LIST_LINK; ?>RESOLVED">Resolved Complain</a>
-                    </li>   
-                    <li><a href="<?php //echo ADMIN_COMPLAIN_LIST_LINK; ?>ASSIGNED">Assigned Complain</a>
-                    </li>                   -->
                 </ul>
-            </li>                    
+            </li> 
+            <li><a><i class="fa fa-file"></i> Service Item Make <span class="fa fa-chevron-right"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo ADMIN_ADD_ITEM_MAKE_FORM_LINK; ?>">Add Item Make</a>
+                    </li>
+                    <li><a href="<?php echo ADMIN_ITEM_MAKE_LIST_LINK; ?>">Item Make List</a>
+                    </li>
+                </ul>
+            </li> 
+            <li><a><i class="fa fa-file"></i> Service Item <span class="fa fa-chevron-right"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo ADMIN_ADD_ITEM_FORM_LINK; ?>">Add Item</a>
+                    </li>
+                    <li><a href="<?php echo ADMIN_ITEM_LIST_LINK; ?>">Item List</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>            
 </div>

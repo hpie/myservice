@@ -23,10 +23,31 @@ class login_c extends Controllers {
                 }               
             }                                 
         loadLoginView('login/', 'login.php', $this->data);
-    }         
+    }
+    public function loginEmployee() {
+        $error = '';
+        $_SESSION['valid'] = 0;                
+            if (isset($_POST['username']) && isset($_POST['password'])) {
+                $result = $this->login_m->login_manager($_POST['username'], $_POST['password']);                                              
+                if ($result==true) {                    
+                    redirect(FRONT_EMPLOYEE_HOME_LINK);
+                }
+                if ($result == false) {
+                    $_SESSION['valid'] = 1;
+                } 
+                if($result==2){
+                    redirect(FRONT_EMPLOYEE_LOGIN_LINK);
+                }               
+            }                                 
+        loadviewOnlyPage('login/', 'loginManager.php', $this->data);
+    }
     public function logout() {
         sessionDestroy();
         redirect(LOGIN);
+    }    
+    public function logoutEmployee() {
+        sessionDestroy();
+        redirect(FRONT_EMPLOYEE_LOGIN_LINK);
     }    
 }
 

@@ -26,13 +26,14 @@ include_once("../config/init.php");
 /* * ***************************************************************************************** */
 /* * ************************************************ add customer ****************************** */
 /* * ***************************************************************************************** */
-$APP->post('add-customer', false, function() use($APP) {   
+$APP->get('add-customer', false, function() use($APP) {   
             $data = array();
             global $USERID;
             global $controller;
             global $VARS;
             global $ID;            
-            $VARS=json_decode(file_get_contents("php://input"),true);              
+          //  $VARS=json_decode(file_get_contents("php://input"),true);              
+          //  print_r($VARS);die;
 //            $APP->generateApiKey();
 //             promocode();                        
             verifyRequiredParams(array('customer_mobile_number','customer_password', 'customer_fname','customer_mname','customer_lname','customer_email','customer_address','customer_city','customer_state','customer_country','device'));
@@ -72,7 +73,7 @@ $APP->put('update-customer', false, function(){
             global $controller;
             global $VARS;
             global $ID;            
-            $VARS=json_decode(file_get_contents("php://input"),true);            
+          //  $VARS=json_decode(file_get_contents("php://input"),true);            
             issetID();             
                verifyRequiredParams(array('customer_password', 'customer_fname','customer_mname','customer_lname','customer_email','customer_address','customer_city','customer_state','customer_country','device'));
             if (!in_array($VARS['device'], array('iphone', 'android','web'))) {

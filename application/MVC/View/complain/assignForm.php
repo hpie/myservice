@@ -30,7 +30,38 @@
                                         ?>                                           
                                     </select>
                                 </div>
-                            </div>                                                        
+                            </div>  
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appointment_date	">Appointment Date<span class="required">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <input type="text" name="appointment_date" id="dp3" readonly="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $resultTicket['appointment_date']; ?>">
+                                </div>
+                            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Appointment Time Range<span class="text-danger">*</span>
+                </label>                                                                                                             
+                <div class='col-md-2 col-sm-3 col-xs-3'>
+                    <input type='text' class="form-control col-md-7 col-xs-12" id='datetimepicker3' value="<?php echo $fromtotime[0]; ?>" name="appointment_time_range1" required="" />                                       
+                </div>
+                <div class='col-md-2 col-sm-3 col-xs-3'>
+                    
+                    <input type='text' class="form-control col-md-7 col-xs-12" id='datetimepicker4' value="<?php echo $fromtotime[1]; ?>" name="appointment_time_range2" required="" />                   
+                </div>
+            </div>
+<!--                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appointment_time_range">Appointment Time Range<span class="text-danger">*</span>
+                                </label>                                                                                                             
+                                <div class="col-md-2 col-sm-3 col-xs-3" data-autoclose="true">
+                                    <input class="form-control" placeholder="From Time" value="<?php //echo $fromtotime[0]; ?>" name="appointment_time_range1" required="">
+                                    <input type="text" name="appointment_time_range1" id="datetimepicker3" readonly="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $fromtotime[0]; ?>">
+                                </div>                                    
+                                <div class="col-md-2 col-sm-3 col-xs-3 input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                                    <input class="form-control timepicker" name="appointment_time_range2" value="<?php echo $fromtotime[1]; ?>" placeholder="To Time" required="">
+                                </div>
+                            </div>-->
+
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appointment_notes">Appointment Notes
                                 </label>

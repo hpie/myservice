@@ -21,8 +21,25 @@ function sessionCheck() {
         redirect(LOGIN);
         return false;
     }
+    if (($_SESSION['adminDetails']['role_code'])!='ADMIN') {
+        redirect(LOGIN);
+        return false;
+    }
     return true;
 }
+
+function sessionCheckManager() {
+    if (!isset($_SESSION['adminDetails']['employee_id'])) {
+        redirect(FRONT_EMPLOYEE_LOGIN_LINK);
+        return false;
+    }
+    if (($_SESSION['adminDetails']['role_code'])=='ADMIN') {
+        redirect(FRONT_EMPLOYEE_LOGIN_LINK);
+        return false;
+    }
+    return true;
+}
+
 
 function sessionDestroy() {
     session_destroy();

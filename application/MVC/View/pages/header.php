@@ -14,7 +14,7 @@
     <link href="<?php echo BASE_URL; ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     
 
-     <!--<link href="<?php echo BASE_URL; ?>assets/datepicker1/css/datepicker.css" rel="stylesheet">--> 
+     <link href="<?php echo BASE_URL; ?>assets/datepicker1/css/datepicker.css" rel="stylesheet"> 
     <!-- NProgress -->
     <link href="<?php echo BASE_URL; ?>assets/nprogress/nprogress.css" rel="stylesheet">        
     <link href="<?php echo BASE_URL; ?>assets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">    
@@ -25,6 +25,14 @@
     <link href="<?php echo BASE_URL; ?>assets/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>assets/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>assets/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">  
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
+
+
+    
     
     <!--<link href="<?php echo BASE_URL; ?>/assets/front/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>-->
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/assets/front/css/dataTables.responsive.css">        

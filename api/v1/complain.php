@@ -24,15 +24,37 @@ include_once("../config/init.php");
 
 
 /* * ***************************************************************************************** */
-/* * ************************************************insert data in tax_challan ****************************** */
+/* * ************************************************add complain ****************************** */
 /* * ***************************************************************************************** */
-$APP->post('add-complain', false, function() use($APP) {   
+//$APP->get('get-tax-type', false, function() use($APP) {
+//            $data = array();
+//            global $USERID;
+//            global $controller;
+//            global $VARS;
+//            global $ID;
+//            
+//            $VARS=json_decode(file_get_contents("php://input"),true);            
+//            issetID();            
+//            verifyRequiredParams(array('token', 'device'));
+//            if (!in_array($VARS['device'], array('iphone', 'android'))) {
+//                return array(false, "device name is invalid", $data);
+//            }                                  
+//            $result=$controller->getSingleRecordById('tax_type',$ID);
+//            if ($result) {
+//                $data['Result']=$result;
+//                return array(true, "Data Loaded successfully", $data);
+//            }
+//            return array(false, "No Record found", $data);
+//        });  
+
+$APP->get('add-complain', false, function() use($APP) {   
             $data = array();
             global $USERID;
             global $controller;
             global $VARS;
-            global $ID;            
-            $VARS=json_decode(file_get_contents("php://input"),true);
+            global $ID;   
+           // print_r($VARS);die;
+//            $VARS=json_decode(file_get_contents("php://input"),true);            
 //                        
 //            $APP->generateApiKey();
 //             promocode();                        

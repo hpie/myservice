@@ -8,4 +8,38 @@ $route['dashboard'] = 'admin_c';
 $route['complain-list/OPEN'] = 'admin_c/complainList';
 $route['assign-executive-form/(:any)'] = 'admin_c/assignExecutiveForm';
 $route['assign-executive-add'] = 'admin_c/assignExecutiveAdd';
+
+$route['add-employee-form'] = 'admin_c/addEmployeeForm';
+$route['add-employee'] = 'admin_c/addEmployee';
+$route['employee-list'] = 'admin_c/employeeList';
+$route['edit-employee-form/(:any)'] = 'admin_c/editEmployeeForm';
+$route['edit-employee/(:any)'] = 'admin_c/editEmployee';
+
+$route['add-item-make-form'] = 'admin_c/addItemMakeForm';
+$route['add-item-make'] = 'admin_c/addItemMake';
+$route['item-make-list'] = 'admin_c/itemMakeList';
+$route['edit-item-make-form/(:any)'] = 'admin_c/editItemMakeForm';
+$route['edit-item-make/(:any)'] = 'admin_c/editItemMake';
+
+
+$route['add-item-form'] = 'admin_c/addItemForm';
+$route['add-item'] = 'admin_c/addItem';
+$route['item-list'] = 'admin_c/itemList';
+$route['edit-item-form/(:any)'] = 'admin_c/editItemForm';
+$route['edit-item/(:any)'] = 'admin_c/editItem';
+
+$route['add-ticket-form'] = 'admin_c/addTicketForm';
+$route['add-ticket'] = 'admin_c/addTicket';
+$route['edit-ticket-form/(:any)'] = 'admin_c/editTicketForm';
+$route['edit-ticket/(:any)'] = 'admin_c/editTicket';
 //**************************************************************************************//
+
+//*************************************************************************************//
+//******************************front side root***************************************//
+//***********************************************************************************//
+$route['employee-complain-list'] = 'front_c/complainListEmployee';
+$route['employee-dashboard'] = 'front_c';
+$route['employee-login'] = 'login_c/loginEmployee';
+$route['employee-logout'] = 'login_c/logoutEmployee';
+$route['assign-executive-form-manager/(:any)'] = 'front_c/assignExecutiveForm';
+$route['assign-executive-add-employee'] = 'front_c/assignExecutiveAdd';

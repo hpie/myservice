@@ -15,16 +15,6 @@ function loadview($dir, $filename, $data) {
     include_once(APP_INCLUDE_V . "pages/footer.php");
 }
 
-function loadviewTechnician($dir, $filename, $data) {
-    global $APP;
-    extract($data);
-    include_once(APP_INCLUDE_V . "technician/pages/header.php");
-    include_once(APP_INCLUDE_V . "technician/pages/sidebar.php");
-    include_once(APP_INCLUDE_V . "technician/pages/topnavigation.php");
-    include_once(APP_INCLUDE_V . $dir . $filename);
-    include_once(APP_INCLUDE_V . "technician/pages/footer.php");
-}
-
 function loadviewOnlyPage($dir, $filename, $data) {
     global $APP;
     extract($data);
@@ -34,9 +24,10 @@ function loadviewOnlyPage($dir, $filename, $data) {
 function loadviewFront($dir, $filename, $data) {
     global $APP;
     extract($data);
-    include_once(APP_INCLUDE_V . "frontcommon/header.php");
+    include_once(APP_INCLUDE_V . "front/common/header.php");
+    include_once(APP_INCLUDE_V . "front/common/topbar.php");
     include_once(APP_INCLUDE_V . $dir . $filename);
-    include_once(APP_INCLUDE_V . "frontcommon/footer.php");
+    include_once(APP_INCLUDE_V . "front/common/footer.php");
 }
 
 
