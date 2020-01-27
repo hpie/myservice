@@ -28,7 +28,7 @@ class login_c extends Controllers {
         $error = '';
         $_SESSION['valid'] = 0;                
             if (isset($_POST['username']) && isset($_POST['password'])) {
-                $result = $this->login_m->login_manager($_POST['username'], $_POST['password']);                                              
+                $result = $this->login_m->login_employee($_POST['username'], $_POST['password']);                                              
                 if ($result==true) {                    
                     redirect(FRONT_EMPLOYEE_HOME_LINK);
                 }
@@ -48,7 +48,7 @@ class login_c extends Controllers {
     public function logoutEmployee() {
         sessionDestroy();
         redirect(FRONT_EMPLOYEE_LOGIN_LINK);
-    }    
+    }     
 }
 
 ?>

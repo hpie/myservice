@@ -28,7 +28,7 @@ function sessionCheck() {
     return true;
 }
 
-function sessionCheckManager() {
+function sessionCheckEmployee() {
     if (!isset($_SESSION['adminDetails']['employee_id'])) {
         redirect(FRONT_EMPLOYEE_LOGIN_LINK);
         return false;
@@ -40,12 +40,12 @@ function sessionCheckManager() {
     return true;
 }
 
-
 function sessionDestroy() {
     session_destroy();
 }
-function sessionAdmin($row) {
+function sessionAdmin($row) {    
     $_SESSION['adminDetails']=$row;
+//    prePRINT($_SESSION['adminDetails']['role_code']);die;
 }
 function get_AdminName($name) {
     if (isset($_SESSION['adminDetails'][$name])) {

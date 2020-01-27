@@ -26,9 +26,9 @@ class login_m extends Models {
         }
         return false;
     }
-    public function login_manager($username, $password) {
+    public function login_employee($username, $password) {
         $password = md5($password);        
-        $q3 = " SELECT se.*,ser.role_code FROM service_employee se
+        $q3 = "SELECT se.*,ser.role_code FROM service_employee se
                 INNER JOIN service_employee_role ser
                 ON ser.employee_id=se.employee_id
                 WHERE se.employee_password='$password' AND (se.employee_email='$username' OR se.employee_mobile_number='$username') AND ser.role_code!='ADMIN'";

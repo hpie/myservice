@@ -56,6 +56,9 @@ class admin_c extends Controllers {
     }
 
     public function addEmployee() {
+        if(!isset($_POST['role_code'])){
+            $_POST['role_code']=array('READONLY');
+        }
         $existRecord = $this->admin_m->getExistUser($_POST['employee_mobile_number'], 'employee_mobile_number');
         $existRecord1 = $this->admin_m->getExistUser($_POST['employee_email'], 'employee_email');
         if ($existRecord && $existRecord1) {
@@ -74,8 +77,6 @@ class admin_c extends Controllers {
             $_SESSION['existrecordEmail'] = 1;
             redirect(ADMIN_ADD_EMPLOYEE_FORM_LINK);
         }
-
-
         $_POST['employee_password'] = md5($_POST['employee_password']);
         $res = $this->admin_m->addEmployee($_POST);
         if (!empty($res)) {
@@ -84,7 +85,6 @@ class admin_c extends Controllers {
         }
         redirect(ADMIN_ADD_EMPLOYEE_FORM_LINK);
     }
-
     public function employeeList() {
         $this->data['TITLE'] = TITLE_EMPLOYEE_LIST;
         loadview('employee/', 'list.php', $this->data);
@@ -93,7 +93,23 @@ class admin_c extends Controllers {
     public function editEmployeeForm($empId) {
         $result = $this->admin_m->getEmployeeRole();
         $resultEmp = $this->admin_m->getSingleEmployee($empId);
-        $this->data['result'] = $result;
+        $result_role = $this->admin_m->getEmployeeRoleByEmp($empId);
+        
+//        prePRINT($result_role);die;
+        
+        $res=array();
+        foreach ($result as $row){
+            foreach ($result_role as $row1){
+                if($row['role_code']==$row1['role_code']){
+                    $row['checked']="checked";
+                }                
+            } 
+            array_push($res, $row);
+        }         
+//        prePRINT($res);die;
+        
+        $this->data['result'] = $res;
+        $this->data['result_role'] = $result_role;
         $this->data['resultEmp'] = $resultEmp;
         $this->data['empId'] = $empId;
         $this->data['TITLE'] = TITLE_EDIT_EMPLOYEE;
@@ -205,18 +221,26 @@ class admin_c extends Controllers {
             redirect(ADMIN_EDIT_ITEM_FORM_LINK . $code);
         }
     }
-    
-    
-    
-    
-    public function addTicketForm() {   
+                
+    public function addTicketForm() {    
+         $serviceItem = $this->admin_m->getServiceItem(); 
+        $serviceType = $this->admin_m->getServiceType(); 
+        $this->data['serviceItem'] = $serviceItem;
+        $this->data['serviceType'] = $serviceType;        
         $this->data['TITLE'] = TITLE_ADD_TICKET;
         loadview('complain/', 'addTicket.php', $this->data);
     }    
-    public function addTicket() {
+    public function addTicket() {                        
         $_POST['appointment_time_range']=$_POST['appointment_time_range1'].'-'.$_POST['appointment_time_range2'];
         unset($_POST['appointment_time_range1']);
-        unset($_POST['appointment_time_range2']);
+        unset($_POST['appointment_time_range2']);        
+        if($this->admin_m->getExist('service_customer','customer_mobile_number',$_POST['customer_mobile_number'])){            
+        }else{
+            $params1=array();
+            $params1['customer_mobile_number']=$_POST['customer_mobile_number'];
+            $this->admin_m->addCustomer($params1,'service_customer');              
+        }
+        
         $res = $this->admin_m->addTicket($_POST);
         if (!empty($res)) {
             $_SESSION['addData'] = 1;
@@ -225,7 +249,8 @@ class admin_c extends Controllers {
         redirect(ADMIN_ADD_TICKET_FORM_LINK);
     }    
     public function editTicketForm($Id) {
-        $singleItem = $this->admin_m->getSingleTicket($Id);              
+       
+        $singleItem = $this->admin_m->getSingleTicket($Id);                           
         $this->data['itemId'] = $Id;
         $this->data['TITLE'] = TITLE_EDIT_TICKET;
         loadview('complain/', 'editTicket.php', $this->data);

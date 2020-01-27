@@ -12,24 +12,25 @@
                     <div class="x_content">
                         <br />
                         <form class="form-horizontal form-label-left" method="post" name="addEmployee" action="<?php echo ADMIN_EDIT_EMPLOYEE_LINK.$empId; ?>">                                                                                                                                                                                                                              
+                            
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role_code">Employee Role
                                 </label>
                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="role_code" required="">                                              
-                                        <option class="" value="" selected="" disabled=""i>Select Employee Role Code</option>       
-                                        <?php
+                                <?php
                                         if ($result) {
-                                            foreach ($result as $row) {
+                                            foreach ($result as $row) {                                               
                                                 ?>
-                                                <option class="" value="<?php echo $row['role_code']; ?>" <?php echo set_selected($row['role_code'], $resultEmp['role_code']) ?>><?php echo $row['role_code']; ?></option>   
-                                                <?php
+                                <?php echo $row['role_code']; ?>
+                                    <input type="checkbox"  name="role_code[]" <?php if(isset($row['checked'])){echo $row['checked'];} ?>  value="<?php echo $row['role_code']; ?>">
+                                &nbsp;&nbsp;
+                                <?php
+                                                
                                             }
                                         }
-                                        ?>                                           
-                                    </select>
-                                </div>
-                            </div>  
+                                        ?>      
+                                        </div>                                    
+                                </div>                                                         
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="employee_fname">First name<span class="required">*</span>
                                 </label>

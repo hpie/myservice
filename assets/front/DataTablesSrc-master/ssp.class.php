@@ -27,7 +27,7 @@ $r = $_SERVER['SCRIPT_NAME'];
 $subdomain = explode('/', $r);
 array_pop($subdomain);
 $urllink = $protocol . '://' . $_SERVER['HTTP_HOST'];
-if ($urllink == "http://localhost") {
+if ($urllink == "https://localhost") {
     $urllink .= '/myservice';
 }
 define('BASE_URL', $urllink);
@@ -246,26 +246,21 @@ class SSP {
         
         // Main query to actually get the data
         $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
-			 FROM $table
-                         INNER JOIN service_employee_role ser
-                         ON se.employee_id=ser.employee_id
+			 FROM $table                        
 			 $where
 			 $order
 			 $limit"
         );
+                        
         // Data set length after filtering
         $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
-			 FROM $table
-                         INNER JOIN service_employee_role ser
-                         ON se.employee_id=ser.employee_id 
+			 FROM $table                         
 			 $where"
         );
         $recordsFiltered = $resFilterLength[0][0];
         // Total data set length
         $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
-			 FROM $table
-                         INNER JOIN service_employee_role ser
-                         ON se.employee_id=ser.employee_id "    
+			 FROM $table"    
         );
         $recordsTotal = $resTotalLength[0][0];
 
@@ -278,6 +273,19 @@ class SSP {
                 $empId=$row['employee_id'];
                 $row['edit'] = "<a href='".BASE_URL."/edit-employee-form/$empId' class='btn btn-xs btn-warning'>Edit <i class='fa fa-pencil'></i></a>";
                 $row['index'] = '';
+                
+                $data1=self::sql_exec($db, $bindings, "SELECT * FROM service_employee_role WHERE employee_id='$empId'"
+                );
+                $str='';
+                foreach ($data1 as $row1){
+                    if($str==''){
+                        $str.=$row1['role_code'];
+                    }
+                    else{
+                        $str.=', '.$row1['role_code'];
+                    }
+                }
+                $row['role_code'] =$str;                
                 array_push($resData, $row);
             }
         }
@@ -446,8 +454,7 @@ class SSP {
                 
                 if($row['ticket_status']){
                       $row['Assign'] = "<a href='".BASE_URL."/assign-executive-form/".$row['ticket_id']."' class='btn btn-xs btn-warning'> Assign <i class='fa fa-check'></i></a>";
-                }
-                
+                }                
                 $row['index'] = '';  
                 array_push($resData, $row);
             }

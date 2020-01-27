@@ -66,9 +66,8 @@
                                     <th>Ticket ID</th> 
                                     <th>Mobile No.</th> 
                                     <th>Appointment Date</th> 
-                                    <th>Appointment Time</th> 
-                                    <th>Longitude</th>
-                                    <th>Latitude</th>                                    
+                                    <th>Appointment Time</th>                                    
+                                    <th>Address</th>                                    
                                     <th>Service Item</th>
                                     <th>Service Type</th>
                                     <th>Action</th>
@@ -84,8 +83,7 @@
                                     <th>Mobile No.</th> 
                                     <th>Appointment Date</th> 
                                     <th>Appointment Time</th> 
-                                    <th>Longitude</th>
-                                    <th>Latitude</th>                                  
+                                     <th>Address</th>                                    
                                     <th>Service Item</th>
                                     <th>Service Type</th>
                                     <th>Action</th>

@@ -1,14 +1,38 @@
 <!-- page content -->
 <div class="right_col">
-    <div class="">      
-        <div class="clearfix"></div>
+    <div class="">  
+        <div class="clearfix"></div>         
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
+            <div class="col-md-12 col-sm-12 col-xs-12">                
+                <div class="x_panel"> 
+                    <div class="x_title">
+                        <h2>Complain Information</h2>                    
+                        <div class="clearfix"></div>
+                    </div>                    
+                    <div class="col-xs-12">                                        
+                    <div class="col-md-6">                                        
+                        <p style="margin-left: 3%;" class="text-muted"><strong><i class="fa fa-phone margin-r-5"></i> &nbsp;&nbsp;Customer Mobile Number :</strong>  <?php echo $resultTicket['customer_mobile_number']; ?></p>
+                        <hr>                                        
+                        <p style="margin-left: 3%;" class="text-muted"><strong><i class="fa fa-calendar margin-r-5"></i>&nbsp;&nbsp;Appointment Date :</strong> <?php echo $resultTicket['appointment_date']; ?> </p>
+                        <hr>                                        
+                        <p style="margin-left: 3%;" class="text-muted"><strong><i class="fa fa-clock-o margin-r-5"></i>&nbsp;&nbsp;Appointment Time :</strong> <?php echo $resultTicket['appointment_time_range']; ?> </p>
+                        <hr>                                                                                                        
+                    </div> 
+                    <div class="col-md-6">                                        
+                        <p style="margin-left: 3%;" class="text-muted"><strong><i class="fa fa-map-marker margin-r-5"></i> &nbsp;&nbsp;Appointment address :</strong>  <?php echo $resultTicket['address']; ?></p>
+                        <hr>                                        
+                        <p style="margin-left: 3%;" class="text-muted"><strong><i class="fa fa-phone margin-r-5"></i>&nbsp;&nbsp;Service Item :</strong> <?php echo $resultTicket['service_item_id']; ?> </p>
+                        <hr>                                        
+                        <p style="margin-left: 3%;" class="text-muted"><strong><i class="fa fa-phone margin-r-5"></i>&nbsp;&nbsp;Service Type :</strong> <?php echo $resultTicket['service_type_id']; ?> </p>
+                        <hr>                                        
+                        <p style="margin-left: 3%;" class="text-muted"><strong><i class="fa fa-pencil-square margin-r-5"></i>&nbsp;&nbsp;Service description :</strong> <?php echo $resultTicket['service_desc']; ?> </p>
+                        <hr>                                                                                                        
+                    </div>  
+                        </div>                                        
                     <div class="x_title">
                         <h2>Assign Executive</h2>                    
                         <div class="clearfix"></div>
-                    </div>
+                    </div>    
                     <div class="x_content">
                         <br />
                         <form class="form-horizontal form-label-left" method="post" name="assignexecutive" action="<?php echo ADMIN_ASSIGN_EXECUTIVE_ADD_LINK; ?>">                                                                                                                                                                      
@@ -19,7 +43,7 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <select class="form-control" name="employee_id" required="">                                              
                                         <option class="" value="" selected="" disabled=""i>Select Tax Executive</option>       
-                                        <?php
+                                    <?php
                                         if ($executiveRes) {
                                             foreach ($executiveRes as $row) {
                                                 ?>
@@ -39,28 +63,28 @@
                                 </div>
                             </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Appointment Time Range<span class="text-danger">*</span>
-                </label>                                                                                                             
-                <div class='col-md-2 col-sm-3 col-xs-3'>
-                    <input type='text' class="form-control col-md-7 col-xs-12" id='datetimepicker3' value="<?php echo $fromtotime[0]; ?>" name="appointment_time_range1" required="" />                                       
-                </div>
-                <div class='col-md-2 col-sm-3 col-xs-3'>
-                    
-                    <input type='text' class="form-control col-md-7 col-xs-12" id='datetimepicker4' value="<?php echo $fromtotime[1]; ?>" name="appointment_time_range2" required="" />                   
-                </div>
-            </div>
-<!--                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appointment_time_range">Appointment Time Range<span class="text-danger">*</span>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Appointment Time Range<span class="text-danger">*</span>
                                 </label>                                                                                                             
-                                <div class="col-md-2 col-sm-3 col-xs-3" data-autoclose="true">
-                                    <input class="form-control" placeholder="From Time" value="<?php //echo $fromtotime[0]; ?>" name="appointment_time_range1" required="">
-                                    <input type="text" name="appointment_time_range1" id="datetimepicker3" readonly="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $fromtotime[0]; ?>">
-                                </div>                                    
-                                <div class="col-md-2 col-sm-3 col-xs-3 input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-                                    <input class="form-control timepicker" name="appointment_time_range2" value="<?php echo $fromtotime[1]; ?>" placeholder="To Time" required="">
+                                <div class='col-md-2 col-sm-3 col-xs-3'>
+                                    <input type='text' class="form-control col-md-7 col-xs-12" id='datetimepicker3' value="<?php echo $fromtotime[0]; ?>" name="appointment_time_range1" required="" />                                       
                                 </div>
-                            </div>-->
+                                <div class='col-md-2 col-sm-3 col-xs-3'>
+
+                                    <input type='text' class="form-control col-md-7 col-xs-12" id='datetimepicker4' value="<?php echo $fromtotime[1]; ?>" name="appointment_time_range2" required="" />                   
+                                </div>
+                            </div>
+                            <!--                            <div class="form-group row">
+                                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appointment_time_range">Appointment Time Range<span class="text-danger">*</span>
+                                                            </label>                                                                                                             
+                                                            <div class="col-md-2 col-sm-3 col-xs-3" data-autoclose="true">
+                                                                <input class="form-control" placeholder="From Time" value="<?php //echo $fromtotime[0];  ?>" name="appointment_time_range1" required="">
+                                                                <input type="text" name="appointment_time_range1" id="datetimepicker3" readonly="" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $fromtotime[0]; ?>">
+                                                            </div>                                    
+                                                            <div class="col-md-2 col-sm-3 col-xs-3 input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                                                                <input class="form-control timepicker" name="appointment_time_range2" value="<?php echo $fromtotime[1]; ?>" placeholder="To Time" required="">
+                                                            </div>
+                                                        </div>-->
 
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="appointment_notes">Appointment Notes

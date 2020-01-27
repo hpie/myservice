@@ -124,6 +124,11 @@ function set_selected($desired_value, $new_value) {
         echo ' selected="selected"';
     }
 }
+function set_cheked($desired_value, $new_value) {
+    if ($desired_value == $new_value) {
+        echo ' checked';
+    }
+}
 
 function returnSingleImage($imgArray, $field) {
     $arr = array();

@@ -6,7 +6,7 @@ class front_c extends Controllers {
     public $admin_m;
     public function __construct() {
         parent::__construct();
-        sessionCheckManager();
+        sessionCheckEmployee();
         $this->admin_m = $this->loadModel('admin_m');
     }
     public function invoke() {               

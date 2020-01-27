@@ -49,20 +49,19 @@ $columns = array(
     array('db' => 'service_type_id', 'dt' =>'service_type_id'),
     array('db' => 'service_desc', 'dt' =>'service_desc'),
     array('db' => 'ticket_status', 'dt' =>'ticket_status'),
-    array('db' => 'clouser_notes', 'dt' =>'clouser_notes') ,
-    array('db' => 'invoice_amount', 'dt' =>'invoice_amount') 
+    array('db' => 'clouser_notes', 'dt' =>'clouser_notes'),
+    array('db' => 'invoice_amount', 'dt' =>'invoice_amount'),
+    array('db' => 'address', 'dt' =>'address') 
 );
 include 'conn.php';
 
-
 $status=$_REQUEST['status'];
 if($status=="ALL"){
-    $statusArray=array('OPEN','CLOSED','CANCLED','RESOLVED','ASSIGNED');
+    $statusArray=array('OPEN');
 }else{
     $statusArray[0]=$status;
 } 
 $status = join("','",$statusArray); 
-
 $where =" ticket_status IN('$status') ";
 
 
@@ -71,8 +70,7 @@ $month=$_REQUEST['month'];
 $taxtype=$_REQUEST['taxtype'];
 $searchFromToDate=$_REQUEST['searchFromToDate'];
 //$uploaded_file_tag=$_REQUEST['uploaded_file_tag'];
-//
-//
+
 if(!empty($year)){
     $year2=$year+1;
     $where.=" AND ttq.tax_transaction_dt BETWEEN '$year-04-01' AND '$year2-03-31' ";    

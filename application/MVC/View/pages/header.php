@@ -39,7 +39,18 @@
        <!-- PNotify -->             
     <link href="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifiadmin.css" rel="stylesheet">     
     <!-- Custom Theme Style -->
-    <link href="<?php echo BASE_URL; ?>assets/build/css/custom.min.css" rel="stylesheet">              
+    <link href="<?php echo BASE_URL; ?>assets/build/css/custom.min.css" rel="stylesheet">   
+    
+    
+    <style>
+ #map {
+   width: 100%;
+   height: 300px;
+   background-color: grey;
+ }
+</style>
+
+    
   </head>
   <body class="nav-md">
     <div class="container body">

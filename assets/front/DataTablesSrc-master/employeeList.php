@@ -18,7 +18,7 @@
  */
 
 // DB table to use
-$table = 'service_employee se';
+$table = 'service_employee';
 
 //$table = <<<EOT
 // (
@@ -32,20 +32,19 @@ $table = 'service_employee se';
 //EOT;
 
 // Table's primary key
-$primaryKey = 'se.employee_id';
+$primaryKey = 'employee_id';
 
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array('db' => 'se.employee_id', 'dt' =>'employee_id'),     
-    array('db' => 'se.employee_fname', 'dt' => 'employee_fname'),
-    array('db' => 'se.employee_mname', 'dt' =>'employee_mname'),
-    array('db' => 'se.employee_lname', 'dt' =>'employee_lname'),
-    array('db' => 'se.employee_mobile_number', 'dt' =>'employee_mobile_number'),
-    array('db' => 'se.employee_email', 'dt' =>'employee_email'),
-    array('db' => 'ser.role_code', 'dt' =>'role_code')    
+    array('db' => 'employee_id', 'dt' =>'employee_id'),     
+    array('db' => 'employee_fname', 'dt' => 'employee_fname'),
+    array('db' => 'employee_mname', 'dt' =>'employee_mname'),
+    array('db' => 'employee_lname', 'dt' =>'employee_lname'),
+    array('db' => 'employee_mobile_number', 'dt' =>'employee_mobile_number'),
+    array('db' => 'employee_email', 'dt' =>'employee_email')
 );
 include 'conn.php';
 $where ="";

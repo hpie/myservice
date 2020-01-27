@@ -97,33 +97,39 @@
 //        });
 //
 //    });
-    $(document).ready(function () {    
-        
-        if (<?php if (isset($_SESSION['existrecordMobile'])) {
+    $(document).ready(function () {
+
+        if (<?php
+if (isset($_SESSION['existrecordMobile'])) {
     echo $_SESSION['existrecordMobile'];
-} ?> == 1) {
+}
+?> == 1) {
             var d = new PNotify({
                 title: 'Mobile number allready exist',
                 type: 'error',
                 styling: 'bootstrap3'
             });
 <?php echo $_SESSION['existrecordMobile'] = 0; ?>;
-        } 
-    if (<?php if (isset($_SESSION['existrecordEmail'])) {
+        }
+        if (<?php
+if (isset($_SESSION['existrecordEmail'])) {
     echo $_SESSION['existrecordEmail'];
-} ?> == 1) {
+}
+?> == 1) {
             var d = new PNotify({
                 title: 'Email allready exist',
                 type: 'error',
                 styling: 'bootstrap3'
             });
 <?php echo $_SESSION['existrecordEmail'] = 0; ?>;
-        }   
- 
- 
- if (<?php if (isset($_SESSION['dataupdate'])) {
+        }
+
+
+        if (<?php
+if (isset($_SESSION['dataupdate'])) {
     echo $_SESSION['dataupdate'];
-} ?> == 1) {
+}
+?> == 1) {
             var d = new PNotify({
                 title: 'Data updated successfully',
                 type: 'success',
@@ -131,11 +137,13 @@
             });
 <?php echo $_SESSION['dataupdate'] = 0; ?>;
         }
- 
- 
- if (<?php if (isset($_SESSION['addData'])) {
+
+
+        if (<?php
+if (isset($_SESSION['addData'])) {
     echo $_SESSION['addData'];
-} ?> == 1) {
+}
+?> == 1) {
             var d = new PNotify({
                 title: 'Add data successfully',
                 type: 'success',
@@ -143,66 +151,70 @@
             });
 <?php echo $_SESSION['addData'] = 0; ?>;
         }
- 
- 
-  if (<?php if (isset($_SESSION['addEmployee'])) {
+
+
+        if (<?php
+if (isset($_SESSION['addEmployee'])) {
     echo $_SESSION['addEmployee'];
-} ?> == 1) {
+}
+?> == 1) {
             var d = new PNotify({
                 title: 'Add data successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
 <?php echo $_SESSION['addEmployee'] = 0; ?>;
-        }  
-if (<?php if (isset($_SESSION['assignComplain'])) {
+        }
+        if (<?php
+if (isset($_SESSION['assignComplain'])) {
     echo $_SESSION['assignComplain'];
-} ?> == 1) {
+}
+?> == 1) {
             var d = new PNotify({
                 title: 'Appointment assigned successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
 <?php echo $_SESSION['assignComplain'] = 0; ?>;
-        }               
+        }
 //        $('#dp4').datepicker({
 //            format: 'yyyy',
 //            viewMode: 'years', 
 //            minViewMode: 'years'         
 //        }); 
 <?php if ($TITLE === TITLE_ADD_EMPLOYEE) { ?>
-   $('#dp3').datepicker({
-            format: 'yyyy-mm-dd',            
-            autoclose: true,
-            endDate: new Date()
-        });
+            $('#dp3').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                endDate: new Date()
+            });
 <?php } ?>
-<?php if ($TITLE === TITLE_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE===TITLE_ADD_TICKET) { ?>
-        $('#dp4').datepicker({
-            format: 'yyyy',
-            viewMode: 'years',
-            minViewMode: 'years',
-            autoclose: true
-        });
-        $('#dp3').datepicker({
-            format: 'yyyy-mm-dd',            
-            autoclose: true
-        });
-        $('#dp5').datepicker({
-            dateFormat: 'MM yy',
-            format: 'mm-yyyy',
-            viewMode: 'months',
-            minViewMode: 'months',
-            autoclose: true
-        });
-            
-        $('#datetimepicker3').datetimepicker({
-            format: 'HH:mm'
-        });
-         $('#datetimepicker4').datetimepicker({
-            format: 'HH:mm'
-        });
-          
+<?php if ($TITLE === TITLE_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE === TITLE_ADD_TICKET) { ?>
+            $('#dp4').datepicker({
+                format: 'yyyy',
+                viewMode: 'years',
+                minViewMode: 'years',
+                autoclose: true
+            });
+            $('#dp3').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            });
+            $('#dp5').datepicker({
+                dateFormat: 'MM yy',
+                format: 'mm-yyyy',
+                viewMode: 'months',
+                minViewMode: 'months',
+                autoclose: true
+            });
+
+            $('#datetimepicker3').datetimepicker({
+                format: 'HH:mm'
+            });
+            $('#datetimepicker4').datetimepicker({
+                format: 'HH:mm'
+            });
+
 
 <?php } ?>
     });
@@ -276,8 +288,9 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
     <script>
         $(document).ready(function () {
             fill_datatable();
-            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
-            {   var status = $('#status').val();      
+            function fill_datatable(year = '', month = '', taxtype = '', searchFromToDate = '')
+            {
+                var status = $('#status').val();
                 $('#example').DataTable({
                     responsive: {
                         details: {
@@ -298,11 +311,11 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                         'type': 'POST',
                         'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainList.php' ?>",
                         'data': {
-                            year:year,
-                            month:month,
-                            taxtype:taxtype,
-                            searchFromToDate:searchFromToDate,
-                            status:status
+                            year: year,
+                            month: month,
+                            taxtype: taxtype,
+                            searchFromToDate: searchFromToDate,
+                            status: status
                         }
                     },
                     "columns": [
@@ -311,8 +324,7 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                         {"data": "customer_mobile_number"},
                         {"data": "appointment_date"},
                         {"data": "appointment_time_range"},
-                        {"data": "location_longitude"},
-                        {"data": "location_latitude"},                       
+                        {"data": "address"},                        
                         {"data": "service_item_id"},
                         {"data": "service_type_id"},
                         {"data": "Assign"},
@@ -323,11 +335,11 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                 });
             }
             $('#searchYear').click(function () {
-                var year = $('#dp4').val();                
+                var year = $('#dp4').val();
                 if (year != '')
                 {
                     $('#example').DataTable().destroy();
-                    fill_datatable(year,'');
+                    fill_datatable(year, '');
                 } else
                 {
                     alert('Select Year');
@@ -336,11 +348,11 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                 }
             });
             $('#searchMonth').click(function () {
-                var month = $('#dp5').val();               
+                var month = $('#dp5').val();
                 if (month != '')
                 {
                     $('#example').DataTable().destroy();
-                    fill_datatable('',month);
+                    fill_datatable('', month);
                 } else
                 {
                     alert('Select Month');
@@ -349,11 +361,11 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                 }
             });
             $('#searchTaxType').click(function () {
-                var taxtype = $('#selectTaxType').children("option:selected").val();                             
+                var taxtype = $('#selectTaxType').children("option:selected").val();
                 if (taxtype != '')
                 {
                     $('#example').DataTable().destroy();
-                    fill_datatable('','',taxtype);
+                    fill_datatable('', '', taxtype);
                 } else
                 {
                     alert('Select Tax Type');
@@ -362,11 +374,11 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                 }
             });
             $('#searchFromToDate').click(function () {
-                var searchFromToDate = $('.single_cal1').val();               
+                var searchFromToDate = $('.single_cal1').val();
                 if (searchFromToDate != '')
                 {
                     $('#example').DataTable().destroy();
-                    fill_datatable('','','',searchFromToDate);
+                    fill_datatable('', '', '', searchFromToDate);
                 } else
                 {
                     alert('Select Proper Date');
@@ -374,71 +386,72 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                     fill_datatable();
                 }
             });
-            
 
-//            $(document).on('click', '.btn_approve_reject', function () {
-//                var self = $(this);
-//                var status = self.attr('data-status');
-//                var user_status = 'ACTIVE';
-//                if (status == 1)
-//                    user_status = 'INACTIVE';
-//                if (!confirm('Are you sure want to ' + user_status.toLocaleLowerCase() + ' employee?'))
-//                    return;
-//                self.attr('disabled', 'disabled');
-//                var data = {
-//                    'tax_employee_id': self.data('id'),
-//                    'tax_employee_status': user_status
-//                };
-//                $.ajax({
-//                    type: "POST",
-//                    url: "<?php //echo ADMIN_EMPLOYEE_APPROVE_LINK ?>",
-//                    data: data,
-//                    success: function (res) {
-//                        var res = $.parseJSON(res);
-//                        if (res.suceess) {
-//                            var title = 'Click to deactivate employee';
-//                            var class_ = 'btn_approve_reject btn btn-success btn-xs';
-//                            var text = 'Active';
-//                            var isactive = 1;
-//
-//                            if (status == 1) {
-//                                title = 'Click to active employee';
-//                                class_ = 'btn_approve_reject btn btn-danger btn-xs';
-//                                text = 'Inactive';
-//                                isactive = 0;
-//                                new PNotify({
-//                                    title: 'Employee InActived Successfully',
-//                                    type: 'success',
-//                                    styling: 'bootstrap3'
-//                                });
-//
-//                            } else {
-//                                new PNotify({
-//                                    title: 'Employee Actived Successfully',
-//                                    type: 'success',
-//                                    styling: 'bootstrap3'
-//                                });
-//                            }
-//                            self.removeClass().addClass(class_);
-//                            self.attr({
-//                                'data-status': isactive,
-//                                'title': title
-//                            });
-//                            self.removeAttr('disabled');
-//                            self.html(text);
-//                        }
-//                    }
-//                });
-//            });
+
+    //            $(document).on('click', '.btn_approve_reject', function () {
+    //                var self = $(this);
+    //                var status = self.attr('data-status');
+    //                var user_status = 'ACTIVE';
+    //                if (status == 1)
+    //                    user_status = 'INACTIVE';
+    //                if (!confirm('Are you sure want to ' + user_status.toLocaleLowerCase() + ' employee?'))
+    //                    return;
+    //                self.attr('disabled', 'disabled');
+    //                var data = {
+    //                    'tax_employee_id': self.data('id'),
+    //                    'tax_employee_status': user_status
+    //                };
+    //                $.ajax({
+    //                    type: "POST",
+    //                    url: "<?php //echo ADMIN_EMPLOYEE_APPROVE_LINK  ?>",
+    //                    data: data,
+    //                    success: function (res) {
+    //                        var res = $.parseJSON(res);
+    //                        if (res.suceess) {
+    //                            var title = 'Click to deactivate employee';
+    //                            var class_ = 'btn_approve_reject btn btn-success btn-xs';
+    //                            var text = 'Active';
+    //                            var isactive = 1;
+    //
+    //                            if (status == 1) {
+    //                                title = 'Click to active employee';
+    //                                class_ = 'btn_approve_reject btn btn-danger btn-xs';
+    //                                text = 'Inactive';
+    //                                isactive = 0;
+    //                                new PNotify({
+    //                                    title: 'Employee InActived Successfully',
+    //                                    type: 'success',
+    //                                    styling: 'bootstrap3'
+    //                                });
+    //
+    //                            } else {
+    //                                new PNotify({
+    //                                    title: 'Employee Actived Successfully',
+    //                                    type: 'success',
+    //                                    styling: 'bootstrap3'
+    //                                });
+    //                            }
+    //                            self.removeClass().addClass(class_);
+    //                            self.attr({
+    //                                'data-status': isactive,
+    //                                'title': title
+    //                            });
+    //                            self.removeAttr('disabled');
+    //                            self.html(text);
+    //                        }
+    //                    }
+    //                });
+    //            });
         });
     </script>
 <?php } ?>    
-    <?php if ($TITLE === TITLE_EMPLOYEE_LIST) { ?>
+<?php if ($TITLE === TITLE_EMPLOYEE_LIST) { ?>
     <script>
         $(document).ready(function () {
             fill_datatable();
-            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
-            {   var status = $('#status').val();      
+            function fill_datatable(year = '', month = '', taxtype = '', searchFromToDate = '')
+            {
+                var status = $('#status').val();
                 $('#example').DataTable({
                     responsive: {
                         details: {
@@ -459,11 +472,11 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                         'type': 'POST',
                         'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/employeeList.php' ?>",
                         'data': {
-                            year:year,
-                            month:month,
-                            taxtype:taxtype,
-                            searchFromToDate:searchFromToDate,
-                            status:status
+                            year: year,
+                            month: month,
+                            taxtype: taxtype,
+                            searchFromToDate: searchFromToDate,
+                            status: status
                         }
                     },
                     "columns": [
@@ -473,21 +486,22 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                         {"data": "employee_mname"},
                         {"data": "employee_lname"},
                         {"data": "employee_mobile_number"},
-                        {"data": "employee_email"},                       
+                        {"data": "employee_email"},
                         {"data": "role_code"},
                         {"data": "edit"}
                     ]
                 });
-            }                    
+            }
         });
     </script>
 <?php } ?>    
-    <?php if ($TITLE === TITLE_ITEM_MAKE_LIST) { ?>
+<?php if ($TITLE === TITLE_ITEM_MAKE_LIST) { ?>
     <script>
         $(document).ready(function () {
             fill_datatable();
             function fill_datatable()
-            {   var status = $('#status').val();      
+            {
+                var status = $('#status').val();
                 $('#example').DataTable({
                     responsive: {
                         details: {
@@ -506,7 +520,7 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                     "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
                     "ajax": {
                         'type': 'POST',
-                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/itemMakeList.php' ?>"                        
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/itemMakeList.php' ?>"
                     },
                     "columns": [
                         {"data": "index"},
@@ -515,24 +529,25 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                         {"data": "item_make_mobile"},
                         {"data": "item_make_phone"},
                         {"data": "item_make_email"},
-                        {"data": "item_make_address"},                       
+                        {"data": "item_make_address"},
                         {"data": "item_make_city"},
                         {"data": "item_make_state"},
-                        {"data": "item_make_country"},                       
+                        {"data": "item_make_country"},
                         {"data": "item_status"},
                         {"data": "edit"}
                     ]
                 });
-            }                    
+            }
         });
     </script>
 <?php } ?>   
-     <?php if ($TITLE === TITLE_ITEM_LIST) { ?>
+<?php if ($TITLE === TITLE_ITEM_LIST) { ?>
     <script>
         $(document).ready(function () {
             fill_datatable();
             function fill_datatable()
-            {   var status = $('#status').val();      
+            {
+                var status = $('#status').val();
                 $('#example').DataTable({
                     responsive: {
                         details: {
@@ -551,7 +566,7 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                     "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
                     "ajax": {
                         'type': 'POST',
-                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/itemList.php' ?>"                        
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/itemList.php' ?>"
                     },
                     "columns": [
                         {"data": "index"},
@@ -562,9 +577,52 @@ if (<?php if (isset($_SESSION['assignComplain'])) {
                         {"data": "edit"}
                     ]
                 });
-            }                    
+            }
         });
     </script>
-<?php } ?>    
+  
+<?php } ?>
+<?php if ($TITLE === TITLE_ADD_TICKET) { ?>    
+       <script type="text/javascript">
+        var map;        
+        function initMap() {                            
+            var latitude = 27.7172453; // YOUR LATITUDE VALUE
+            var longitude = 85.3239605; // YOUR LONGITUDE VALUE            
+            var myLatLng = {lat: latitude, lng: longitude};
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: myLatLng,
+              zoom: 14,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+               // disable the default map zoom on double click
+            });                                           
+            var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map          
+            });                                      
+            google.maps.event.addListener(map, 'click', function (event) {
+                document.getElementById('latclicked').value = event.latLng.lat();
+                document.getElementById('longclicked').value =  event.latLng.lng();        
+                var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                             document.getElementById('location').value =results[1].formatted_address;        
+                        }
+                    }
+                });
+                marker.setMap(null);    
+                marker = new google.maps.Marker({
+                  position: event.latLng, 
+                  map: map, 
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  title: event.latLng.lat()+', '+event.latLng.lng()
+                });                               
+            });            
+        }
+        </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOo8VS-DubgppGE3b94PsvweQyYqzrKGI&libraries=places&callback=initMap" async defer></script>
+    <?php } ?>
 </body>
 </html>
