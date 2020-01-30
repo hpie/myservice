@@ -32,14 +32,21 @@ $route['add-ticket-form'] = 'admin_c/addTicketForm';
 $route['add-ticket'] = 'admin_c/addTicket';
 $route['edit-ticket-form/(:any)'] = 'admin_c/editTicketForm';
 $route['edit-ticket/(:any)'] = 'admin_c/editTicket';
+//***************************************Manager add ticket*****************************//
+$route['employee-add-ticket-form'] = 'manager_c/addTicketForm';
+$route['employee-add-ticket'] = 'manager_c/addTicket';
+$route['employee-edit-ticket-form/(:any)'] = 'manager_c/editTicketForm';
+$route['employee-edit-ticket/(:any)'] = 'manager_c/editTicket';
+
+
 //**************************************************************************************//
 
 //*************************************************************************************//
 //******************************front side root***************************************//
 //***********************************************************************************//
-$route['employee-complain-list'] = 'front_c/complainListEmployee';
-$route['employee-dashboard'] = 'front_c';
+$route['employee-complain-list'] = 'manager_c/complainListEmployee';
+$route['employee-dashboard'] = 'manager_c';
 $route['employee-login'] = 'login_c/loginEmployee';
 $route['employee-logout'] = 'login_c/logoutEmployee';
-$route['assign-executive-form-manager/(:any)'] = 'front_c/assignExecutiveForm';
-$route['assign-executive-add-employee'] = 'front_c/assignExecutiveAdd';
+$route['assign-executive-form-manager/(:any)'] = 'manager_c/assignExecutiveForm';
+$route['assign-executive-add-employee'] = 'manager_c/assignExecutiveAdd';

@@ -71,4 +71,10 @@ define('FRONT_EMPLOYEE_LOGOUT_LINK', BASE_URL ."employee-logout");
 define('FRONT_EMPLOYEE_OPEN_COMPLAIN_LIST_LINK', BASE_URL."employee-complain-list");
 define('FRONT_EMPLOYEE_ASSIGN_EXECUTIVE_FORM_LINK', BASE_URL."assign-executive-form-employee/");
 define('FRONT_EMPLOYEE_ASSIGN_EXECUTIVE_ADD_LINK', BASE_URL."assign-executive-add-employee");
+
+
+define('EMPLOYEE_ADD_TICKET_FORM_LINK', BASE_URL."employee-add-ticket-form");
+define('EMPLOYEE_ADD_TICKET_LINK', BASE_URL."employee-add-ticket");
+define('EMPLOYEE_EDIT_TICKET_FORM_LINK', BASE_URL."employee-edit-ticket-form/");
+define('EMPLOYEE_EDIT_TICKET_LINK', BASE_URL."employee-edit-ticket/");
 ?>

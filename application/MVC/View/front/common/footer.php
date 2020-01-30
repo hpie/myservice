@@ -23,11 +23,9 @@
 <script src="<?php echo ASSETS_FRONT; ?>js/settings.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>js/gleek.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>js/styleSwitcher.js"></script>
-
-
-
-<?php if ($TITLE === TITLE_COMPLAIN_ASSIGN_FORM) { ?>
-
+<script src="<?php echo ASSETS_FRONT; ?>plugins/sweetalert/js/sweetalert.min.js"></script>
+<!--<script src="<?php echo ASSETS_FRONT; ?>plugins/sweetalert/js/sweetalert.init.js"></script>-->
+<?php if ($TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE===TITLE_ADD_TICKET) { ?>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate.min.js"></script>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate-init.js"></script>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/moment/moment.js"></script>
@@ -38,10 +36,7 @@
     <!-- Date range Plugin JavaScript -->
     <script src="<?php echo ASSETS_FRONT; ?>plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-
     <script src="<?php echo ASSETS_FRONT; ?>js/plugins-init/form-pickers-init.js"></script>
-
-    
 <?php } ?>
 
 <?php if ($TITLE === TITLE_COMPLAIN_LIST) { ?>
@@ -60,11 +55,32 @@
 <script src="<?php echo BASE_URL ?>assets/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 <script type="text/javascript" language="javascript" src="<?php echo BASE_URL; ?>/assets/front/js/dataTables.responsive.min.js"></script>
 <?php } ?>
- <!--Circle progress -->-->
+ <!--Circle progress -->
 <script src="<?php echo ASSETS_FRONT; ?>plugins/circle-progress/circle-progress.min.js"></script>
 <!-- Pignose Calender -->
-<!--<script src="<?php echo ASSETS_FRONT; ?>plugins/moment/moment.min.js"></script>-->
+<!--<script src="<?php //echo ASSETS_FRONT; ?>plugins/moment/moment.min.js"></script>-->
 
+<script>
+    $(document).ready(function () {
+        if (<?php
+if (isset($_SESSION['addData'])) {
+    echo $_SESSION['addData'];
+}
+?> == 1) {
+            swal("Hey, Good job !!", "Data added successfully..!", "success");
+<?php echo $_SESSION['addData'] = 0; ?>;
+        }   
+        
+        if (<?php
+if (isset($_SESSION['assignComplain'])) {
+    echo $_SESSION['assignComplain'];
+}
+?> == 1) {
+            swal("Hey, Good job !!", "Complain assigned successfully..!", "success");
+<?php echo $_SESSION['assignComplain'] = 0; ?>;
+        } 
+    });
+</script>
 <?php if ($TITLE === TITLE_COMPLAIN_LIST) { ?>
     <script>
         $(document).ready(function () {
@@ -110,8 +126,8 @@
                         {"data": "service_type_id"},
                         {"data": "Assign"},
                         {"data": "service_desc"},
-                        {"data": "ticket_status"},
-                        {"data": "invoice_amount"}
+                        {"data": "ticket_status"}
+                       
                     ]
                 });
             }
@@ -170,7 +186,48 @@
         });
     </script>
 <?php } ?>  
-
+<?php if ($TITLE === TITLE_ADD_TICKET) { ?>    
+       <script type="text/javascript">        
+        var map;        
+        function initMap() {                            
+            var latitude = 27.7172453; // YOUR LATITUDE VALUE
+            var longitude = 85.3239605; // YOUR LONGITUDE VALUE            
+            var myLatLng = {lat: latitude, lng: longitude};
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: myLatLng,
+              zoom: 14,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+               // disable the default map zoom on double click
+            });                                           
+            var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map          
+            });                                      
+            google.maps.event.addListener(map, 'click', function (event) {
+                document.getElementById('latclicked').value = event.latLng.lat();
+                document.getElementById('longclicked').value =  event.latLng.lng();        
+                var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                             document.getElementById('location').value =results[1].formatted_address;        
+                        }
+                    }
+                });
+                marker.setMap(null);    
+                marker = new google.maps.Marker({
+                  position: event.latLng, 
+                  map: map, 
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  title: event.latLng.lat()+', '+event.latLng.lng()
+                });                               
+            });            
+        }
+        </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOo8VS-DubgppGE3b94PsvweQyYqzrKGI&libraries=places&callback=initMap" async defer></script>
+    <?php } ?>
 </body>
 
 </html>

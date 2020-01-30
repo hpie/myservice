@@ -36,15 +36,7 @@
 
                                     <input type='text' class="form-control col-md-7 col-xs-12" id='datetimepicker4' name="appointment_time_range2" required="" />                   
                                 </div>
-                            </div>                            
-<!--                            
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location_latitude">Latitude<span class="required">*</span>
-                                </label>
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <input type="text" name="location_latitude" required="required" id="latclicked" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>-->                             
+                            </div>                                            
                             <input type="hidden" name="location_latitude" id="latclicked">
                             <input type="hidden" name="location_longitude" id="longclicked">
 
@@ -62,20 +54,6 @@
                                     <input type="text" readonly="" id="location" name="address" class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
-<!--                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_id">Service Item<span class="required">*</span>
-                                </label>
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <input type="text" name="service_item_id" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>-->
-<!--                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_type_id">Service Type<span class="required">*</span>
-                                </label>
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <input type="text" name="service_type_id" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>-->
                             
                             
                             <div class="form-group">

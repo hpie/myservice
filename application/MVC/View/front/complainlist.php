@@ -21,8 +21,7 @@
                                         <th>Service Type</th>
                                         <th>Action</th>
                                         <th>Description</th>
-                                        <th>Status</th>
-                                        <th>Amount</th>
+                                        <th>Status</th>                                       
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -38,8 +37,7 @@
                                         <th>Service Type</th>
                                         <th>Action</th>
                                         <th>Description</th>
-                                        <th>Status</th>
-                                        <th>Amount</th>
+                                        <th>Status</th>                                       
                                     </tr>
                                 </tfoot>
                             </table>

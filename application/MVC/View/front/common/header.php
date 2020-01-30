@@ -15,7 +15,7 @@
 <!--        <link rel="stylesheet" href="<?php echo ASSETS_FRONT; ?>plugins/chartist/css/chartist.min.css">
         <link rel="stylesheet" href="<?php echo ASSETS_FRONT; ?>plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">-->
         <!-- Custom Stylesheet -->
-    <?php if ($TITLE === TITLE_COMPLAIN_ASSIGN_FORM) { ?>
+    <?php if ($TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE === TITLE_ADD_TICKET) { ?>
     <!-- Custom Stylesheet -->
     <link href="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">    
     <!-- Date picker plugins css -->
@@ -32,7 +32,15 @@
     <link href="<?php echo BASE_URL; ?>assets/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">  
     <link href="<?php echo ASSETS_FRONT; ?>plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">      
     <?php } ?>
-     <link href="<?php echo ASSETS_FRONT; ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_FRONT; ?>plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_FRONT; ?>css/style.css" rel="stylesheet">
+     <style>
+ #map {
+   width: 100%;
+   height: 300px;
+   background-color: grey;
+ }
+</style>
     </head>
     <body>
         <!--*******************
@@ -84,19 +92,6 @@
                             <span class="toggle-icon"><i class="icon-menu"></i></span>
                         </div>
                     </div>
-<!--                    <div class="header-left">
-                        <div class="input-group icons">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                            </div>
-                            <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
-                            <div class="drop-down animated flipInX d-md-none">
-                                <form action="#">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </form>
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="header-right">
                         <ul class="clearfix">
                             <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
@@ -211,19 +206,6 @@
                                     </div>
                                 </div>
                             </li>
-<!--                            <li class="icons dropdown d-none d-md-flex">
-                                <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                                    <span>English</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                                </a>
-                                <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li><a href="javascript:void()">English</a></li>
-                                            <li><a href="javascript:void()">Dutch</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>-->
                             <li class="icons dropdown">
                                 <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                     <span class="activity active"></span>
@@ -241,9 +223,6 @@
                                                 </a>
                                             </li>
                                             <hr class="my-2">
-<!--                                            <li>
-                                                <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                            </li>-->
                                             <li><a href="<?php echo FRONT_EMPLOYEE_LOGOUT_LINK; ?>"><i class="icon-key"></i> <span>Logout</span></a></li>
                                         </ul>
                                     </div>

@@ -47,7 +47,6 @@ class admin_c extends Controllers {
         }
         redirect(ADMIN_ASSIGN_EXECUTIVE_FORM_LINK . $_POST['ticket_id']);
     }
-
     public function addEmployeeForm() {
         $result = $this->admin_m->getEmployeeRole();
         $this->data['result'] = $result;
@@ -220,10 +219,9 @@ class admin_c extends Controllers {
             $_SESSION['Error'] = 1;
             redirect(ADMIN_EDIT_ITEM_FORM_LINK . $code);
         }
-    }
-                
+    }                
     public function addTicketForm() {    
-         $serviceItem = $this->admin_m->getServiceItem(); 
+        $serviceItem = $this->admin_m->getServiceItem(); 
         $serviceType = $this->admin_m->getServiceType(); 
         $this->data['serviceItem'] = $serviceItem;
         $this->data['serviceType'] = $serviceType;        

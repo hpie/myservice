@@ -28,7 +28,7 @@ class login_m extends Models {
     }
     public function login_employee($username, $password) {
         $password = md5($password);        
-        $q3 = "SELECT se.*,ser.role_code FROM service_employee se
+        $q3 = "SELECT * FROM service_employee se
                 INNER JOIN service_employee_role ser
                 ON ser.employee_id=se.employee_id
                 WHERE se.employee_password='$password' AND (se.employee_email='$username' OR se.employee_mobile_number='$username') AND ser.role_code!='ADMIN'";
@@ -38,7 +38,11 @@ class login_m extends Models {
                 $admin_id = $row['employee_id'];
                 $q4 = "UPDATE service_employee SET employee_last_login_dt=now() WHERE employee_id='$admin_id'";
                 $this->query->update($q4);
-                sessionAdmin($row);
+                $q4 = "SELECT role_code FROM service_employee_role WHERE employee_id='$admin_id' && role_code!='ADMIN'";
+                $result1 = $this->query->select($q4);
+                if ($data = $this->query->fetch_array($result1)) {                   
+                    sessionEmployee($row,$data);
+                }                
                 return true;
             }
         }
