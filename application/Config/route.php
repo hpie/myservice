@@ -50,3 +50,12 @@ $route['employee-login'] = 'login_c/loginEmployee';
 $route['employee-logout'] = 'login_c/logoutEmployee';
 $route['assign-executive-form-manager/(:any)'] = 'manager_c/assignExecutiveForm';
 $route['assign-executive-add-employee'] = 'manager_c/assignExecutiveAdd';
+
+$route['employee-assigned-complain-list'] = 'manager_c/complainAssignedListEmployee';
+$route['employee-assigned-complain-list-executeive'] = 'manager_c/complainAssignedListExecuteiveEmployee';
+$route['employee-accepted-complain-list-executeive'] = 'manager_c/complainAcceptedListExecuteiveEmployee';
+$route['employee-revisit-complain-list'] = 'manager_c/complainRevisitListEmployee';
+$route['employee-resolved-complain-list'] = 'manager_c/complainResolvedListEmployee';
+$route['employee-cancled-complain-list'] = 'manager_c/complainCancledListEmployee';
+$route['emplyee-change-status-ticket'] = 'manager_c/changeStatusTicket';
+$route['emplyee-change-status-appointment'] = 'manager_c/changeStatusAppointment';

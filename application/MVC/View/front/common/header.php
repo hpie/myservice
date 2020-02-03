@@ -25,7 +25,7 @@
     <link href="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">    
     
     <?php } ?>
-    <?php if ($TITLE === TITLE_COMPLAIN_LIST) { ?>
+    <?php if ($TITLE === TITLE_CANCLED_COMPLAIN_LIST || $TITLE === TITLE_RESOLVED_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_LIST || $TITLE===TITLE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_REVISIT_COMPLAIN_LIST || $TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_ACCEPT_COMPLAIN_LIST) { ?>
         <link href="<?php echo BASE_URL; ?>assets/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>assets/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL; ?>assets/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">

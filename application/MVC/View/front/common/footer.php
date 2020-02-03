@@ -39,7 +39,7 @@
     <script src="<?php echo ASSETS_FRONT; ?>js/plugins-init/form-pickers-init.js"></script>
 <?php } ?>
 
-<?php if ($TITLE === TITLE_COMPLAIN_LIST) { ?>
+<?php if ($TITLE === TITLE_CANCLED_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_LIST || $TITLE===TITLE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_REVISIT_COMPLAIN_LIST || $TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_ACCEPT_COMPLAIN_LIST || $TITLE === TITLE_RESOLVED_COMPLAIN_LIST) { ?>
 <!-- Datatables -->
 <script src="<?php echo BASE_URL ?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
@@ -63,13 +63,22 @@
 <script>
     $(document).ready(function () {
         if (<?php
+if (isset($_SESSION['changeStatus'])) {
+    echo $_SESSION['changeStatus'];
+}
+?> == 1) {
+           swal("Hey, Good job !!", "Complain status changed successfully..!", "success");
+<?php echo $_SESSION['changeStatus'] = 0; ?>;
+        }
+        
+if (<?php
 if (isset($_SESSION['addData'])) {
     echo $_SESSION['addData'];
 }
 ?> == 1) {
             swal("Hey, Good job !!", "Data added successfully..!", "success");
 <?php echo $_SESSION['addData'] = 0; ?>;
-        }   
+        }          
         
         if (<?php
 if (isset($_SESSION['assignComplain'])) {
@@ -120,8 +129,7 @@ if (isset($_SESSION['assignComplain'])) {
                         {"data": "customer_mobile_number"},
                         {"data": "appointment_date"},
                         {"data": "appointment_time_range"},
-                        {"data": "location_longitude"},
-                        {"data": "location_latitude"},                       
+                        {"data": "address"},                                               
                         {"data": "service_item_id"},
                         {"data": "service_type_id"},
                         {"data": "Assign"},
@@ -186,7 +194,489 @@ if (isset($_SESSION['assignComplain'])) {
         });
     </script>
 <?php } ?>  
-<?php if ($TITLE === TITLE_ADD_TICKET) { ?>    
+<?php if ($TITLE === TITLE_ASSIGNED_COMPLAIN_LIST) { ?>
+    <script>
+        $(document).ready(function () {       
+//            alert('hi')
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainAssignedListManager.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "ticket_id"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "appointment_date"},
+                        {"data": "appointment_time_range"},
+                        {"data": "address"},                        
+                        {"data": "service_item_id"},
+                        {"data": "service_type_id"},
+                        {"data": "Assign"},
+                        {"data": "service_desc"},
+                        {"data": "ticket_status"}                        
+                    ]
+                });
+            }    
+            $(document).on('click', '.btn_approve_reject', function () {
+            
+                var self = $(this);                               
+                if (!confirm('Are you sure want to close ticket?'))
+                    return;
+                self.attr('disabled', 'disabled');
+
+                var data = {
+                    'ticket_id': self.data('id'),
+                    'ticket_status': self.data('status')
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_TICKET_LINK; ?>",
+                    data: data,
+                    success: function (res) {
+                        var res = $.parseJSON(res);
+                        if (res.suceess) {
+//                            alert('#id_'+self.data('id'));
+//                            $('#id_'+self.data('id')).parents("tr").remove();
+//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
+                            location.reload();
+                        }
+                    }
+                });
+            });        
+        });
+    </script>
+<?php } ?>
+     <?php if ($TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST) { ?>
+    <script>
+        $(document).ready(function () { 
+//            alert('hi')
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainAssignedListExecutive.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "ticket_id"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "sa_appointment_date"},
+                        {"data": "sa_appointment_time_range"},
+                        {"data": "address"},                                              
+                        {"data": "service_item_id"},
+                        {"data": "service_type_id"},
+                        {"data": "Assign"},
+                        {"data": "service_desc"},
+                        {"data": "ticket_status"},
+                        {"data": "appointment_status"}
+                    ]
+                });
+            }  
+              $(document).on('click', '.btn_approve_reject', function () {
+            
+                var self = $(this);                               
+                if (!confirm('Are you sure want to close ticket?'))
+                    return;
+                self.attr('disabled', 'disabled');
+
+                var data = {
+                    'ticket_id': self.data('id'),
+                    'appointment_status': self.data('status')
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK; ?>",
+                    data: data,
+                    success: function (res) {
+                        var res = $.parseJSON(res);
+                        if (res.suceess) {
+//                            alert('#id_'+self.data('id'));
+//                            $('#id_'+self.data('id')).parents("tr").remove();
+//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
+                            location.reload();
+                        }
+                    }
+                });
+            });        
+        });
+    </script>
+<?php } ?>  
+      <?php if ($TITLE === TITLE_ACCEPT_COMPLAIN_LIST) { ?>
+    <script>
+        $(document).ready(function () { 
+//            alert('hi')
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainAcceptedListExecutive.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "ticket_id"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "sa_appointment_date"},
+                        {"data": "sa_appointment_time_range"},
+                        {"data": "address"},                                              
+                        {"data": "service_item_id"},
+                        {"data": "service_type_id"},
+                        {"data": "Assign"},
+                        {"data": "service_desc"},
+                        {"data": "ticket_status"},
+                        {"data": "appointment_status"}
+                    ]
+                });
+            }  
+              $(document).on('click', '.btn_approve_reject', function () { 
+//              alert('hi')
+                var self = $(this);                               
+                if (!confirm('Are you sure want to close ticket?'))
+                    return;
+                self.attr('disabled', 'disabled');
+
+                var data = {
+                    'ticket_id': self.data('id'),
+                    'appointment_status': self.data('status')
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK; ?>",
+                    data: data,
+                    success: function (res) {
+                        var res = $.parseJSON(res);
+                        if (res.suceess) {
+//                            alert('#id_'+self.data('id'));
+//                            $('#id_'+self.data('id')).parents("tr").remove();
+//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
+                            location.reload();
+                        }
+                    }
+                });
+            });        
+        });
+    </script>
+<?php } ?>  
+    <?php if ($TITLE === TITLE_REVISIT_COMPLAIN_LIST) { ?>
+    <script>
+        $(document).ready(function () {                
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainRevisitListManager.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "ticket_id"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "sa_appointment_date"},
+                        {"data": "sa_appointment_time_range"},
+                        {"data": "address"},                                              
+                        {"data": "service_item_id"},
+                        {"data": "service_type_id"},
+                        {"data": "Assign"},
+                        {"data": "service_desc"},
+                        {"data": "ticket_status"},
+                        {"data": "appointment_status"}
+                    ]
+                });
+            }  
+              $(document).on('click', '.btn_approve_reject', function () {
+            
+                var self = $(this);                               
+                if (!confirm('Are you sure want to close ticket?'))
+                    return;
+                self.attr('disabled', 'disabled');
+
+                var data = {
+                    'ticket_id': self.data('id'),
+                    'ticket_status': self.data('status')
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_TICKET_LINK; ?>",
+                    data: data,
+                    success: function (res) {
+                        var res = $.parseJSON(res);
+                        if (res.suceess) {
+//                            alert('#id_'+self.data('id'));
+//                            $('#id_'+self.data('id')).parents("tr").remove();
+//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
+                            location.reload();
+                        }
+                    }
+                });
+            });        
+        });
+    </script>
+<?php } ?>  
+      <?php if ($TITLE === TITLE_RESOLVED_COMPLAIN_LIST) { ?>
+    <script>
+        $(document).ready(function () {                
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainResolvedListManager.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "ticket_id"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "sa_appointment_date"},
+                        {"data": "sa_appointment_time_range"},
+                        {"data": "address"},                                              
+                        {"data": "service_item_id"},
+                        {"data": "service_type_id"},
+                        {"data": "Assign"},
+                        {"data": "service_desc"},
+                        {"data": "ticket_status"},
+                        {"data": "appointment_status"}
+                    ]
+                });
+            }  
+              $(document).on('click', '.btn_approve_reject', function () {
+            
+                var self = $(this);                               
+                if (!confirm('Are you sure want to close ticket?'))
+                    return;
+                self.attr('disabled', 'disabled');
+
+                var data = {
+                    'ticket_id': self.data('id'),
+                    'ticket_status': self.data('status')
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_TICKET_LINK; ?>",
+                    data: data,
+                    success: function (res) {
+                        var res = $.parseJSON(res);
+                        if (res.suceess) {
+                            location.reload();
+                        }
+                    }
+                });                
+                var data = {
+                    'ticket_id': self.data('id'),
+                    'appointment_status': self.data('status')
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK; ?>",
+                    data: data,
+                    success: function (res) {
+                        var res = $.parseJSON(res);
+                        if (res.suceess) {
+//                            alert('#id_'+self.data('id'));
+//                            $('#id_'+self.data('id')).parents("tr").remove();
+//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
+                            location.reload();
+                        }
+                    }
+                });
+            });        
+        });
+    </script>
+<?php } ?>  
+      <?php if ($TITLE === TITLE_CANCLED_COMPLAIN_LIST) { ?>
+    <script>
+        $(document).ready(function () {            
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            {   var status = $('#status').val();      
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainCancledListManager.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "ticket_id"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "sa_appointment_date"},
+                        {"data": "sa_appointment_time_range"},
+                        {"data": "address"},                                              
+                        {"data": "service_item_id"},
+                        {"data": "service_type_id"},
+                        {"data": "Assign"},
+                        {"data": "service_desc"},
+                        {"data": "ticket_status"},
+                        {"data": "appointment_status"}
+                    ]
+                });
+            }  
+              $(document).on('click', '.btn_approve_reject', function () {
+            
+                var self = $(this);                               
+                if (!confirm('Are you sure want to close ticket?'))
+                    return;
+                self.attr('disabled', 'disabled');
+
+                var data = {
+                    'ticket_id': self.data('id'),
+                    'ticket_status': self.data('status')
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_TICKET_LINK; ?>",
+                    data: data,
+                    success: function (res) {
+                        var res = $.parseJSON(res);
+                        if (res.suceess) {
+                            location.reload();
+                        }
+                    }
+                });                               
+            });        
+        });
+    </script>
+<?php } ?>  
+    <?php if ($TITLE === TITLE_ADD_TICKET) { ?>    
        <script type="text/javascript">        
         var map;        
         function initMap() {                            

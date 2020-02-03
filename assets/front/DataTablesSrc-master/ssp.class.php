@@ -469,7 +469,409 @@ class SSP {
             "data" => $resData
         );
     }    
-      static function complainListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+    static function complainAssignedListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }                        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table 
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table  
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) { 
+                
+                if($row['ticket_status']){
+                      $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-status='CLOSED' title='Close ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Close</button>";
+                }
+                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+     static function complainAcceptedListEcecutive($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }  
+        
+//       echo  "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+//			 FROM $table
+//                         LEFT JOIN service_appointment sa
+//                         ON sa.ticket_id=st.ticket_id
+//			 $where
+//			 $order
+//			 $limit";die;
+        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table 
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+                             "    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {                 
+                if($row['ticket_status']){
+                      $row['Assign'] = "
+                            <button type='button' data-id='".$row['ticket_id']."' data-status='REVISIT' title='Revisit ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."'>Revisit</button>
+                            <button type='button' data-id='".$row['ticket_id']."' data-status='RESOLVED' title='Resolve ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."' >Resolve</button>
+                            <button type='button' data-id='".$row['ticket_id']."' data-status='CANCLED' title='Cancle ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."' >Cancle</button>
+                            ";
+                }                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+    static function complainAssignedListEcecutive($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }  
+        
+//       echo  "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+//			 FROM $table
+//                         LEFT JOIN service_appointment sa
+//                         ON sa.ticket_id=st.ticket_id
+//			 $where
+//			 $order
+//			 $limit";die;
+        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table 
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+                             "    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {                 
+                if($row['ticket_status']){
+                      $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-status='ACCEPTED' title='Accept ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Accept</button>";
+                }                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+       static function complainRevisitListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }                        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {                                 
+                
+                if($row['ticket_status']){
+                      $row['Assign'] = "                            
+                            <a href='".BASE_URL."/assign-executive-form-manager/".$row['ticket_id']."' class='btn btn-xs btn-warning'> Assign <i class='fa fa-check'></i></a>";
+                }
+                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+       static function complainResovedListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }                        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {                                                 
+                if($row['ticket_status']){                                                
+                            $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-status='CLOSED' title='Close ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Close</button>";
+                }                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+       static function complainCancledListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }                        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table
+                         LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {                                                 
+                if($row['ticket_status']){                                                
+                            $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-status='CANCLED' title='Cancle ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Cancle</button>";
+                }                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+
+        static function complainListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
         $bindings = array();
         $db = self::db($conn);
         // Build the SQL query string from the request
@@ -486,20 +888,26 @@ class SSP {
                         
         // Main query to actually get the data
         $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
-			 FROM $table                         
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
 			 $where
 			 $order
 			 $limit"
         );
         // Data set length after filtering
         $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
-			 FROM $table                       
+			 FROM $table 
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
 			 $where"
         );
         $recordsFiltered = $resFilterLength[0][0];
         // Total data set length
         $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
-			 FROM $table "    
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id"    
         );
         $recordsTotal = $resTotalLength[0][0];
 
@@ -528,7 +936,6 @@ class SSP {
             "data" => $resData
         );
     }    
-
     /**
      * The difference between this method and the simple one, is that you can
      * apply additional where conditions to the SQL queries. These can be in

@@ -58,17 +58,14 @@ include 'conn.php';
 
 
 $status=$_REQUEST['status'];
-
 if($status=="ALL"){
-    $statusArray=array('OPEN');
+    $statusArray=array('ASSIGNED');
 }else{
     $statusArray[0]=$status;
 } 
 $status = join("','",$statusArray); 
 
-$where =" st.ticket_status IN('$status') ";
-
-
+$where =" ticket_status IN('$status') AND sa.appointment_status='REVISIT' ";
 $year=$_REQUEST['year'];
 $month=$_REQUEST['month'];
 $taxtype=$_REQUEST['taxtype'];
@@ -117,7 +114,7 @@ if(!empty($searchFromToDate)){
  */
 require( 'ssp.class.php' );
 echo json_encode(
-    SSP::complainListManager($_REQUEST, $sql_details, $table, $primaryKey, $columns,$where)
+    SSP::complainRevisitListManager($_REQUEST, $sql_details, $table, $primaryKey, $columns,$where)
 );
 
 

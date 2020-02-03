@@ -4,18 +4,75 @@
 class manager_c extends Controllers {
     public $admin_m;
     public function __construct() {
-        parent::__construct();   
-//        sessionCheckEmployee(array('EXECUTEIVE','MANAGER','READONLY'));
+        parent::__construct();           
         $this->admin_m = $this->loadModel('admin_m');
     }
-    public function invoke() {        
+    public function invoke() { 
+        sessionCheckEmployee(array('MANAGER','EXECUTEIVE'));
         $this->data['TITLE'] = TITLE_DASHBOARD;
         loadviewFront('front/', 'dashboard.php', $this->data);
     }
-    public function complainListEmployee() {                
+    public function complainListEmployee() {  
+        sessionCheckEmployee(array('MANAGER','EXECUTEIVE'));
         $this->data['TITLE'] = TITLE_COMPLAIN_LIST;
         loadviewFront('front/', 'complainlist.php', $this->data);
     }
+    public function complainAssignedListEmployee() {        
+        sessionCheckEmployee(array('MANAGER'));
+        $this->data['TITLE'] = TITLE_ASSIGNED_COMPLAIN_LIST;
+        loadviewFront('front/', 'assignedComplainlist.php', $this->data);
+    }  
+    public function complainAssignedListExecuteiveEmployee() {        
+        sessionCheckEmployee(array('EXECUTEIVE'));
+        $this->data['TITLE'] = TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST;
+        loadviewFront('front/', 'assignedComplainlistExecuteive.php', $this->data);
+    }  
+    public function complainRevisitListEmployee() { 
+        sessionCheckEmployee(array('MANAGER'));
+        $this->data['TITLE'] = TITLE_REVISIT_COMPLAIN_LIST;
+        loadviewFront('front/', 'revisitComplainlist.php', $this->data);
+    }
+    public function complainResolvedListEmployee() { 
+        sessionCheckEmployee(array('MANAGER'));
+        $this->data['TITLE'] = TITLE_RESOLVED_COMPLAIN_LIST;
+        loadviewFront('front/', 'resolvedComplainlist.php', $this->data);
+    }
+    public function complainCancledListEmployee() { 
+        sessionCheckEmployee(array('MANAGER'));
+        $this->data['TITLE'] = TITLE_CANCLED_COMPLAIN_LIST;
+        loadviewFront('front/', 'cancledComplainlist.php', $this->data);
+    }
+    public function complainAcceptedListExecuteiveEmployee() {
+        sessionCheckEmployee(array('EXECUTEIVE'));
+        $this->data['TITLE'] = TITLE_ACCEPT_COMPLAIN_LIST;
+        loadviewFront('front/', 'acceptedComplainlistExecuteive.php', $this->data);
+    }        
+
+    public function changeStatusTicket(){
+        if(isset($_REQUEST['ticket_id'])){            
+            $res = $this->admin_m->changeSingleStatus('service_ticket',$_REQUEST['ticket_status'],'ticket_id',$_REQUEST['ticket_id']);
+            if($res){
+                $_SESSION['changeStatus']=1;
+                $data = array(                   
+                    'suceess' => true
+                );
+            }            
+            echo json_encode($data);
+        }
+    }
+    public function changeStatusAppointment(){        
+        if(isset($_REQUEST['ticket_id'])){            
+            $res = $this->admin_m->changeSingleStatusAppointment('service_appointment',$_REQUEST['appointment_status'],'ticket_id',$_REQUEST['ticket_id']);
+            if($res){
+                $_SESSION['changeStatus']=1;
+                $data = array(                   
+                    'suceess' => true
+                );
+            }            
+            echo json_encode($data);
+        }
+    }
+    
     public function assignExecutiveForm($tickiteId) {  
         $result = $this->admin_m->getExecutive(); 
         $resultTicket = $this->admin_m->getSingleTicket($tickiteId); 

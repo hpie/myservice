@@ -1,6 +1,6 @@
 <div class="content-body">
     <div class="container-fluid">
-        <input type="hidden" id="status" value="<?php echo 'OPEN'; ?>">
+        <input type="hidden" id="status" value="<?php echo 'ASSIGNED'; ?>">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -15,13 +15,13 @@
                                         <th>Mobile No.</th> 
                                         <th>Appointment Date</th> 
                                         <th>Appointment Time</th> 
-                                        <th>Address</th>
-                                        
+                                        <th>Address</th>                                                                           
                                         <th>Service Item</th>
                                         <th>Service Type</th>
                                         <th>Action</th>
                                         <th>Description</th>
-                                        <th>Status</th>                                       
+                                        <th>Ticket Status</th>                                       
+                                        <th>Appointment Status</th>                                       
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -31,12 +31,13 @@
                                         <th>Mobile No.</th> 
                                         <th>Appointment Date</th> 
                                         <th>Appointment Time</th> 
-                                        <th>Address</th>                                                                     
+                                        <th>Address</th>                                                                          
                                         <th>Service Item</th>
                                         <th>Service Type</th>
                                         <th>Action</th>
                                         <th>Description</th>
-                                        <th>Status</th>                                       
+                                        <th>Ticket Status</th> 
+                                        <th>Appointment Status</th>                                       
                                     </tr>
                                 </tfoot>
                             </table>

@@ -53,22 +53,31 @@ function sessionCheckEmployee($array) {
 //    print_r($_SESSION['role_code']);die;
     
     if (count($array) == 3) {
-        if ($_SESSION['role_code'][0]==$array[0] && $_SESSION['role_code'][1]==$array[1] && $_SESSION['role_code'][2]==$array[2]) {
+        if (isset ($_SESSION['role_code'][0]) && isset ($_SESSION['role_code'][1]) && isset ($_SESSION['role_code'][2])) {
             return true;
-        }else{
+        }else if(isset ($_SESSION['role_code'][0]) && !isset ($_SESSION['role_code'][1]) && !isset ($_SESSION['role_code'][2])){ 
+            return true;           
+        }
+        else if(isset ($_SESSION['role_code'][0]) && isset ($_SESSION['role_code'][1]) && !isset ($_SESSION['role_code'][2])){ 
+            return true;           
+        }
+        else{
             redirect(FRONT_EMPLOYEE_LOGIN_LINK);
             return false;
         }
     }
-    if (count($array) == 2) {
-        if($_SESSION['role_code'][0]==$array[0] && $_SESSION['role_code'][1]==$array[1]) {
+    if (count($array) == 2) {        
+        if(isset($_SESSION['role_code'][0]) && isset($_SESSION['role_code'][1])) {
             return true;   
+        }else if(isset($_SESSION['role_code'][0]) && !isset($_SESSION['role_code'][1])){ 
+            return true;           
         }else{
             redirect(FRONT_EMPLOYEE_LOGIN_LINK);
             return false;
         }
     }
     if (count($array) == 1) {
+//        echo $_SESSION['role_code'][0];die;
         if($_SESSION['role_code'][0]==$array[0]) {
              return true;   
         }else{

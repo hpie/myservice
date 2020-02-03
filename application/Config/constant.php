@@ -12,6 +12,12 @@ define('ORIGINAL_IMAGES',BASE_URL.'uploads/original/');
 //**************************Admin Title*********************//
 define('TITLE_DASHBOARD', "DASHBOARD");
 define('TITLE_COMPLAIN_LIST', "Complain List");
+define('TITLE_ASSIGNED_COMPLAIN_LIST', "Assigned Complain List");
+define('TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST', "Assigned Executeive Complain List");
+define('TITLE_REVISIT_COMPLAIN_LIST', "Revisit Complain List");
+define('TITLE_RESOLVED_COMPLAIN_LIST', "Resolved Complain List");
+define('TITLE_CANCLED_COMPLAIN_LIST', "Cancled Complain List");
+define('TITLE_ACCEPT_COMPLAIN_LIST', "Accept Complain List");
 define('TITLE_COMPLAIN_ASSIGN_FORM', "Assign complain");
 define('TITLE_ADD_EMPLOYEE', "Add Employee");
 define('TITLE_EMPLOYEE_LIST', "Employee List");
@@ -69,12 +75,23 @@ define('FRONT_EMPLOYEE_HOME_LINK', BASE_URL ."employee-dashboard");
 define('FRONT_EMPLOYEE_LOGIN_LINK', BASE_URL ."employee-login");
 define('FRONT_EMPLOYEE_LOGOUT_LINK', BASE_URL ."employee-logout");
 define('FRONT_EMPLOYEE_OPEN_COMPLAIN_LIST_LINK', BASE_URL."employee-complain-list");
+define('FRONT_EMPLOYEE_REVISIT_COMPLAIN_LIST_LINK', BASE_URL."employee-revisit-complain-list");
+define('FRONT_EMPLOYEE_RESOLVED_COMPLAIN_LIST_LINK', BASE_URL."employee-resolved-complain-list");
+define('FRONT_EMPLOYEE_CANCLED_COMPLAIN_LIST_LINK', BASE_URL."employee-cancled-complain-list");
+define('FRONT_EMPLOYEE_ASSIGNED_COMPLAIN_LIST_LINK', BASE_URL."employee-assigned-complain-list");
+define('FRONT_EMPLOYEE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST_LINK', BASE_URL."employee-assigned-complain-list-executeive");
+define('FRONT_EMPLOYEE_EXECUTEIVE_ACCEPTED_COMPLAIN_LIST_LINK', BASE_URL."employee-accepted-complain-list-executeive");
 define('FRONT_EMPLOYEE_ASSIGN_EXECUTIVE_FORM_LINK', BASE_URL."assign-executive-form-employee/");
 define('FRONT_EMPLOYEE_ASSIGN_EXECUTIVE_ADD_LINK', BASE_URL."assign-executive-add-employee");
+
+define('FRONT_EMPLOYEE_ACCEPT_COMPLAIN_LIST_LINK', BASE_URL."employee-accept-complain-list");
 
 
 define('EMPLOYEE_ADD_TICKET_FORM_LINK', BASE_URL."employee-add-ticket-form");
 define('EMPLOYEE_ADD_TICKET_LINK', BASE_URL."employee-add-ticket");
 define('EMPLOYEE_EDIT_TICKET_FORM_LINK', BASE_URL."employee-edit-ticket-form/");
 define('EMPLOYEE_EDIT_TICKET_LINK', BASE_URL."employee-edit-ticket/");
+
+define('EMPLOYEE_CHANGE_STATUS_TICKET_LINK', BASE_URL."emplyee-change-status-ticket");
+define('EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK', BASE_URL."emplyee-change-status-appointment");
 ?>

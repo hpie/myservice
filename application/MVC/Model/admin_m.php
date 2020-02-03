@@ -8,24 +8,25 @@ class admin_m extends Models {
         $this->query = new Query();
     }
 
-    public function getExist($table,$column,$id) {        
-        $res=$this->checkRecord("$table","$column","$id");        
+    public function getExist($table, $column, $id) {
+        $res = $this->checkRecord("$table", "$column", "$id");
         if ($res)
             return true;
         return false;
-    }   
-    public function addCustomer($params, $table) {      
+    }
+
+    public function addCustomer($params, $table) {
         $columns = $this->insertMaker($params, $values);
         if ($columns) {
             $q = "INSERT INTO $table($columns) VALUES($values)";
-            $id = $this->query->insert($q);              
-            if ($id) {               
+            $id = $this->query->insert($q);
+            if ($id) {
                 return $id;
             }
         }
         return false;
     }
-    
+
     public function getExecutive() {
         $q = "  SELECT * FROM service_employee se
                 LEFT JOIN service_employee_role ser
@@ -75,6 +76,26 @@ class admin_m extends Models {
         return false;
     }
 
+    public function changeSingleStatusAppointment($table, $status, $idColumn, $id) {
+        
+        $q = "UPDATE $table SET appointment_status='$status' WHERE $idColumn='$id'";
+//        echo $q;die;
+        $res = $this->query->update($q);
+        if ($res) {
+            return true;
+        }
+        return FALSE;
+    }
+    
+    public function changeSingleStatus($table, $status, $idColumn, $id) {
+        $q = "UPDATE $table SET ticket_status='$status' WHERE $idColumn='$id'";
+        $res = $this->query->update($q);
+        if ($res) {
+            return true;
+        }
+        return FALSE;
+    }
+
     public function getSingleTicket($ticketId) {
         $q = "  SELECT * FROM service_ticket WHERE ticket_id='$ticketId'";
         $result = $this->query->select($q);
@@ -83,7 +104,7 @@ class admin_m extends Models {
         }
         return false;
     }
-    
+
     public function getServiceItem() {
         $q = "  SELECT * FROM service_item";
         $result = $this->query->select($q);
@@ -92,6 +113,7 @@ class admin_m extends Models {
         }
         return false;
     }
+
     public function getServiceType() {
         $q = "  SELECT * FROM service_type";
         $result = $this->query->select($q);
