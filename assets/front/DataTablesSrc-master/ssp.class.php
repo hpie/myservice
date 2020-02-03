@@ -728,7 +728,8 @@ class SSP {
             foreach ($result as $row) {                                 
                 
                 if($row['ticket_status']){
-                      $row['Assign'] = "                            
+                      $row['Assign'] = " 
+                          <button type='button' data-id='".$row['ticket_id']."' data-status='OPEN' title='Open ticket' class='btn btn-xs btn-success btn_approve_reject' id='id_".$row['ticket_id']."'>Open</button>
                             <a href='".BASE_URL."/assign-executive-form-manager/".$row['ticket_id']."' class='btn btn-xs btn-warning'> Assign <i class='fa fa-check'></i></a>";
                 }
                 

@@ -479,8 +479,7 @@ if (isset($_SESSION['assignComplain'])) {
                     ]
                 });
             }  
-              $(document).on('click', '.btn_approve_reject', function () {
-            
+              $(document).on('click', '.btn_approve_reject', function () {            
                 var self = $(this);                               
                 if (!confirm('Are you sure want to close ticket?'))
                     return;
