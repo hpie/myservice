@@ -57,7 +57,7 @@
                                         <input type="text" readonly="" id="location" name="address" class="form-control">
                                     </div>
                                 </div>
-<!--                                <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="control-label col-md-2 col-sm-2 col-xs-12  offset-md-2" for="item_make_code">Service Item Make<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-md-4 col-sm-6 col-xs-12">
@@ -74,7 +74,7 @@
                                             ?>                                           
                                         </select>
                                     </div>
-                                </div>-->
+                                </div>
                                 <div class="form-group row">
                                     <label class="control-label col-md-2 col-sm-2 col-xs-12  offset-md-2" for="service_item_id">Service Item<span class="text-danger">*</span>
                                     </label>

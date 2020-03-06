@@ -98,22 +98,6 @@
                     <?php
                 }if ($_SESSION['role_code'][0] == 'READONLY') {
                     ?>
-                                        <li class="nav-label">Add Complain</li>
-                    <li>
-                        <a class="has-arrow" href="<?php echo EMPLOYEE_ADD_TICKET_FORM_LINK; ?>" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Add Complain</span>
-                        </a>                               
-                    </li> 
-                    
-<!--                    <li class="nav-label">Complain</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-note menu-icon"></i><span class="nav-text">Complain</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?php //echo EMPLOYEE_ADD_TICKET_FORM_LINK; ?>">Add Complain</a></li>                              
-                        </ul>
-                    </li>-->
                     <li class="nav-label">Pending</li>
                     <li>
                         <a class="has-arrow" href="<?php echo FRONT_READONLY_COMPLAIN_LIST_LINK; ?>" aria-expanded="false">

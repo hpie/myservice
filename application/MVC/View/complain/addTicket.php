@@ -53,7 +53,7 @@
                                     <input type="text" readonly="" id="location" name="address" class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>                            
-<!--                            <div class="form-group">
+                            <div class="form-group">
                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_make_code">Service Item Make<span class="required">*</span>
                                 </label>
                                 <div class="col-md-4 col-sm-6 col-xs-12">
@@ -70,7 +70,7 @@
                                         ?>                                           
                                     </select>
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="form-group">
                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_id">Service Item<span class="required">*</span>
                                 </label>
