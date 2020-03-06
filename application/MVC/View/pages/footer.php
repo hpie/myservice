@@ -200,6 +200,16 @@ if (isset($_SESSION['assignComplain'])) {
                 format: 'yyyy-mm-dd',
                 autoclose: true
             });
+            $('#dp6').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                endDate: new Date()
+            });
+             $('#dp7').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                endDate: new Date()
+            });
             $('#dp5').datepicker({
                 dateFormat: 'MM yy',
                 format: 'mm-yyyy',
@@ -571,7 +581,8 @@ if (isset($_SESSION['assignComplain'])) {
                     "columns": [
                         {"data": "index"},
                         {"data": "item_code"},
-                        {"data": "item_make_code"},
+                        {"data": "item_name"},
+//                        {"data": "item_make_code"},
                         {"data": "item_desc"},
                         {"data": "item_status"},
                         {"data": "edit"}
@@ -583,6 +594,19 @@ if (isset($_SESSION['assignComplain'])) {
   
 <?php } ?>
 <?php if ($TITLE === TITLE_ADD_TICKET) { ?>    
+    <script>
+    $(document).ready(function () {
+        $('#service_item_iswarrenty').on('change', function() {
+            if(this.value==='YES'){                
+//                $('#dp6').prop('required',true);                
+                $("#dp6").attr("required",true);
+            }
+            else{
+                $('#dp6').removeAttr('required');
+            }
+        });
+    });
+    </script>
        <script type="text/javascript">
         var map;        
         function initMap() {                            

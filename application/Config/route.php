@@ -4,6 +4,7 @@ $route = array();
 $route['login'] = 'login_c';
 $route['logout'] = 'login_c/logout';
 $route['dashboard'] = 'admin_c';
+//$route['register'] = 'login_c/register';
 
 $route['complain-list/OPEN'] = 'admin_c/complainList';
 $route['assign-executive-form/(:any)'] = 'admin_c/assignExecutiveForm';
@@ -45,6 +46,8 @@ $route['employee-edit-ticket/(:any)'] = 'manager_c/editTicket';
 //******************************front side root***************************************//
 //***********************************************************************************//
 $route['employee-complain-list'] = 'manager_c/complainListEmployee';
+//$route['readonly-complain-list'] = 'manager_c/complainListReadonly';
+//$route['readonly-close-complain-list'] = 'manager_c/closeComplainListReadonly';
 $route['employee-dashboard'] = 'manager_c';
 $route['employee-login'] = 'login_c/loginEmployee';
 $route['employee-logout'] = 'login_c/logoutEmployee';

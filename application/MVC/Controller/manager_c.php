@@ -17,6 +17,18 @@ class manager_c extends Controllers {
         $this->data['TITLE'] = TITLE_COMPLAIN_LIST;
         loadviewFront('front/', 'complainlist.php', $this->data);
     }
+    
+//     public function complainListReadonly() {  
+////        sessionCheckEmployee(array('MANAGER','EXECUTEIVE'));
+//        $this->data['TITLE'] = TITLE_COMPLAIN_READONLY_LIST;
+//        loadviewFront('front/', 'complainlist_1.php', $this->data);
+//    }
+//    public function closeComplainListReadonly() {  
+////        sessionCheckEmployee(array('MANAGER','EXECUTEIVE'));
+//        $this->data['TITLE'] = TITLE_CLOSE_COMPLAIN_READONLY_LIST;
+//        loadviewFront('front/', 'complainlist_close.php', $this->data);
+//    }
+    
     public function complainAssignedListEmployee() {        
         sessionCheckEmployee(array('MANAGER'));
         $this->data['TITLE'] = TITLE_ASSIGNED_COMPLAIN_LIST;
@@ -97,10 +109,12 @@ class manager_c extends Controllers {
             }
             redirect(FRONT_EMPLOYEE_ASSIGN_EXECUTIVE_FORM_LINK.$_POST['ticket_id']);
     }    
-    public function addTicketForm() {    
+    public function addTicketForm() {         
         $serviceItem = $this->admin_m->getServiceItem(); 
+        $serviceItemMake = $this->admin_m->getServiceItemMake(); 
         $serviceType = $this->admin_m->getServiceType(); 
         $this->data['serviceItem'] = $serviceItem;
+        $this->data['serviceItemMake'] = $serviceItemMake;
         $this->data['serviceType'] = $serviceType;        
         $this->data['TITLE'] = TITLE_ADD_TICKET;
         loadviewFront('front/', 'addTicket.php', $this->data);
@@ -113,11 +127,14 @@ class manager_c extends Controllers {
         }else{
             $params1=array();
             $params1['customer_mobile_number']=$_POST['customer_mobile_number'];
-            $this->admin_m->addCustomer($params1,'service_customer');              
+            $this->admin_m->addCustomer($params1,'service_customer');                           
         }        
         $res = $this->admin_m->addTicket($_POST);
         if (!empty($res)) {
             $_SESSION['addData'] = 1;
+            if($_SESSION['adminDetails']['role_code_check']=="READONLY"){
+                    redirect(FRONT_READONLY_COMPLAIN_LIST_LINK);
+            }
             redirect(FRONT_EMPLOYEE_OPEN_COMPLAIN_LIST_LINK);
         }
         redirect(EMPLOYEE_ADD_TICKET_FORM_LINK);

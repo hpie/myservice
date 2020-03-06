@@ -17,7 +17,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Item Make List</h3>
+                <h3>Customer List</h3>
             </div>              
         </div>
         <div class="clearfix"></div>
@@ -29,22 +29,29 @@
                             <thead>
                                 <tr>
                                     <th>Index</th> 
-                                    <th>Item Code</th> 
-                                    <th>Item Name</th> 
-                                    <!--<th>Item Make Code</th>--> 
-                                    <th>Description</th>
-                                    <th>Status</th>
+                                    <th>Mobile No</th> 
+                                    <th>First name</th> 
+                                    <th>Last name</th> 
+                                    <th>Middle name</th> 
+                                    <th>Mobile No.</th>
+                                    <th>Email</th>                                    
+                                    <th>Address</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>customer_country</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Index</th> 
-                                    <th>Item Code</th> 
-                                    <th>Item Name</th> 
-                                    <!--<th>Item Make Code</th>--> 
-                                    <th>Description</th>
-                                    <th>Status</th>
+                                   <th>Index</th> 
+                                    <th>Employee ID</th> 
+                                    <th>First name</th> 
+                                    <th>Last name</th> 
+                                    <th>Middle name</th> 
+                                    <th>Mobile No.</th>
+                                    <th>Email</th>                                    
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

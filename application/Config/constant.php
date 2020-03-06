@@ -1,5 +1,5 @@
 <?php
-define('APPNAME', "My Service");
+define('APPNAME', "Mistry Motor Rewinding");
 define('ASSETS',BASE_URL.'assets/');
 define('ASSETS_FRONT',BASE_URL.'assets/frontassets/');
 define('LOGIN', BASE_URL ."login");
@@ -12,6 +12,8 @@ define('ORIGINAL_IMAGES',BASE_URL.'uploads/original/');
 //**************************Admin Title*********************//
 define('TITLE_DASHBOARD', "DASHBOARD");
 define('TITLE_COMPLAIN_LIST', "Complain List");
+define('TITLE_COMPLAIN_READONLY_LIST', "Complain List Readonly");
+define('TITLE_CLOSE_COMPLAIN_READONLY_LIST', "Close Complain List Readonly");
 define('TITLE_ASSIGNED_COMPLAIN_LIST', "Assigned Complain List");
 define('TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST', "Assigned Executeive Complain List");
 define('TITLE_REVISIT_COMPLAIN_LIST', "Revisit Complain List");
@@ -71,10 +73,12 @@ define('ADMIN_EDIT_ITEM_LINK', BASE_URL."edit-item/");
 //define('ADMIN_TAX_MASTER_EDIT_LINK', BASE_URL."tax-master-edit/");
 
 //**************************UserPanel Link*******************//
-define('FRONT_EMPLOYEE_HOME_LINK', BASE_URL ."employee-dashboard");
+define('FRONT_EMPLOYEE_HOME_LINK', BASE_URL ."employee-complain-list");
 define('FRONT_EMPLOYEE_LOGIN_LINK', BASE_URL ."employee-login");
 define('FRONT_EMPLOYEE_LOGOUT_LINK', BASE_URL ."employee-logout");
 define('FRONT_EMPLOYEE_OPEN_COMPLAIN_LIST_LINK', BASE_URL."employee-complain-list");
+define('FRONT_READONLY_COMPLAIN_LIST_LINK', BASE_URL."readonly-complain-list");
+define('FRONT_READONLY_CLOSE_COMPLAIN_LIST_LINK', BASE_URL."readonly-close-complain-list");
 define('FRONT_EMPLOYEE_REVISIT_COMPLAIN_LIST_LINK', BASE_URL."employee-revisit-complain-list");
 define('FRONT_EMPLOYEE_RESOLVED_COMPLAIN_LIST_LINK', BASE_URL."employee-resolved-complain-list");
 define('FRONT_EMPLOYEE_CANCLED_COMPLAIN_LIST_LINK', BASE_URL."employee-cancled-complain-list");

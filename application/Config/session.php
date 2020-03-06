@@ -93,6 +93,7 @@ function sessionDestroy() {
 }
 function sessionEmployee($row, $data) {
     $_SESSION['adminDetails'] = $row;
+    $_SESSION['adminDetails']['role_code_check']=$row['role_code'];
     $roleCode = array();
     foreach ($data as $row) {
         array_push($roleCode, $row['role_code']);

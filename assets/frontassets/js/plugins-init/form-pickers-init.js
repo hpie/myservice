@@ -8,6 +8,16 @@
         time: false,
         minDate: new Date()
     });
+    $('#mdate1').bootstrapMaterialDatePicker({
+        weekStart: 0,
+        time: false,
+        maxDate: new Date()
+    });
+    $('#mdate2').bootstrapMaterialDatePicker({
+        weekStart: 0,
+        time: false,
+        maxDate: new Date()
+    });
     $('#timepicker').bootstrapMaterialDatePicker({
         format: 'HH:mm',
         time: true,

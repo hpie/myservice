@@ -43,7 +43,7 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <h4 class="text-center">Rosella</h4>
+                                <h4 class="text-center"><?php echo APPNAME; ?></h4>
                                 <form class="mt-5 mb-5 login-input" method="post">
                                     <div class="form-group">
                                         <input type="text" name="username" class="form-control" placeholder="Username">
@@ -53,7 +53,7 @@
                                     </div>
                                     <button class="btn login-form__btn submit w-100">Login</button>
                                 </form>
-                                <!--<p class="mt-5 login-form__footer">Dont have account? <a href="page-register.html" class="text-primary">Sign Up</a> now</p>-->
+                                <p class="mt-5 login-form__footer">Dont have account? <a href="<?php echo BASE_URL.'register'; ?>" class="text-primary">Sign Up</a> now</p>
                             </div>
                         </div>
                     </div>

@@ -20,23 +20,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_make_code">Item Make Code
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_name">Item Name<span class="required">*</span>
                                 </label>
                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="item_make_code" required="">                                              
-                                        <option class="" value="" selected="" disabled=""i>Select Item Make Code</option>       
-                                        <?php
-                                        if ($result) {
-                                            foreach ($result as $row) {
-                                                ?>
-                                                <option class="" value="<?php echo $row['item_make_code']; ?>" <?php echo set_selected($row['item_make_code'], $singleItem['item_make_code']) ?>><?php echo $row['item_make_code']; ?></option>   
-                                                <?php
-                                            }
-                                        }
-                                        ?>                                           
-                                    </select>
+                                    <input type="text" name="item_name" value="<?php echo $singleItem['item_name']; ?>" required="required" class="form-control col-md-7 col-xs-12">
                                 </div>
-                            </div>  
+                            </div>
+                            
                                <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_desc">Description
                                 </label>

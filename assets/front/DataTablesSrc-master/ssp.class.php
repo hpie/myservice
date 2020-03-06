@@ -871,8 +871,72 @@ class SSP {
             "data" => $resData
         );
     }    
+ static function complainListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }
+                        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where
+			 $order
+			 $limit"
+        );
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table 
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table
+                             LEFT JOIN service_appointment sa
+                         ON sa.ticket_id=st.ticket_id"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
 
-        static function complainListManager($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $result = self::data_output($columns, $data);
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) { 
+                
+                if($row['ticket_status']){
+                      $row['Assign'] = "<a href='".BASE_URL."/assign-executive-form-manager/".$row['ticket_id']."' class='btn btn-xs btn-warning'> Assign <i class='fa fa-check'></i></a>";
+                }
+                
+                $row['index'] = '';  
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+        static function complainListReadonly($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
         $bindings = array();
         $db = self::db($conn);
         // Build the SQL query string from the request

@@ -105,6 +105,14 @@ class admin_m extends Models {
         return false;
     }
 
+     public function getServiceItemMake() {
+        $q = "  SELECT * FROM service_item_make";
+        $result = $this->query->select($q);
+        if ($data = $this->query->fetch_array($result)) {
+            return $data;
+        }
+        return false;
+    }
     public function getServiceItem() {
         $q = "  SELECT * FROM service_item";
         $result = $this->query->select($q);
@@ -147,7 +155,7 @@ class admin_m extends Models {
         return false;
     }
 
-    public function addEmployee($params) {
+    public function addEmployee($params) {        
         $empCode = $params['role_code'];
         unset($params['role_code']);
         $columns = $this->insertMaker($params, $values);

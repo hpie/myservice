@@ -18,7 +18,7 @@
  */
 
 // DB table to use
-$table = 'service_item';
+$table = 'service_customer';
 
 //$table = <<<EOT
 // (
@@ -32,18 +32,19 @@ $table = 'service_item';
 //EOT;
 
 // Table's primary key
-$primaryKey = 'item_code';
+$primaryKey = 'customer_mobile_number';
 
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array('db' => 'item_code', 'dt' =>'item_code'),  
-    array('db' => 'item_name', 'dt' =>'item_name'),  
-    array('db' => 'item_make_code', 'dt' => 'item_make_code'),
-    array('db' => 'item_desc', 'dt' =>'item_desc'),
-    array('db' => 'item_status', 'dt' =>'item_status')
+    array('db' => 'customer_mobile_number', 'dt' =>'customer_mobile_number'),     
+    array('db' => 'customer_fname', 'dt' => 'customer_fname'),
+    array('db' => 'customer_mname', 'dt' =>'customer_mname'),
+    array('db' => 'customer_lname', 'dt' =>'customer_lname'),
+    array('db' => 'customer_email', 'dt' =>'customer_email'),
+    array('db' => 'customer_address', 'dt' =>'customer_address')
 );
 include 'conn.php';
 $where ="";
@@ -53,7 +54,7 @@ $where ="";
  */
 require( 'ssp.class.php' );
 echo json_encode(
-    SSP::itemList($_REQUEST, $sql_details, $table, $primaryKey, $columns,$where)
+    SSP::customerList($_REQUEST, $sql_details, $table, $primaryKey, $columns,$where)
 );
 
 

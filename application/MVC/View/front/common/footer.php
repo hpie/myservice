@@ -39,7 +39,7 @@
     <script src="<?php echo ASSETS_FRONT; ?>js/plugins-init/form-pickers-init.js"></script>
 <?php } ?>
 
-<?php if ($TITLE === TITLE_CANCLED_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_LIST || $TITLE===TITLE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_REVISIT_COMPLAIN_LIST || $TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_ACCEPT_COMPLAIN_LIST || $TITLE === TITLE_RESOLVED_COMPLAIN_LIST) { ?>
+<?php if ($TITLE===TITLE_CLOSE_COMPLAIN_READONLY_LIST || $TITLE===TITLE_COMPLAIN_READONLY_LIST || $TITLE === TITLE_CANCLED_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_LIST || $TITLE===TITLE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_REVISIT_COMPLAIN_LIST || $TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_ACCEPT_COMPLAIN_LIST || $TITLE === TITLE_RESOLVED_COMPLAIN_LIST) { ?>
 <!-- Datatables -->
 <script src="<?php echo BASE_URL ?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
@@ -133,6 +133,113 @@ if (isset($_SESSION['assignComplain'])) {
                         {"data": "service_item_id"},
                         {"data": "service_type_id"},
                         {"data": "Assign"},
+                        {"data": "service_desc"},
+                        {"data": "ticket_status"}
+                       
+                    ]
+                });
+            }
+//            $('#searchYear').click(function () {
+//                var year = $('#dp4').val();                
+//                if (year != '')
+//                {
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable(year,'');
+//                } else
+//                {
+//                    alert('Select Year');
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable();
+//                }
+//            });
+//            $('#searchMonth').click(function () {
+//                var month = $('#dp5').val();               
+//                if (month != '')
+//                {
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable('',month);
+//                } else
+//                {
+//                    alert('Select Month');
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable();
+//                }
+//            });
+//            $('#searchTaxType').click(function () {
+//                var taxtype = $('#selectTaxType').children("option:selected").val();                             
+//                if (taxtype != '')
+//                {
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable('','',taxtype);
+//                } else
+//                {
+//                    alert('Select Tax Type');
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable();
+//                }
+//            });
+//            $('#searchFromToDate').click(function () {
+//                var searchFromToDate = $('.single_cal1').val();               
+//                if (searchFromToDate != '')
+//                {
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable('','','',searchFromToDate);
+//                } else
+//                {
+//                    alert('Select Proper Date');
+//                    $('#example').DataTable().destroy();
+//                    fill_datatable();
+//                }
+//            });           
+        });
+    </script>
+<?php } ?>  
+<?php if ($TITLE === TITLE_COMPLAIN_READONLY_LIST || $TITLE === TITLE_CLOSE_COMPLAIN_READONLY_LIST) { ?>
+    <script>
+        $(document).ready(function () {               
+            fill_datatable();
+            function fill_datatable(year = '',month = '',taxtype='',searchFromToDate='')
+            
+            { 
+                var monumber=<?php echo $_SESSION['adminDetails']['employee_mobile_number']; ?>;
+                var status = $('#status').val();                  
+                $('#example').DataTable({                                        
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/complainListReadonly.php' ?>",
+                        'data': {
+                            year:year,
+                            month:month,
+                            taxtype:taxtype,
+                            searchFromToDate:searchFromToDate,
+                            status:status,
+                            monumber:monumber
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "ticket_id"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "appointment_date"},
+                        {"data": "appointment_time_range"},
+                        {"data": "address"},                                               
+                        {"data": "service_item_id"},
+                        {"data": "service_type_id"},                        
                         {"data": "service_desc"},
                         {"data": "ticket_status"}
                        
@@ -675,7 +782,20 @@ if (isset($_SESSION['assignComplain'])) {
         });
     </script>
 <?php } ?>  
-    <?php if ($TITLE === TITLE_ADD_TICKET) { ?>    
+    <?php if ($TITLE === TITLE_ADD_TICKET) { ?> 
+    <script>
+    $(document).ready(function () {
+        $('#service_item_iswarrenty').on('change', function() {
+            if(this.value==='YES'){                
+//                $('#dp6').prop('required',true);                
+                $("#mdate1").attr("required",true);
+            }
+            else{
+                $('#mdate1').removeAttr('required');
+            }
+        });
+    });
+    </script>
        <script type="text/javascript">        
         var map;        
         function initMap() {                            

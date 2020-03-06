@@ -39,7 +39,6 @@
                             </div>                                            
                             <input type="hidden" name="location_latitude" id="latclicked">
                             <input type="hidden" name="location_longitude" id="longclicked">
-
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Location<span class="required">*</span>
                                 </label>                                                                
@@ -53,9 +52,25 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <input type="text" readonly="" id="location" name="address" class="form-control col-md-7 col-xs-12">
                                 </div>
-                            </div>
-                            
-                            
+                            </div>                            
+<!--                            <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_make_code">Service Item Make<span class="required">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <select class="form-control" required="">                                              
+                                        <option class="" value="" selected="" disabled=""i>Select Service Item Make</option>       
+                                        <?php
+                                        if ($serviceItemMake) {
+                                            foreach ($serviceItemMake  as $row) {
+                                                ?>
+                                                <option class="" value="<?php echo $row['item_make_code']; ?>"><?php echo $row['item_make_code']; ?></option>   
+                                                <?php
+                                            }
+                                        }
+                                        ?>                                           
+                                    </select>
+                                </div>
+                            </div>-->
                             <div class="form-group">
                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_id">Service Item<span class="required">*</span>
                                 </label>
@@ -66,7 +81,7 @@
                                         if ($serviceItem) {
                                             foreach ($serviceItem  as $row) {
                                                 ?>
-                                                <option class="" value="<?php echo $row['item_code']; ?>"><?php echo $row['item_code']; ?></option>   
+                                                <option class="" value="<?php echo $row['item_code']; ?>"><?php echo $row['item_name'].' ['.$row['item_code'].']'; ?></option>   
                                                 <?php
                                             }
                                         }
@@ -92,9 +107,55 @@
                                     </select>
                                 </div>
                             </div>
+
+
                             
-                            
-                            
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_serial">Item serial no.
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <input type="text" name="service_item_serial" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_iswarrenty">Warranty<span class="required">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="service_item_iswarrenty" id="service_item_iswarrenty" required="">                                              
+                                        <option class="" value="" selected="" disabled=""i>Select Item Warranty</option>       
+                                        <option class="" value="NO">NO</option>   
+                                        <option class="" value="YES">YES</option>   
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_warrentydt">Warranty Date
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <input type="text" name="service_item_warrentydt" id="dp6" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_purchasedt">Purchase Date
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <input type="text" name="service_item_purchasedt" id="dp7" readonly="" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_billno">Bill no.
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <input type="text" name="service_item_billno" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_storename">Store Name
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <input type="text" name="service_item_storename" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>                                                                                    
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_desc">Ticket Notes
                                 </label>
