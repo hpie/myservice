@@ -76,8 +76,7 @@ class admin_m extends Models {
         return false;
     }
 
-    public function changeSingleStatusAppointment($table, $status, $idColumn, $id) {
-        
+    public function changeSingleStatusAppointment($table, $status, $idColumn, $id) {        
         $q = "UPDATE $table SET appointment_status='$status' WHERE $idColumn='$id'";
 //        echo $q;die;
         $res = $this->query->update($q);
@@ -95,7 +94,14 @@ class admin_m extends Models {
         }
         return FALSE;
     }
-
+    public function getSingleAppointment($apointment_Id) {
+        $q = "  SELECT * FROM service_appointment WHERE appointment_id='$apointment_Id'";
+        $result = $this->query->select($q);
+        if ($row = $this->query->fetch($result)) {
+            return $row;
+        }
+        return false;
+    }
     public function getSingleTicket($ticketId) {
         $q = "  SELECT * FROM service_ticket WHERE ticket_id='$ticketId'";
         $result = $this->query->select($q);
@@ -121,7 +127,6 @@ class admin_m extends Models {
         }
         return false;
     }
-
     public function getServiceType() {
         $q = "  SELECT * FROM service_type";
         $result = $this->query->select($q);
@@ -177,6 +182,27 @@ class admin_m extends Models {
         return FALSE;
     }
 
+    public function updateAppointment($params, $appointment_id) {        
+        $columnsdesc = $this->updateMaker($params);
+        if ($columnsdesc) {
+            $q = "UPDATE service_appointment SET $columnsdesc WHERE appointment_id='$appointment_id'";
+            $res1 = $this->query->update($q);
+            if($res1)
+                return TRUE;
+        }
+        return FALSE;
+    }
+    public function updateTicket($params, $ticket_id) {        
+        $columnsdesc = $this->updateMaker($params);
+        if ($columnsdesc) {
+            $q = "UPDATE service_ticket SET $columnsdesc WHERE ticket_id='$ticket_id'";
+            $res1 = $this->query->update($q);
+            if($res1)
+                return TRUE;
+        }
+        return FALSE;
+    }
+    
     public function editemployee($params, $id) {
         $empCode = $params['role_code'];
         unset($params['role_code']);

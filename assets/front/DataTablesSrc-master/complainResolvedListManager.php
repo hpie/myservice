@@ -52,19 +52,15 @@ $columns = array(
     array('db' => 'st.invoice_amount', 'dt' =>'invoice_amount'),    
     array('db' => 'sa.appointment_time_range as sa_appointment_time_range', 'dt' =>'sa_appointment_time_range'),        
     array('db' => 'sa.appointment_date as sa_appointment_date', 'dt' =>'sa_appointment_date'),
-    array('db' => 'sa.appointment_status', 'dt' =>'appointment_status')
+    array('db' => 'sa.appointment_status', 'dt' =>'appointment_status'),
+    array('db' => 'sa.appointment_id', 'dt' =>'appointment_id')
 );
 include 'conn.php';
 
 
-$status=$_REQUEST['status'];
-if($status=="ALL"){
-    $statusArray=array('ASSIGNED');
-}else{
-    $statusArray[0]=$status;
-} 
-$status = join("','",$statusArray); 
 
+$statusArray=array('ASSIGNED');
+$status = join("','",$statusArray); 
 $where =" ticket_status IN('$status') AND sa.appointment_status='RESOLVED' ";
 $year=$_REQUEST['year'];
 $month=$_REQUEST['month'];

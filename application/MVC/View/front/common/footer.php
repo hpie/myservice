@@ -24,7 +24,7 @@
 <script src="<?php echo ASSETS_FRONT; ?>js/gleek.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>js/styleSwitcher.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>plugins/sweetalert/js/sweetalert.min.js"></script>
-<!--<script src="<?php echo ASSETS_FRONT; ?>plugins/sweetalert/js/sweetalert.init.js"></script>-->
+<!--<script src="<?php //echo ASSETS_FRONT; ?>plugins/sweetalert/js/sweetalert.init.js"></script>-->
 <?php if ($TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE===TITLE_ADD_TICKET) { ?>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate.min.js"></script>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate-init.js"></script>
@@ -65,28 +65,28 @@
         if (<?php
 if (isset($_SESSION['changeStatus'])) {
     echo $_SESSION['changeStatus'];
-}
+}else{echo 0;}
 ?> == 1) {
            swal("Hey, Good job !!", "Complain status changed successfully..!", "success");
-<?php echo $_SESSION['changeStatus'] = 0; ?>;
+<?php $_SESSION['changeStatus'] = 0; ?>
         }
         
 if (<?php
 if (isset($_SESSION['addData'])) {
     echo $_SESSION['addData'];
-}
+}else{echo 0;}
 ?> == 1) {
             swal("Hey, Good job !!", "Data added successfully..!", "success");
-<?php echo $_SESSION['addData'] = 0; ?>;
+<?php $_SESSION['addData'] = 0; ?>
         }          
         
         if (<?php
 if (isset($_SESSION['assignComplain'])) {
     echo $_SESSION['assignComplain'];
-}
+}else{echo 0;}
 ?> == 1) {
             swal("Hey, Good job !!", "Complain assigned successfully..!", "success");
-<?php echo $_SESSION['assignComplain'] = 0; ?>;
+<?php $_SESSION['assignComplain'] = 0; ?>
         } 
     });
 </script>
@@ -138,59 +138,7 @@ if (isset($_SESSION['assignComplain'])) {
                        
                     ]
                 });
-            }
-//            $('#searchYear').click(function () {
-//                var year = $('#dp4').val();                
-//                if (year != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable(year,'');
-//                } else
-//                {
-//                    alert('Select Year');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });
-//            $('#searchMonth').click(function () {
-//                var month = $('#dp5').val();               
-//                if (month != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable('',month);
-//                } else
-//                {
-//                    alert('Select Month');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });
-//            $('#searchTaxType').click(function () {
-//                var taxtype = $('#selectTaxType').children("option:selected").val();                             
-//                if (taxtype != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable('','',taxtype);
-//                } else
-//                {
-//                    alert('Select Tax Type');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });
-//            $('#searchFromToDate').click(function () {
-//                var searchFromToDate = $('.single_cal1').val();               
-//                if (searchFromToDate != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable('','','',searchFromToDate);
-//                } else
-//                {
-//                    alert('Select Proper Date');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });           
+            }          
         });
     </script>
 <?php } ?>  
@@ -245,59 +193,7 @@ if (isset($_SESSION['assignComplain'])) {
                        
                     ]
                 });
-            }
-//            $('#searchYear').click(function () {
-//                var year = $('#dp4').val();                
-//                if (year != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable(year,'');
-//                } else
-//                {
-//                    alert('Select Year');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });
-//            $('#searchMonth').click(function () {
-//                var month = $('#dp5').val();               
-//                if (month != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable('',month);
-//                } else
-//                {
-//                    alert('Select Month');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });
-//            $('#searchTaxType').click(function () {
-//                var taxtype = $('#selectTaxType').children("option:selected").val();                             
-//                if (taxtype != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable('','',taxtype);
-//                } else
-//                {
-//                    alert('Select Tax Type');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });
-//            $('#searchFromToDate').click(function () {
-//                var searchFromToDate = $('.single_cal1').val();               
-//                if (searchFromToDate != '')
-//                {
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable('','','',searchFromToDate);
-//                } else
-//                {
-//                    alert('Select Proper Date');
-//                    $('#example').DataTable().destroy();
-//                    fill_datatable();
-//                }
-//            });           
+            }          
         });
     </script>
 <?php } ?>  
@@ -346,7 +242,8 @@ if (isset($_SESSION['assignComplain'])) {
                         {"data": "service_type_id"},
                         {"data": "Assign"},
                         {"data": "service_desc"},
-                        {"data": "ticket_status"}                        
+                        {"data": "ticket_status"},
+                         {"data": "appointment_status"}                        
                     ]
                 });
             }    
@@ -368,9 +265,6 @@ if (isset($_SESSION['assignComplain'])) {
                     success: function (res) {
                         var res = $.parseJSON(res);
                         if (res.suceess) {
-//                            alert('#id_'+self.data('id'));
-//                            $('#id_'+self.data('id')).parents("tr").remove();
-//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
                             location.reload();
                         }
                     }
@@ -437,8 +331,8 @@ if (isset($_SESSION['assignComplain'])) {
                 self.attr('disabled', 'disabled');
 
                 var data = {
-                    'ticket_id': self.data('id'),
-                    'appointment_status': self.data('status')
+                    'appointment_id': self.data('appoid'),
+                    'appointment_status': self.data('appostatus')
                 };
                 $.ajax({
                     type: "POST",
@@ -508,31 +402,16 @@ if (isset($_SESSION['assignComplain'])) {
                     ]
                 });
             }  
-              $(document).on('click', '.btn_approve_reject', function () { 
-//              alert('hi')
+            $(document).on('click', '.btn_approve_reject', function () { 
                 var self = $(this);                               
-                if (!confirm('Are you sure want to close ticket?'))
+                if (!confirm('Are you sure want to procced?'))
                     return;
-                self.attr('disabled', 'disabled');
-
-                var data = {
-                    'ticket_id': self.data('id'),
-                    'appointment_status': self.data('status')
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK; ?>",
-                    data: data,
-                    success: function (res) {
-                        var res = $.parseJSON(res);
-                        if (res.suceess) {
-//                            alert('#id_'+self.data('id'));
-//                            $('#id_'+self.data('id')).parents("tr").remove();
-//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
-                            location.reload();
-                        }
-                    }
-                });
+                    self.attr('disabled', 'disabled');                
+                    var appointment_id=self.data('appoid');
+                    var ticket_id=self.data('id');
+                    var appointment_status=self.data('status');
+                    var ticket_status=self.data('appostatus');                
+                    window.location.href="<?php echo EXECUTIVE_CHANGE_STATUS_APPOINTMENT_LINK; ?>"+ticket_id+"/"+ticket_status+"/"+appointment_id+"/"+appointment_status;   
             });        
         });
     </script>
@@ -663,46 +542,14 @@ if (isset($_SESSION['assignComplain'])) {
                     ]
                 });
             }  
-              $(document).on('click', '.btn_approve_reject', function () {
+            $(document).on('click', '.btn_approve_reject', function () {
             
                 var self = $(this);                               
                 if (!confirm('Are you sure want to close ticket?'))
                     return;
-                self.attr('disabled', 'disabled');
-
-                var data = {
-                    'ticket_id': self.data('id'),
-                    'ticket_status': self.data('status')
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_TICKET_LINK; ?>",
-                    data: data,
-                    success: function (res) {
-                        var res = $.parseJSON(res);
-                        if (res.suceess) {
-                            location.reload();
-                        }
-                    }
-                });                
-                var data = {
-                    'ticket_id': self.data('id'),
-                    'appointment_status': self.data('status')
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK; ?>",
-                    data: data,
-                    success: function (res) {
-                        var res = $.parseJSON(res);
-                        if (res.suceess) {
-//                            alert('#id_'+self.data('id'));
-//                            $('#id_'+self.data('id')).parents("tr").remove();
-//                            swal("Hey, Good job !!", "Complain closed successfully..!", "success");
-                            location.reload();
-                        }
-                    }
-                });
+                self.attr('disabled', 'disabled');                
+                var ticket_id=self.data('id');             
+                window.location.href="<?php echo MANAGER_CLOSE_TICKET_LINK; ?>"+ticket_id;   
             });        
         });
     </script>

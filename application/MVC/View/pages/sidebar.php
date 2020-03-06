@@ -5,6 +5,12 @@
             <li>
                 <a href="<?php echo ADMIN_DASHBOARD_LINK; ?>"><i class="fa fa-dashboard"></i> Dashboard <span class="fa fa-chevron-right"></span></a>                    
             </li>
+            <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-right"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo ADMIN_CUSTOMER_LIST_LINK; ?>">Customer List</a>
+                    </li>                   
+                </ul>
+            </li>
             <li><a><i class="fa fa-users"></i> Employee <span class="fa fa-chevron-right"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo ADMIN_EMPLOYEE_LIST_LINK; ?>">Employee List</a>

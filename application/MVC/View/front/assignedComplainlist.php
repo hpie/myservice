@@ -20,7 +20,8 @@
                                         <th>Service Type</th>
                                         <th>Action</th>
                                         <th>Description</th>
-                                        <th>Status</th>                                       
+                                        <th>Ticket Status</th>                                       
+                                        <th>Appointment status</th>                                       
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -35,7 +36,8 @@
                                         <th>Service Type</th>
                                         <th>Action</th>
                                         <th>Description</th>
-                                        <th>Status</th>                                       
+                                        <th>Ticket Status</th>                                       
+                                        <th>Appointment status</th>                                       
                                     </tr>
                                 </tfoot>
                             </table>

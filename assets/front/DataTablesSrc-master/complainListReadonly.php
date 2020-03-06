@@ -52,7 +52,8 @@ $columns = array(
     array('db' => 'st.invoice_amount', 'dt' =>'invoice_amount'),    
     array('db' => 'sa.appointment_time_range as sa_appointment_time_range', 'dt' =>'sa_appointment_time_range'),        
     array('db' => 'sa.appointment_date as sa_appointment_date', 'dt' =>'sa_appointment_date'),
-    array('db' => 'sa.appointment_status', 'dt' =>'appointment_status')
+    array('db' => 'sa.appointment_status', 'dt' =>'appointment_status'),
+    array('db' => 'sa.appointment_id', 'dt' =>'appointment_id')
 );
 include 'conn.php';
 

@@ -16,6 +16,9 @@ $route['employee-list'] = 'admin_c/employeeList';
 $route['edit-employee-form/(:any)'] = 'admin_c/editEmployeeForm';
 $route['edit-employee/(:any)'] = 'admin_c/editEmployee';
 
+
+$route['customer-list'] = 'admin_c/customerList';
+
 $route['add-item-make-form'] = 'admin_c/addItemMakeForm';
 $route['add-item-make'] = 'admin_c/addItemMake';
 $route['item-make-list'] = 'admin_c/itemMakeList';
@@ -62,3 +65,9 @@ $route['employee-resolved-complain-list'] = 'manager_c/complainResolvedListEmplo
 $route['employee-cancled-complain-list'] = 'manager_c/complainCancledListEmployee';
 $route['emplyee-change-status-ticket'] = 'manager_c/changeStatusTicket';
 $route['emplyee-change-status-appointment'] = 'manager_c/changeStatusAppointment';
+
+$route['executive-change-status-appointment/(:any)/(:any)/(:any)/(:any)'] = 'manager_c/executiveChangeStatusAppointment';
+$route['manager-close-ticket/(:any)'] = 'manager_c/closeTicket';
+/*
+ * url/ticket_id/ticket_status/appointment_id/appointment_status
+ */

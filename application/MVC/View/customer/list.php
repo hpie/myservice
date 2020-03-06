@@ -32,26 +32,21 @@
                                     <th>Mobile No</th> 
                                     <th>First name</th> 
                                     <th>Last name</th> 
-                                    <th>Middle name</th> 
-                                    <th>Mobile No.</th>
+                                    <th>Middle name</th>                                     
                                     <th>Email</th>                                    
-                                    <th>Address</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>customer_country</th>
+                                    <th>Address</th>                                    
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                    <th>Index</th> 
-                                    <th>Employee ID</th> 
+                                    <th>Mobile No</th> 
                                     <th>First name</th> 
                                     <th>Last name</th> 
-                                    <th>Middle name</th> 
-                                    <th>Mobile No.</th>
+                                    <th>Middle name</th>                                     
                                     <th>Email</th>                                    
-                                    <th>Role</th>
+                                    <th>Address</th>                                  
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

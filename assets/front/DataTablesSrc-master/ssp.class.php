@@ -214,7 +214,7 @@ class SSP {
      *  @param  array $columns Column information array
      *  @return array          Server-side processing response array
      */
-       static function employeeList($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+      static function employeeList($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
         $bindings = array();
         $db = self::db($conn);
         // Build the SQL query string from the request
@@ -286,6 +286,64 @@ class SSP {
                     }
                 }
                 $row['role_code'] =$str;                
+                array_push($resData, $row);
+            }
+        }
+        /*
+         * Output
+         */
+        return array(
+            "draw" => isset($request['draw']) ? intval($request['draw']) : 0,
+            "recordsTotal" => intval($recordsTotal),
+            "recordsFiltered" => intval($recordsFiltered),
+            "data" => $resData
+        );
+    }    
+       static function customerList($request, $conn, $table, $primaryKey, $columns, $where_custom = '') {       
+        $bindings = array();
+        $db = self::db($conn);
+        // Build the SQL query string from the request
+        $limit = self::limit($request, $columns);
+        $order = self::order($request, $columns);
+        $where = self::filter($request, $columns, $bindings);
+        if ($where_custom) {
+            if ($where) {
+                $where .= ' AND ' . $where_custom;
+            } else {
+                $where .= 'WHERE ' . $where_custom;
+            }
+        }
+        
+        
+        // Main query to actually get the data
+        $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
+			 FROM $table                        
+			 $where
+			 $order
+			 $limit"
+        );
+                        
+        // Data set length after filtering
+        $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
+			 FROM $table                         
+			 $where"
+        );
+        $recordsFiltered = $resFilterLength[0][0];
+        // Total data set length
+        $resTotalLength = self::sql_exec($db, "SELECT COUNT({$primaryKey})
+			 FROM $table"    
+        );
+        $recordsTotal = $resTotalLength[0][0];
+
+        $result = self::data_output($columns, $data);        
+
+        $resData = array();
+
+        if (!empty($result)) {
+            foreach ($result as $row) {  
+                $cus_id=$row['customer_mobile_number'];
+                $row['edit'] = "<a href='".BASE_URL."/edit-customer-form/$cus_id' class='btn btn-xs btn-warning'>Edit <i class='fa fa-pencil'></i></a>";
+                $row['index'] = '';                              
                 array_push($resData, $row);
             }
         }
@@ -516,7 +574,7 @@ class SSP {
             foreach ($result as $row) { 
                 
                 if($row['ticket_status']){
-                      $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-status='CLOSED' title='Close ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Close</button>";
+                      $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-appoid='".$row['appointment_id']."' data-status='CLOSED' data-appostatus='OPEN' title='Close ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Close</button>";
                 }
                 
                 $row['index'] = '';  
@@ -589,10 +647,10 @@ class SSP {
         if (!empty($result)) {
             foreach ($result as $row) {                 
                 if($row['ticket_status']){
-                      $row['Assign'] = "
-                            <button type='button' data-id='".$row['ticket_id']."' data-status='REVISIT' title='Revisit ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."'>Revisit</button>
-                            <button type='button' data-id='".$row['ticket_id']."' data-status='RESOLVED' title='Resolve ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."' >Resolve</button>
-                            <button type='button' data-id='".$row['ticket_id']."' data-status='CANCLED' title='Cancle ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."' >Cancle</button>
+                      $row['Assign'] = "                            
+                            <button type='button' data-id='".$row['ticket_id']."' data-appoid='".$row['appointment_id']."' data-status='REVISIT' data-appostatus='OPEN' title='Revisit ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."'>Revisit</button>
+                            <button type='button' data-id='".$row['ticket_id']."' data-appoid='".$row['appointment_id']."' data-status='RESOLVED'data-appostatus='ASSIGNED' title='Resolve ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."' >Resolve</button>
+                            <button type='button' data-id='".$row['ticket_id']."' data-appoid='".$row['appointment_id']."' data-status='CANCLED' data-appostatus='ASSIGNED' title='Cancle ticket' class='btn btn-xs btn-danger btn_approve_reject id_".$row['ticket_id']."' >Cancle</button>
                             ";
                 }                
                 $row['index'] = '';  
@@ -657,7 +715,6 @@ class SSP {
                              "    
         );
         $recordsTotal = $resTotalLength[0][0];
-
         $result = self::data_output($columns, $data);
 
         $resData = array();
@@ -665,7 +722,7 @@ class SSP {
         if (!empty($result)) {
             foreach ($result as $row) {                 
                 if($row['ticket_status']){
-                      $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-status='ACCEPTED' title='Accept ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Accept</button>";
+                      $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-appoid='".$row['appointment_id']."' data-status='ASSIGNED' data-appostatus='ACCEPTED' title='Accept ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['appointment_id']."'>Accept</button>";
                 }                
                 $row['index'] = '';  
                 array_push($resData, $row);
@@ -694,7 +751,7 @@ class SSP {
             } else {
                 $where .= 'WHERE ' . $where_custom;
             }
-        }                        
+        }                         
         // Main query to actually get the data
         $data = self::sql_exec($db, $bindings, "SELECT " . implode(", ", self::pluck($columns, 'db')) . "
 			 FROM $table
@@ -723,16 +780,12 @@ class SSP {
         $result = self::data_output($columns, $data);
 
         $resData = array();
-
         if (!empty($result)) {
-            foreach ($result as $row) {                                 
-                
+            foreach ($result as $row) {                                                 
                 if($row['ticket_status']){
-                      $row['Assign'] = " 
-                          <button type='button' data-id='".$row['ticket_id']."' data-status='OPEN' title='Open ticket' class='btn btn-xs btn-success btn_approve_reject' id='id_".$row['ticket_id']."'>Open</button>
+                      $row['Assign'] = "                           
                             <a href='".BASE_URL."/assign-executive-form-manager/".$row['ticket_id']."' class='btn btn-xs btn-warning'> Assign <i class='fa fa-check'></i></a>";
-                }
-                
+                }                
                 $row['index'] = '';  
                 array_push($resData, $row);
             }
@@ -793,7 +846,7 @@ class SSP {
         if (!empty($result)) {
             foreach ($result as $row) {                                                 
                 if($row['ticket_status']){                                                
-                            $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-status='CLOSED' title='Close ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Close</button>";
+                            $row['Assign'] = "<button type='button' data-id='".$row['ticket_id']."' data-appoid='".$row['appointment_id']."' data-status='CLOSED' data-appostatus='CLOSED'  title='Close ticket' class='btn btn-xs btn-danger btn_approve_reject' id='id_".$row['ticket_id']."'>Close</button>";
                 }                
                 $row['index'] = '';  
                 array_push($resData, $row);
@@ -898,7 +951,7 @@ class SSP {
         // Data set length after filtering
         $resFilterLength = self::sql_exec($db, $bindings, "SELECT COUNT({$primaryKey})
 			 FROM $table 
-                             LEFT JOIN service_appointment sa
+                            LEFT JOIN service_appointment sa
                          ON sa.ticket_id=st.ticket_id
 			 $where"
         );

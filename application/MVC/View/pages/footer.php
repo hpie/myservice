@@ -81,101 +81,82 @@
     }
 </script>
 <script>
-
-//    $(function () {
-//        $('input[name="datefilter"]').daterangepicker({
-//            autoUpdateInput: false,
-//            locale: {
-//                cancelLabel: 'Clear'
-//            }
-//        });
-//        $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
-//            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' To ' + picker.endDate.format('MM/DD/YYYY'));
-//        });
-//        $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
-//            $(this).val('');
-//        });
-//
-//    });
     $(document).ready(function () {
 
         if (<?php
 if (isset($_SESSION['existrecordMobile'])) {
     echo $_SESSION['existrecordMobile'];
-}
+}else{echo 0;}
 ?> == 1) {
             var d = new PNotify({
                 title: 'Mobile number allready exist',
                 type: 'error',
                 styling: 'bootstrap3'
             });
-<?php echo $_SESSION['existrecordMobile'] = 0; ?>;
+<?php $_SESSION['existrecordMobile'] = 0; ?>
         }
         if (<?php
 if (isset($_SESSION['existrecordEmail'])) {
     echo $_SESSION['existrecordEmail'];
-}
+}else{echo 0;}
 ?> == 1) {
             var d = new PNotify({
                 title: 'Email allready exist',
                 type: 'error',
                 styling: 'bootstrap3'
             });
-<?php echo $_SESSION['existrecordEmail'] = 0; ?>;
+<?php $_SESSION['existrecordEmail'] = 0; ?>
         }
 
 
         if (<?php
 if (isset($_SESSION['dataupdate'])) {
     echo $_SESSION['dataupdate'];
-}
+}else{echo 0;}
 ?> == 1) {
             var d = new PNotify({
                 title: 'Data updated successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-<?php echo $_SESSION['dataupdate'] = 0; ?>;
+<?php $_SESSION['dataupdate'] = 0; ?>
         }
-
-
         if (<?php
 if (isset($_SESSION['addData'])) {
     echo $_SESSION['addData'];
-}
+}else{echo 0;}
 ?> == 1) {
             var d = new PNotify({
                 title: 'Add data successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-<?php echo $_SESSION['addData'] = 0; ?>;
+<?php $_SESSION['addData'] = 0; ?>
         }
-
 
         if (<?php
 if (isset($_SESSION['addEmployee'])) {
     echo $_SESSION['addEmployee'];
-}
+}else{echo 0;}
 ?> == 1) {
             var d = new PNotify({
                 title: 'Add data successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-<?php echo $_SESSION['addEmployee'] = 0; ?>;
+<?php $_SESSION['addEmployee'] = 0; ?>
         }
         if (<?php
 if (isset($_SESSION['assignComplain'])) {
     echo $_SESSION['assignComplain'];
-}
+}else{echo 0;}
 ?> == 1) {
             var d = new PNotify({
                 title: 'Appointment assigned successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-<?php echo $_SESSION['assignComplain'] = 0; ?>;
+<?php $_SESSION['assignComplain'] = 0; ?>
         }
 //        $('#dp4').datepicker({
 //            format: 'yyyy',
@@ -396,66 +377,10 @@ if (isset($_SESSION['assignComplain'])) {
                     fill_datatable();
                 }
             });
-
-
-    //            $(document).on('click', '.btn_approve_reject', function () {
-    //                var self = $(this);
-    //                var status = self.attr('data-status');
-    //                var user_status = 'ACTIVE';
-    //                if (status == 1)
-    //                    user_status = 'INACTIVE';
-    //                if (!confirm('Are you sure want to ' + user_status.toLocaleLowerCase() + ' employee?'))
-    //                    return;
-    //                self.attr('disabled', 'disabled');
-    //                var data = {
-    //                    'tax_employee_id': self.data('id'),
-    //                    'tax_employee_status': user_status
-    //                };
-    //                $.ajax({
-    //                    type: "POST",
-    //                    url: "<?php //echo ADMIN_EMPLOYEE_APPROVE_LINK  ?>",
-    //                    data: data,
-    //                    success: function (res) {
-    //                        var res = $.parseJSON(res);
-    //                        if (res.suceess) {
-    //                            var title = 'Click to deactivate employee';
-    //                            var class_ = 'btn_approve_reject btn btn-success btn-xs';
-    //                            var text = 'Active';
-    //                            var isactive = 1;
-    //
-    //                            if (status == 1) {
-    //                                title = 'Click to active employee';
-    //                                class_ = 'btn_approve_reject btn btn-danger btn-xs';
-    //                                text = 'Inactive';
-    //                                isactive = 0;
-    //                                new PNotify({
-    //                                    title: 'Employee InActived Successfully',
-    //                                    type: 'success',
-    //                                    styling: 'bootstrap3'
-    //                                });
-    //
-    //                            } else {
-    //                                new PNotify({
-    //                                    title: 'Employee Actived Successfully',
-    //                                    type: 'success',
-    //                                    styling: 'bootstrap3'
-    //                                });
-    //                            }
-    //                            self.removeClass().addClass(class_);
-    //                            self.attr({
-    //                                'data-status': isactive,
-    //                                'title': title
-    //                            });
-    //                            self.removeAttr('disabled');
-    //                            self.html(text);
-    //                        }
-    //                    }
-    //                });
-    //            });
         });
     </script>
 <?php } ?>    
-<?php if ($TITLE === TITLE_EMPLOYEE_LIST) { ?>
+    <?php if ($TITLE === TITLE_EMPLOYEE_LIST) { ?>
     <script>
         $(document).ready(function () {
             fill_datatable();
@@ -498,6 +423,55 @@ if (isset($_SESSION['assignComplain'])) {
                         {"data": "employee_mobile_number"},
                         {"data": "employee_email"},
                         {"data": "role_code"},
+                        {"data": "edit"}
+                    ]
+                });
+            }
+        });
+    </script>
+<?php } ?>    
+<?php if ($TITLE === TITLE_CUSTOMER_LIST) { ?>
+    <script>
+        $(document).ready(function () {
+            fill_datatable();
+            function fill_datatable(year = '', month = '', taxtype = '', searchFromToDate = '')
+            {
+                var status = $('#status').val();
+                $('#example').DataTable({
+                    responsive: {
+                        details: {
+                            type: 'column',
+                            target: 'tr'
+                        }
+                    },
+                    columnDefs: [{
+                            className: 'control',
+                            orderable: false,
+                            targets: 0
+                        }],
+                    "processing": true,
+                    "serverSide": true,
+                    "paginationType": "full_numbers",
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "ajax": {
+                        'type': 'POST',
+                        'url': "<?php echo BASE_URL . '/assets/front/DataTablesSrc-master/customerList.php' ?>",
+                        'data': {
+                            year: year,
+                            month: month,
+                            taxtype: taxtype,
+                            searchFromToDate: searchFromToDate,
+                            status: status
+                        }
+                    },
+                    "columns": [
+                        {"data": "index"},
+                        {"data": "customer_mobile_number"},
+                        {"data": "customer_fname"},
+                        {"data": "customer_mname"},
+                        {"data": "customer_lname"},
+                        {"data": "customer_email"},
+                        {"data": "customer_address"},                        
                         {"data": "edit"}
                     ]
                 });

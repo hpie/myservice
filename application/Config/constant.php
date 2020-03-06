@@ -25,6 +25,8 @@ define('TITLE_ADD_EMPLOYEE', "Add Employee");
 define('TITLE_EMPLOYEE_LIST', "Employee List");
 define('TITLE_EDIT_EMPLOYEE', "Edit Employee");
 
+define('TITLE_CUSTOMER_LIST', "Customer List");
+
 define('TITLE_ITEM_MAKE_LIST', "Item Make List");
 define('TITLE_ADD_ITEM_MAKE', "Add Item Make");
 define('TITLE_EDIT_ITEM_MAKE', "Edit Item Make");
@@ -35,6 +37,10 @@ define('TITLE_EDIT_ITEM', "Edit Item");
 
 define('TITLE_ADD_TICKET', "Add Ticket");
 define('TITLE_EDIT_TICKET', "Edit Ticket");
+
+define('TITLE_EXECUTIVE_CHANGE_STATUS_FORM', "Executive change complain status");
+define('TITLE_MANAGER_CLOSE_TICKET_FORM', "Manager close ticket");
+
 //**************************Admin Link********************//
 define('ADMIN_DASHBOARD_LINK', BASE_URL."dashboard");
 
@@ -49,6 +55,7 @@ define('ADMIN_ADD_TICKET_LINK', BASE_URL."add-ticket");
 define('ADMIN_EDIT_TICKET_FORM_LINK', BASE_URL."edit-ticket-form/");
 define('ADMIN_EDIT_TICKET_LINK', BASE_URL."edit-ticket/");
 
+define('ADMIN_CUSTOMER_LIST_LINK', BASE_URL."customer-list");
 
 define('ADMIN_ADD_EMPLOYEE_FORM_LINK', BASE_URL."add-employee-form");
 define('ADMIN_EMPLOYEE_LIST_LINK', BASE_URL."employee-list");
@@ -98,4 +105,6 @@ define('EMPLOYEE_EDIT_TICKET_LINK', BASE_URL."employee-edit-ticket/");
 
 define('EMPLOYEE_CHANGE_STATUS_TICKET_LINK', BASE_URL."emplyee-change-status-ticket");
 define('EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK', BASE_URL."emplyee-change-status-appointment");
+define('EXECUTIVE_CHANGE_STATUS_APPOINTMENT_LINK', BASE_URL."executive-change-status-appointment/");
+define('MANAGER_CLOSE_TICKET_LINK', BASE_URL."manager-close-ticket/");
 ?>

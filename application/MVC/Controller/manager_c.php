@@ -59,7 +59,6 @@ class manager_c extends Controllers {
         $this->data['TITLE'] = TITLE_ACCEPT_COMPLAIN_LIST;
         loadviewFront('front/', 'acceptedComplainlistExecuteive.php', $this->data);
     }        
-
     public function changeStatusTicket(){
         if(isset($_REQUEST['ticket_id'])){            
             $res = $this->admin_m->changeSingleStatus('service_ticket',$_REQUEST['ticket_status'],'ticket_id',$_REQUEST['ticket_id']);
@@ -73,8 +72,8 @@ class manager_c extends Controllers {
         }
     }
     public function changeStatusAppointment(){        
-        if(isset($_REQUEST['ticket_id'])){            
-            $res = $this->admin_m->changeSingleStatusAppointment('service_appointment',$_REQUEST['appointment_status'],'ticket_id',$_REQUEST['ticket_id']);
+        if(isset($_REQUEST['appointment_id'])){            
+            $res = $this->admin_m->changeSingleStatusAppointment('service_appointment',$_REQUEST['appointment_status'],'appointment_id',$_REQUEST['appointment_id']);
             if($res){
                 $_SESSION['changeStatus']=1;
                 $data = array(                   
@@ -83,7 +82,55 @@ class manager_c extends Controllers {
             }            
             echo json_encode($data);
         }
+    }          
+    public function closeTicket($tickiteId) { 
+        sessionCheckEmployee(array('MANAGER'));
+        if(isset($_POST['submit'])){
+            $params=array();
+            $params['clouser_notes']=$_POST['clouser_notes'];
+            $params['ticket_status']='CLOSED';
+            $res = $this->admin_m->updateTicket($params,$tickiteId); 
+            if($res){
+                 $_SESSION['changeStatus']=1;
+                redirect (FRONT_EMPLOYEE_OPEN_COMPLAIN_LIST_LINK);
+            }
+        }
+        $resultTicket = $this->admin_m->getSingleTicket($tickiteId);         
+        $this->data['resultTicket'] = $resultTicket;        
+        $this->data['TITLE'] = TITLE_MANAGER_CLOSE_TICKET_FORM;
+        loadviewFront('front/', 'close_ticket.php', $this->data);
     }
+    public function executiveChangeStatusAppointment($tickiteId,$ticket_status,$appointment_id,$appointment_status) { 
+        sessionCheckEmployee(array('EXECUTEIVE'));
+        if(isset($_POST['submit'])){
+            $params=array();
+            if(!empty($_POST['appointment_notes'])){                
+                $resultAppointment = $this->admin_m->getSingleAppointment($appointment_id);
+                if(!empty($resultAppointment['appointment_notes'])){                    
+                    $notesArray= json_decode($resultAppointment['appointment_notes']);                    
+                }else{
+                    $notesArray=array();
+                }
+                    $subNotes=array();
+                    $subNotes['notes']=$_POST['appointment_notes'];
+                    $subNotes['date']=date('Y-m-d H:i:s');
+                    array_push($notesArray, $subNotes);
+                    $params['appointment_notes']=json_encode($notesArray);                    
+            }            
+            $params['appointment_status']= $appointment_status;          
+            $res = $this->admin_m->updateAppointment($params,$appointment_id);
+            if($res){
+                $res = $this->admin_m->changeSingleStatus('service_ticket',$ticket_status,'ticket_id',$tickiteId);
+                $_SESSION['changeStatus']=1;
+                redirect(FRONT_EMPLOYEE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST_LINK);
+            }
+        }
+        $resultTicket = $this->admin_m->getSingleTicket($tickiteId);         
+        $this->data['resultTicket'] = $resultTicket;        
+        $this->data['TITLE'] = TITLE_EXECUTIVE_CHANGE_STATUS_FORM;
+        loadviewFront('front/', 'executiveChangeStatusForm.php', $this->data);
+    }
+    
     
     public function assignExecutiveForm($tickiteId) {  
         $result = $this->admin_m->getExecutive(); 
@@ -101,7 +148,15 @@ class manager_c extends Controllers {
             $params['appointment_date']=$_POST['appointment_date'];
             $params['appointment_time_range']=$_POST['appointment_time_range1'].' - '.$_POST['appointment_time_range2'];
             $params['employee_id']=$_POST['employee_id'];
-            $params['appointment_notes']=$_POST['appointment_notes']; 
+            
+            if(!empty($_POST['appointment_notes'])){
+                $notesArray=array();
+                $subNotes=array();
+                $subNotes['notes']=$_POST['appointment_notes'];
+                $subNotes['date']=date('Y-m-d H:i:s');
+                array_push($notesArray, $subNotes);
+                $params['appointment_notes']=json_encode($notesArray);
+            }             
             $res = $this->admin_m->assignExecutiveAdd($params);
             if($res){
                 $_SESSION['assignComplain']=1;

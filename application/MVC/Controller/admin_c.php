@@ -16,6 +16,8 @@ class admin_c extends Controllers {
         loadview('dashboard/', 'dashboard.php', $this->data);
     }
 
+    
+    
     public function complainList() {
         $this->data['TITLE'] = TITLE_COMPLAIN_LIST;
         loadview('complain/', 'list.php', $this->data);
@@ -49,7 +51,7 @@ class admin_c extends Controllers {
     }
 
     public function customerList() {
-        $this->data['TITLE'] = TITLE_EMPLOYEE_LIST;
+        $this->data['TITLE'] = TITLE_CUSTOMER_LIST;
         loadview('customer/', 'list.php', $this->data);
     }
 

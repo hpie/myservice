@@ -55,12 +55,7 @@ $columns = array(
 );
 include 'conn.php';
 
-$status=$_REQUEST['status'];
-if($status=="ALL"){
-    $statusArray=array('OPEN');
-}else{
-    $statusArray[0]=$status;
-} 
+$statusArray=array('OPEN');
 $status = join("','",$statusArray); 
 $where =" ticket_status IN('$status') ";
 
