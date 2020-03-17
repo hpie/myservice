@@ -1,5 +1,5 @@
 <?php
-define('APPNAME', "Mistry Motor Rewinding");
+define('APPNAME', "My service");
 define('ASSETS',BASE_URL.'assets/');
 define('ASSETS_FRONT',BASE_URL.'assets/frontassets/');
 define('LOGIN', BASE_URL ."login");

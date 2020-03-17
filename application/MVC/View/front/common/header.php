@@ -9,12 +9,12 @@
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" sizes="16x16" href="<?php echo ASSETS_FRONT; ?>images/favicon.png">
         <!-- Pignose Calender -->                           
-        <link href="<?php echo BASE_URL; ?>assets/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">               
+        <link href="<?php echo BASE_URL; ?>assets/adminassets/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">               
         <link href="<?php echo ASSETS_FRONT; ?>plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
-        <!-- Chartist -->
-<!--        <link rel="stylesheet" href="<?php echo ASSETS_FRONT; ?>plugins/chartist/css/chartist.min.css">
-        <link rel="stylesheet" href="<?php echo ASSETS_FRONT; ?>plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">-->
-        <!-- Custom Stylesheet -->
+         <!--Chartist--> 
+        <link rel="stylesheet" href="<?php echo ASSETS_FRONT; ?>plugins/chartist/css/chartist.min.css">
+        <link rel="stylesheet" href="<?php echo ASSETS_FRONT; ?>plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+        
     <?php if ($TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE === TITLE_ADD_TICKET) { ?>
     <!-- Custom Stylesheet -->
     <link href="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">    
@@ -25,12 +25,10 @@
     <link href="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">    
     
     <?php } ?>
-    <?php if ($TITLE===TITLE_CLOSE_COMPLAIN_READONLY_LIST || $TITLE===TITLE_COMPLAIN_READONLY_LIST || $TITLE === TITLE_CANCLED_COMPLAIN_LIST || $TITLE === TITLE_RESOLVED_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_LIST || $TITLE===TITLE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_REVISIT_COMPLAIN_LIST || $TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_ACCEPT_COMPLAIN_LIST) { ?>
-        <link href="<?php echo BASE_URL; ?>assets/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">  
-    <link href="<?php echo ASSETS_FRONT; ?>plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">      
+    <?php if ($TITLE===TITLE_CLOSE_COMPLAIN_READONLY_LIST || $TITLE===TITLE_COMPLAIN_READONLY_LIST || $TITLE === TITLE_CANCLED_COMPLAIN_LIST || $TITLE === TITLE_RESOLVED_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_LIST || $TITLE===TITLE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_REVISIT_COMPLAIN_LIST || $TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_ACCEPT_COMPLAIN_LIST) { ?>        
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">  
+    <link href="<?php echo ASSETS_FRONT; ?>plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">    
     <?php } ?>
     <link href="<?php echo ASSETS_FRONT; ?>plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
     <link href="<?php echo ASSETS_FRONT; ?>css/style.css" rel="stylesheet">

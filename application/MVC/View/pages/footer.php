@@ -24,54 +24,28 @@
 </div>
 <!-- jQuery -->
 
-<script src="<?php echo BASE_URL ?>assets/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/icheck/icheck.min.js"></script>
-<!-- FastClick -->
-<script src="<?php echo BASE_URL ?>assets/fastclick/lib/fastclick.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/icheck/icheck.min.js"></script>
 <!-- NProgress -->
-<script src="<?php echo BASE_URL ?>assets/nprogress/nprogress.js"></script>
-
+<script src="<?php echo BASE_URL ?>assets/adminassets/nprogress/nprogress.js"></script>
 <!-- DateJS -->
-<script src="<?php echo BASE_URL ?>assets/moment/min/moment.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/moment/min/moment.min.js"></script>
 <!-- PNotify -->
-<script src="<?php echo BASE_URL ?>assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="<?php echo BASE_URL ?>assets/pnotify/dist/pnotifyadmin.js"></script>    
-<!-- bootstrap-wysiwyg -->
-<script src="<?php echo BASE_URL ?>assets/editor/jquery.hotkeys.js"></script>
-<script src="<?php echo BASE_URL ?>assets/editor/prettify.js"></script>
+
 <!-- Datatables -->
-<script src="<?php echo BASE_URL ?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/buttons.flash.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>-->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js" type="text/javascript" ></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-
-
-<!--<script src="<?php echo BASE_URL; ?>/assets/front/js/jquery.dataTables.min.js" type="text/javascript"></script>-->
-<script type="text/javascript" language="javascript" src="<?php echo BASE_URL; ?>/assets/front/js/dataTables.responsive.min.js"></script>
-<!--Slider--> 
-<!-- ECharts -->
-<script src="<?php echo BASE_URL ?>assets/echarts/dist/echarts.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/echarts/map/js/world.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<link href="<?php echo BASE_URL ?>assets/adminassets/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 <!-- Custom Theme Scripts -->
-<script src="<?php echo BASE_URL ?>assets/build/js/custom.min.js"></script>
-<script src="<?php echo BASE_URL; ?>assets/moment/moment.min.js"></script>
-<!--<script src="<?php echo BASE_URL; ?>assets/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>-->
+<script src="<?php echo BASE_URL ?>assets/adminassets/build/js/custom.min.js"></script>
 <script>
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;

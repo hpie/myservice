@@ -17,20 +17,18 @@
 <!--**********************************
     Scripts
 ***********************************-->
-<script src="<?php echo BASE_URL ?>assets/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>plugins/common/common.min.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>js/custom.min.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>js/settings.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>js/gleek.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>js/styleSwitcher.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>plugins/sweetalert/js/sweetalert.min.js"></script>
-<!--<script src="<?php //echo ASSETS_FRONT; ?>plugins/sweetalert/js/sweetalert.init.js"></script>-->
 <?php if ($TITLE === TITLE_COMPLAIN_ASSIGN_FORM || $TITLE===TITLE_ADD_TICKET) { ?>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate.min.js"></script>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate-init.js"></script>
     <script src="<?php echo ASSETS_FRONT; ?>plugins/moment/moment.js"></script>
-    <script src="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>    
-   
+    <script src="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>      
     <!-- Date Picker Plugin JavaScript -->
     <script src="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <!-- Date range Plugin JavaScript -->
@@ -41,18 +39,11 @@
 
 <?php if ($TITLE===TITLE_CLOSE_COMPLAIN_READONLY_LIST || $TITLE===TITLE_COMPLAIN_READONLY_LIST || $TITLE === TITLE_CANCLED_COMPLAIN_LIST || $TITLE === TITLE_COMPLAIN_LIST || $TITLE===TITLE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_REVISIT_COMPLAIN_LIST || $TITLE === TITLE_EXECUTEIVE_ASSIGNED_COMPLAIN_LIST || $TITLE === TITLE_ACCEPT_COMPLAIN_LIST || $TITLE === TITLE_RESOLVED_COMPLAIN_LIST) { ?>
 <!-- Datatables -->
-<script src="<?php echo BASE_URL ?>assets/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo ASSETS_FRONT; ?>plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/buttons.flash.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script src="<?php echo BASE_URL ?>assets/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?php echo BASE_URL ?>assets/adminassets/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 <script type="text/javascript" language="javascript" src="<?php echo BASE_URL; ?>/assets/front/js/dataTables.responsive.min.js"></script>
 <?php } ?>
  <!--Circle progress -->

@@ -9,20 +9,18 @@
 
         <title><?php echo APPNAME; ?></title>
         <!-- Bootstrap -->
-        <script src="<?php echo BASE_URL; ?>assets/jquery/dist/jquery.min.js"></script>
-        <link href="<?php echo BASE_URL; ?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery.min.js"></script>
+        <link href="<?php echo BASE_URL; ?>assets/adminassets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
-        <link href="<?php echo BASE_URL; ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<?php echo BASE_URL; ?>assets/adminassets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- NProgress -->
-        <link href="<?php echo BASE_URL; ?>assets/nprogress/nprogress.css" rel="stylesheet">
-        <!-- Animate.css -->
-        <!--<link href="<?php echo BASE_URL; ?>assets/animate.css/animate.min.css" rel="stylesheet">-->
+        <link href="<?php echo BASE_URL; ?>assets/adminassets/nprogress/nprogress.css" rel="stylesheet">        
 
         <!-- Custom Theme Style -->
-        <link href="<?php echo BASE_URL; ?>assets/build/css/custom.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/jqueryui/jquery-ui.css">
-        <script src="<?php echo BASE_URL; ?>assets/jquery/dist/jquery.js"></script>
-        <script src="<?php echo BASE_URL; ?>assets/jqueryui/jquery-ui.js"></script>
+        <link href="<?php echo BASE_URL; ?>assets/adminassets/build/css/custom.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery-ui.css">
+        <script src="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery.js"></script>
+        <script src="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery-ui.js"></script>
         
         <script type="text/javascript">
             $(document).ready(function () {               

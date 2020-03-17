@@ -5,43 +5,27 @@
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
     <title><?php echo $TITLE ?></title>
     <!-- Bootstrap -->
-    <link href="<?php echo BASE_URL; ?>assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="<?php echo BASE_URL; ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     
-
-     <link href="<?php echo BASE_URL; ?>assets/datepicker1/css/datepicker.css" rel="stylesheet"> 
+     <link href="<?php echo BASE_URL; ?>assets/adminassets/datepicker1/css/datepicker.css" rel="stylesheet"> 
     <!-- NProgress -->
-    <link href="<?php echo BASE_URL; ?>assets/nprogress/nprogress.css" rel="stylesheet">        
-    <link href="<?php echo BASE_URL; ?>assets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">    
-    <link href="<?php echo BASE_URL; ?>assets/icheck/green.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/editor/prettify.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">  
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/nprogress/nprogress.css" rel="stylesheet">        
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">    
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/icheck/green.css" rel="stylesheet">
     
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">   
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
-
-
-
-    
-    
-    <!--<link href="<?php echo BASE_URL; ?>/assets/front/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>-->
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/assets/front/css/dataTables.responsive.css">        
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/datepicker/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/datepicker/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>          
        <!-- PNotify -->             
-    <link href="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifiadmin.css" rel="stylesheet">     
-    <!-- Custom Theme Style -->
-    <link href="<?php echo BASE_URL; ?>assets/build/css/custom.min.css" rel="stylesheet">   
-    
-    
+    <link href="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifiadmin.css" rel="stylesheet">         
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/build/css/custom.min.css" rel="stylesheet">      
     <style>
  #map {
    width: 100%;
