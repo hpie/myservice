@@ -106,10 +106,7 @@
                                         ?>                                           
                                     </select>
                                 </div>
-                            </div>
-
-
-                            
+                            </div>                            
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_serial">Item serial no.
                                 </label>
@@ -167,7 +164,7 @@
                             <div class="form-group">
                                 <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3">
                                     <button class="btn btn-primary" type="reset">Reset</button>
-                                    <button type="submit" class="btn btn-success">Assign</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>                            
                         </form>

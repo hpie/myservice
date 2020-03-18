@@ -27,33 +27,32 @@
     	    <div class="col-xs-12">
         	    <div class="form-wrap">                
                     <form role="form" action="<?php echo CLIENT_REGISTER_FORM_LINK; ?>" method="post" id="login-form" autocomplete="off">
-                        <div class="form-group">
-                            <label for="user_firstname" class="sr-only">Email</label>
-                            <input type="text" name="user_firstname" id="user_firstname" class="form-control" placeholder="Enter your first name" required="">
+                        <div class="form-group">                            
+                            <input type="text" name="customer_fname" id="customer_fname" class="form-control" placeholder="Enter your first name" required="">
                         </div>
-                        <div class="form-group">
-                            <label for="user_lastname" class="sr-only">Email</label>
-                            <input type="text" name="user_lastname" id="user_lastname" class="form-control" placeholder="Enter your last name" required="">
+                        <div class="form-group">                            
+                            <input type="text" name="customer_lname" id="customer_lname" class="form-control" placeholder="Enter your last name" required="">
                         </div>                        
-                        <div class="form-group">
-                            <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="user_email" id="email" class="form-control" placeholder="somebody@example.com" required="">
+                        <div class="form-group">                            
+                            <input type="text" name="customer_mobile_number" id="customer_mobile_number" minlength="10" maxlength="10" onkeypress="return isNumberKey(event)" class="form-control" placeholder="10 digit Mobile no" required="">
                         </div>
-<!--                        <div class="form-group">
-                            <label for="key" class="sr-only">Password</label>
-                            <input type="password" name="password" id="key" class="form-control" placeholder="Password" required="">
-                        </div>                       -->
+                        <div class="form-group">                            
+                            <input type="email" name="customer_email" id="customer_email" class="form-control" placeholder="Enter Your Email" required="">
+                        </div>
+                        <div class="form-group">                            
+                            <input type="password" name="customer_password" id="customer_password" class="form-control" placeholder="Password" required="">
+                        </div>                       
                         <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Sign Up">
                     </form>
-<!--                    <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
-                    <hr>-->
+                    <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
+                    <hr>
         	    </div>
     		</div> <!-- /.col-xs-12 -->
     	</div> <!-- /.row -->
     </div> <!-- /.container -->
 </section>
 
-<!--<div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
+<div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -71,9 +70,9 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<button type="button" class="btn btn-custom">Recovery</button>
 			</div>
-		</div>  /.modal-content 
-	</div>  /.modal-dialog 
-</div>  /.modal -->
+		</div>  
+	</div>
+</div> 
 
     </div>
 </div>

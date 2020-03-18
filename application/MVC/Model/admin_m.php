@@ -9,7 +9,7 @@ class admin_m extends Models {
     }
 
     public function getExist($table, $column, $id) {
-        $res = $this->checkRecord("$table", "$column", "$id");
+        $res = $this->checkRecord("$table", "$column", "'$id'");
         if ($res)
             return true;
         return false;

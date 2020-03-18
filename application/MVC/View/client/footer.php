@@ -113,9 +113,86 @@
 <script type="text/javascript" src="<?php echo CLIENT_ASSETS; ?>js/jquery.themepunch.tools.min.js"></script>
 <script src="<?php echo CLIENT_ASSETS; ?>js/summernote.js" type="text/javascript"></script>
 <script src="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifyadmin.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery-ui.js" type="text/javascript"></script>
+<script src=""></script>
 <script>
-    $(document).ready(function () {        
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+</script>
+<script type="text/javascript">
+        var map;        
+        function initMap() {                            
+            var latitude = 27.7172453; // YOUR LATITUDE VALUE
+            var longitude = 85.3239605; // YOUR LONGITUDE VALUE            
+            var myLatLng = {lat: latitude, lng: longitude};
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: myLatLng,
+              zoom: 14,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+               // disable the default map zoom on double click
+            });                                           
+            var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map          
+            });                                      
+            google.maps.event.addListener(map, 'click', function (event) {
+                document.getElementById('latclicked').value = event.latLng.lat();
+                document.getElementById('longclicked').value =  event.latLng.lng();        
+                var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                             document.getElementById('location').value =results[1].formatted_address;        
+                        }
+                    }
+                });
+                marker.setMap(null);    
+                marker = new google.maps.Marker({
+                  position: event.latLng, 
+                  map: map, 
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  title: event.latLng.lat()+', '+event.latLng.lng()
+                });                               
+            });            
+        }
+        </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOo8VS-DubgppGE3b94PsvweQyYqzrKGI&libraries=places&callback=initMap" async defer></script>
+<script>
+    $(document).ready(function () {     
+        if ('<?php
+if (isset($_SESSION['exitUserEmail'])) {
+    echo $_SESSION['exitUserEmail'];
+}else{echo 0;}
+?>' == '1') {
+            var d = new PNotify({
+                title: 'Email allready exist',
+                type: 'error',
+                styling: 'bootstrap3'
+            });
+            <?php $_SESSION['exitUserEmail'] = 0; ?>
+            }
+        
+        if ('<?php
+if (isset($_SESSION['exitUser'])) {
+    echo $_SESSION['exitUser'];
+}else{echo 0;}
+?>' == '1') {
+            var d = new PNotify({
+                title: 'Mobile number allready exist',
+                type: 'error',
+                styling: 'bootstrap3'
+            });
+            <?php $_SESSION['exitUser'] = 0; ?>
+            }
+        
+        
+        
         if ('<?php
 if (isset($_SESSION['loginsuccess'])) {
     echo $_SESSION['loginsuccess'];
@@ -135,7 +212,7 @@ if (isset($_SESSION['registersuccess'])) {
 }else{echo 0;}
 ?>' == '1') {
             var d = new PNotify({
-                title: 'Sign Up successfull. Your Password send on your email', 
+                title: 'Sign Up successfull.', 
                 type: 'success',
                 styling: 'bootstrap3'
             });

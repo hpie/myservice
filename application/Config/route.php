@@ -4,7 +4,6 @@ $route = array();
 $route['login'] = 'login_c';
 $route['logout'] = 'login_c/logout';
 $route['dashboard'] = 'admin_c';
-//$route['register'] = 'login_c/register';
 
 $route['complain-list/OPEN'] = 'admin_c/complainList';
 $route['assign-executive-form/(:any)'] = 'admin_c/assignExecutiveForm';

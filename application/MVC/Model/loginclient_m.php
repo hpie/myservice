@@ -22,9 +22,10 @@ class loginclient_m extends Models {
         return false;
     }     
     public function register($params) {
+        $params['customer_password']=md5($params['customer_password']);
         $columns = $this->insertMaker($params, $values);
         if ($columns) {
-            $q = "INSERT INTO  user($columns) values($values)";
+            $q = "INSERT INTO  service_customer($columns) values($values)";
             return $this->query->insert($q);
         }
         return FALSE;

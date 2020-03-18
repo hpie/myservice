@@ -1,11 +1,6 @@
 <?php
 require_once(APP_INCLUDE_Library.'image-resize/ImageResize.php');
 require_once(APP_INCLUDE_Library.'smtp_mail/smtp_send.php'); 
-//require_once(APP_INCLUDE_Library.'phpmailer/vendor/phpmailer/phpmailer/sendmail.php'); 
-//require_once(APP_INCLUDE_Library.'TCPDF-master/examples/tcpdf_include.php');
-require_once(APP_INCLUDE_Library.'TCPDF-master/tcpdf.php');
-//require_once(APP_INCLUDE_Library.'epayment/TreasuryPayment.php');
-//require_once(APP_INCLUDE_Library.'TCPDF-master/MYPDF.php');
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.

@@ -39,8 +39,18 @@
         <link rel="stylesheet" type="text/css" href="<?php echo CLIENT_ASSETS; ?>css/colors/red.css" media="screen" />
         <link href="<?php echo CLIENT_ASSETS; ?>css/loginpopup.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifiadmin.css" rel="stylesheet">        
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">                
+        <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->         
+        
+        <style>
+ #map {
+   width: 100%;
+   height: 300px;
+   background-color: grey;
+ }
+</style>
+        
     </head>
+    <link href="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <body>                      
         <!-- Header Section Start -->
         <div class="header">    
