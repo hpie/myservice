@@ -48,10 +48,6 @@ function sessionCheckEmployee($array) {
             }
         }
     }
-//    echo count($array);
-//    print_r($array);
-//    print_r($_SESSION['role_code']);die;
-    
     if (count($array) == 3) {
         if (isset ($_SESSION['role_code'][0]) && isset ($_SESSION['role_code'][1]) && isset ($_SESSION['role_code'][2])) {
             return true;
@@ -112,7 +108,9 @@ function sessionEmployee($row, $data) {
     }
     $_SESSION['role_code'] = $array;
 }
-
+function sessionUser($row) {
+    $_SESSION['userDetails'] = $row;
+}
 function sessionAdmin($row) {
     $_SESSION['adminDetails'] = $row;
 }

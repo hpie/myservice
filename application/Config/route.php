@@ -70,4 +70,14 @@ $route['executive-change-status-appointment/(:any)/(:any)/(:any)/(:any)'] = 'man
 $route['manager-close-ticket/(:any)'] = 'manager_c/closeTicket';
 /*
  * url/ticket_id/ticket_status/appointment_id/appointment_status
+ * 
  */
+
+
+$route['account'] = 'loginclient_c/login';
+$route['register'] = 'loginclient_c/register';
+$route['logout-client'] = 'loginclient_c/logoutClient';
+$route[''] = 'home_c/home';
+$route['home'] = 'home_c/home';
+$route['post-complain'] = 'home_c/postComplian';
+

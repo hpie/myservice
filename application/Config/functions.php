@@ -143,6 +143,16 @@ function returnSingleImage($imgArray, $field) {
     return $arr;
 }
 
+function promocode() {
+    $characters = 'ACEFHJKMNPRTUVWXY4937';
+    $string = '';
+    for ($i = 0; $i < 6; $i++) {
+        $string .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $string;
+}   
+
+
 function gen_uuid() {
 
 //      return hexdec(uniqid (rand ()));  

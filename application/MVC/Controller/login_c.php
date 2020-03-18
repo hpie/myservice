@@ -3,13 +3,11 @@
 class login_c extends Controllers {
 
     public $login_m;
-
     public function __construct() {
         parent::__construct();
         $this->login_m = $this->loadModel('login_m');
         $this->admin_m = $this->loadModel('admin_m');
     }
-
     public function invoke() {
         $error = '';
         $_SESSION['valid'] = 0;
@@ -27,7 +25,6 @@ class login_c extends Controllers {
         }
         loadLoginView('login/', 'login.php', $this->data);
     }
-
     public function loginEmployee() {
         $error = '';
         $_SESSION['valid'] = 0;
@@ -50,7 +47,6 @@ class login_c extends Controllers {
         sessionDestroy();
         redirect(LOGIN);
     }
-
     public function logoutEmployee() {
         sessionDestroy();
         redirect(FRONT_EMPLOYEE_LOGIN_LINK);

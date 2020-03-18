@@ -2,6 +2,7 @@
 define('APPNAME', "My service");
 define('ASSETS',BASE_URL.'assets/');
 define('ASSETS_FRONT',BASE_URL.'assets/frontassets/');
+define('CLIENT_ASSETS',BASE_URL.'assets/client/');
 define('LOGIN', BASE_URL ."login");
 define('LOGOUT', BASE_URL ."logout");
 define('LARGE_IMAGES',BASE_URL.'uploads/large/');
@@ -107,4 +108,15 @@ define('EMPLOYEE_CHANGE_STATUS_TICKET_LINK', BASE_URL."emplyee-change-status-tic
 define('EMPLOYEE_CHANGE_STATUS_APPOINTMENT_LINK', BASE_URL."emplyee-change-status-appointment");
 define('EXECUTIVE_CHANGE_STATUS_APPOINTMENT_LINK', BASE_URL."executive-change-status-appointment/");
 define('MANAGER_CLOSE_TICKET_LINK', BASE_URL."manager-close-ticket/");
+
+
+
+define('HOME', "HOME");
+define('CLIENT_LOGIN_TITLE', "Lohgin");
+define('CLIENT_COMPLAIN_POST_TITLE', "Complain");
+
+define('CLIENT_LOGIN_FORM_LINK', BASE_URL ."account");
+define('CLIENT_REGISTER_FORM_LINK', BASE_URL ."register");
+define('CLIENT_LOGOUT_LINK', BASE_URL ."logout-client");
+define('CLIENT_POST_COMPLAIN_LINK', BASE_URL ."post-complain");
 ?>
