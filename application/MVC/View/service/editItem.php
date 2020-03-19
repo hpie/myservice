@@ -13,6 +13,24 @@
                         <br />
                         <form class="form-horizontal form-label-left" method="post" name="addItemMake" action="<?php echo ADMIN_EDIT_ITEM_LINK.$itemId; ?>">                                                                                                                                                                                                                              
                             <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_make_code">Service Item Make<span class="required">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <select class="form-control" required="" name="item_make_code">                                              
+                                        <option class="" value="" selected="" disabled=""i>Select Service Item Make</option>       
+                                        <?php
+                                        if ($serviceItemMake) {
+                                            foreach ($serviceItemMake  as $row) {
+                                                ?>
+                                        <option class="" value="<?php echo $row['item_make_code']; ?>" <?php echo set_selected($singleItem['item_make_code'], $row['item_make_code']) ?>><?php echo $row['item_make_code']; ?></option>   
+                                                <?php
+                                            }
+                                        }
+                                        ?>                                           
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_code">Item Code<span class="required">*</span>
                                 </label>
                                 <div class="col-md-4 col-sm-6 col-xs-12">
@@ -25,8 +43,7 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <input type="text" name="item_name" value="<?php echo $singleItem['item_name']; ?>" required="required" class="form-control col-md-7 col-xs-12">
                                 </div>
-                            </div>
-                            
+                            </div>                            
                                <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_desc">Description
                                 </label>

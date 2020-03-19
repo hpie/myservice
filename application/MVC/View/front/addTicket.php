@@ -61,7 +61,7 @@
                                     <label class="control-label col-md-2 col-sm-2 col-xs-12  offset-md-2" for="item_make_code">Service Item Make<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                        <select class="form-control" required="">                                              
+                                        <select class="form-control" required="" name="item_make_code" id="item_make_code">                                              
                                             <option class="" value="" selected="" disabled=""i>Select Service Item Make</option>       
                                             <?php
                                             if ($serviceItemMake) {
@@ -79,17 +79,8 @@
                                     <label class="control-label col-md-2 col-sm-2 col-xs-12  offset-md-2" for="service_item_id">Service Item<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                        <select class="form-control" name="service_item_id" required="">                                              
-                                            <option class="" value="" selected="" disabled=""i>Select Service Item</option>       
-                                            <?php
-                                            if ($serviceItem) {
-                                                foreach ($serviceItem as $row) {
-                                                    ?>
-                                                    <option class="" value="<?php echo $row['item_code']; ?>"><?php echo $row['item_name'].' ['.$row['item_code'].']'; ?></option>                                                         
-                                                    <?php
-                                                }
-                                            }
-                                            ?>                                           
+                                        <select class="form-control" name="service_item_id" required="" id="service_item_id">                                              
+                                            <option class="" value="" selected="" disabled=""i>Select Service Item</option>                                                  
                                         </select>
                                     </div>
                                 </div>

@@ -35,22 +35,29 @@
         <!-- Responsive CSS Styles -->
         <link rel="stylesheet" href="<?php echo CLIENT_ASSETS; ?>css/responsive.css" type="text/css">
         <!-- Color CSS Styles  -->
-        <link href="<?php  echo CLIENT_ASSETS; ?>extras/summernote.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo CLIENT_ASSETS; ?>extras/summernote.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo CLIENT_ASSETS; ?>css/colors/red.css" media="screen" />
         <link href="<?php echo CLIENT_ASSETS; ?>css/loginpopup.css" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifiadmin.css" rel="stylesheet">        
-        <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->         
+ <?php if ($TITLE === CLIENT_COMPLAIN_POST_TITLE) { ?>        
+        <!-- Custom Stylesheet -->
+    <link href="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">    
+    <!-- Date picker plugins css -->
+    <link href="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="<?php echo ASSETS_FRONT; ?>plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">  
+ <?php } ?>     
         
+        <link href="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifiadmin.css" rel="stylesheet">                                 
         <style>
  #map {
    width: 100%;
    height: 300px;
    background-color: grey;
  }
-</style>
-        
-    </head>
-    <link href="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery-ui.css" rel="stylesheet" type="text/css"/>
+</style>      
+    </head>   
     <body>                      
         <!-- Header Section Start -->
         <div class="header">    

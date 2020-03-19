@@ -75,6 +75,9 @@ define('ADMIN_ADD_ITEM_LINK', BASE_URL."add-item");
 define('ADMIN_ITEM_LIST_LINK', BASE_URL."item-list");
 define('ADMIN_EDIT_ITEM_FORM_LINK', BASE_URL."edit-item-form/");
 define('ADMIN_EDIT_ITEM_LINK', BASE_URL."edit-item/");
+
+define('AJAX_ITEM_LIST_LINK', BASE_URL."ajax-item-list");
+
 //define('ADMIN_TAX_MASTER_ADD_FORM_LINK', BASE_URL."tax-master-add-form");
 //define('ADMIN_TAX_MASTER_INSERT_LINK', BASE_URL."tax-master-insert");
 //define('ADMIN_TAX_MASTER_EDIT_FORM_LINK', BASE_URL."tax-master-edit-form/");
@@ -113,7 +116,7 @@ define('MANAGER_CLOSE_TICKET_LINK', BASE_URL."manager-close-ticket/");
 
 define('HOME', "HOME");
 define('CLIENT_LOGIN_TITLE', "Lohgin");
-define('CLIENT_COMPLAIN_POST_TITLE', "Complain");
+define('CLIENT_COMPLAIN_POST_TITLE', "Post Complain");
 
 define('CLIENT_LOGIN_FORM_LINK', BASE_URL ."account");
 define('CLIENT_REGISTER_FORM_LINK', BASE_URL ."register");

@@ -5,11 +5,7 @@
         <div class="row">         
             <div class="col-md-12">
                 <div class="breadcrumb-wrapper">
-                    <h2 class="product-title">My Account</h2>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="ti-home"></i> Home</a></li>
-                        <li class="current">My Account</li>
-                    </ol>
+                    <h2 class="product-title">SignUp</h2>                    
                 </div>
             </div>
         </div>
@@ -37,7 +33,7 @@
                             <input type="text" name="customer_mobile_number" id="customer_mobile_number" minlength="10" maxlength="10" onkeypress="return isNumberKey(event)" class="form-control" placeholder="10 digit Mobile no" required="">
                         </div>
                         <div class="form-group">                            
-                            <input type="email" name="customer_email" id="customer_email" class="form-control" placeholder="Enter Your Email" required="">
+                            <input type="email" name="customer_email" id="customer_email" class="form-control" placeholder="Enter Your Email">
                         </div>
                         <div class="form-group">                            
                             <input type="password" name="customer_password" id="customer_password" class="form-control" placeholder="Password" required="">

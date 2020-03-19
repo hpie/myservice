@@ -108,13 +108,25 @@
 <script type="text/javascript" src="<?php echo CLIENT_ASSETS; ?>js/jasny-bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo CLIENT_ASSETS; ?>js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="<?php echo CLIENT_ASSETS; ?>js/form-validator.min.js"></script>
-<script type="text/javascript" src="<?php echo CLIENT_ASSETS; ?>js/contact-form-script.js"></script>    
 <script type="text/javascript" src="<?php echo CLIENT_ASSETS; ?>js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="<?php echo CLIENT_ASSETS; ?>js/jquery.themepunch.tools.min.js"></script>
 <script src="<?php echo CLIENT_ASSETS; ?>js/summernote.js" type="text/javascript"></script>
+
+ <?php if ($TITLE === CLIENT_COMPLAIN_POST_TITLE) { ?>
+<script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate.min.js"></script>
+    <script src="<?php echo ASSETS_FRONT; ?>plugins/validation/jquery.validate-init.js"></script>
+    <script src="<?php echo ASSETS_FRONT; ?>plugins/moment/moment.js"></script>
+    <script src="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>      
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="<?php echo ASSETS_FRONT; ?>plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="<?php echo ASSETS_FRONT; ?>plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<?php echo ASSETS_FRONT; ?>js/plugins-init/form-pickers-init.js"></script>
+ <?php } ?>
+    
 <script src="<?php echo BASE_URL; ?>assets/pnotify/dist/pnotifyadmin.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/adminassets/jquery/dist/jquery-ui.js" type="text/javascript"></script>
-<script src=""></script>
 <script>
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -123,256 +135,188 @@
         return true;
     }
 </script>
-<script type="text/javascript">
-        var map;        
-        function initMap() {                            
-            var latitude = 27.7172453; // YOUR LATITUDE VALUE
-            var longitude = 85.3239605; // YOUR LONGITUDE VALUE            
-            var myLatLng = {lat: latitude, lng: longitude};
-            
-            map = new google.maps.Map(document.getElementById('map'), {
-              center: myLatLng,
-              zoom: 14,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-               // disable the default map zoom on double click
-            });                                           
-            var marker = new google.maps.Marker({
-              position: myLatLng,
-              map: map          
-            });                                      
-            google.maps.event.addListener(map, 'click', function (event) {
-                document.getElementById('latclicked').value = event.latLng.lat();
-                document.getElementById('longclicked').value =  event.latLng.lng();        
-                var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
-                var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        if (results[1]) {
-                             document.getElementById('location').value =results[1].formatted_address;        
-                        }
-                    }
-                });
-                marker.setMap(null);    
-                marker = new google.maps.Marker({
-                  position: event.latLng, 
-                  map: map, 
-                  mapTypeId: google.maps.MapTypeId.ROADMAP,
-                  title: event.latLng.lat()+', '+event.latLng.lng()
-                });                               
-            });            
-        }
-        </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOo8VS-DubgppGE3b94PsvweQyYqzrKGI&libraries=places&callback=initMap" async defer></script>
+<?php if ($TITLE === CLIENT_COMPLAIN_POST_TITLE) { ?>
 <script>
-    $(document).ready(function () {     
+    $(document).ready(function () {        
+         $('#item_make_code').on('change', function () {                        
+            var urlReq = '<?php echo AJAX_ITEM_LIST_LINK ?>';
+            var id = this.value;            
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: {'id': id},
+                url: urlReq,
+                success: function (_returnData) {
+                    if (_returnData.result == "success") {
+                        $('#service_item_id option').remove();
+                        $('#service_item_id').append('<option class="" value="" selected="" disabled=""i>Select Service Item</option>');
+                        $.each(_returnData.commodity, function (key, value) {                          
+                            $('#service_item_id').append($("<option></option>").attr("value", value['item_code']).text(value['item_name']+' ['+value['item_code']+']'));
+                        });                        
+                    }
+                }
+            });                  
+        });
+        
+        
+        $('#service_item_iswarrenty').on('change', function() {
+            if(this.value==='YES'){                
+//                $('#dp6').prop('required',true);                
+                $("#mdate1").attr("required",true);
+            }
+            else{
+                $('#mdate1').removeAttr('required');
+            }
+        });
+    });
+</script>
+<script type="text/javascript">        
+    var map;
+    function initMap() {
+        var latitude = 27.7172453; // YOUR LATITUDE VALUE
+        var longitude = 85.3239605; // YOUR LONGITUDE VALUE            
+        var myLatLng = {lat: latitude, lng: longitude};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+                    // disable the default map zoom on double click
+        });
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map
+        });
+        google.maps.event.addListener(map, 'click', function (event) {
+            document.getElementById('latclicked').value = event.latLng.lat();
+            document.getElementById('longclicked').value = event.latLng.lng();
+            var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'latLng': latlng}, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        document.getElementById('location').value = results[1].formatted_address;
+                    }
+                }
+            });
+            marker.setMap(null);
+            marker = new google.maps.Marker({
+                position: event.latLng,
+                map: map,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                title: event.latLng.lat() + ', ' + event.latLng.lng()
+            });
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOo8VS-DubgppGE3b94PsvweQyYqzrKGI&libraries=places&callback=initMap" async defer></script>
+<?php } ?>
+<script>
+    $(document).ready(function () {
         if ('<?php
 if (isset($_SESSION['exitUserEmail'])) {
     echo $_SESSION['exitUserEmail'];
-}else{echo 0;}
+} else {
+    echo 0;
+}
 ?>' == '1') {
             var d = new PNotify({
                 title: 'Email allready exist',
                 type: 'error',
                 styling: 'bootstrap3'
             });
-            <?php $_SESSION['exitUserEmail'] = 0; ?>
-            }
-        
+<?php $_SESSION['exitUserEmail'] = 0; ?>
+        }
+
         if ('<?php
 if (isset($_SESSION['exitUser'])) {
     echo $_SESSION['exitUser'];
-}else{echo 0;}
+} else {
+    echo 0;
+}
 ?>' == '1') {
             var d = new PNotify({
                 title: 'Mobile number allready exist',
                 type: 'error',
                 styling: 'bootstrap3'
             });
-            <?php $_SESSION['exitUser'] = 0; ?>
-            }
-        
-        
-        
+<?php $_SESSION['exitUser'] = 0; ?>
+        }
+
+
+
         if ('<?php
 if (isset($_SESSION['loginsuccess'])) {
     echo $_SESSION['loginsuccess'];
-}else{echo 0;}
+} else {
+    echo 0;
+}
 ?>' == '1') {
             var d = new PNotify({
                 title: 'Login successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-            <?php $_SESSION['loginsuccess'] = 0; ?>
+<?php $_SESSION['loginsuccess'] = 0; ?>
         }
 
-if ('<?php
+        if ('<?php
 if (isset($_SESSION['registersuccess'])) {
     echo $_SESSION['registersuccess'];
-}else{echo 0;}
+} else {
+    echo 0;
+}
 ?>' == '1') {
             var d = new PNotify({
-                title: 'Sign Up successfull.', 
+                title: 'Sign Up successfull.',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-            <?php $_SESSION['registersuccess'] = 0; ?>
+<?php $_SESSION['registersuccess'] = 0; ?>
         }
-if ('<?php
+        if ('<?php
 if (isset($_SESSION['jobAddedSuccessfully'])) {
     echo $_SESSION['jobAddedSuccessfully'];
-}else{echo 0;}
+} else {
+    echo 0;
+}
 ?>' == '1') {
             var d = new PNotify({
                 title: 'Job added successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-            <?php $_SESSION['jobAddedSuccessfully'] = 0; ?>
+<?php $_SESSION['jobAddedSuccessfully'] = 0; ?>
         }
-        
+
         if ('<?php
 if (isset($_SESSION['AppllySuccessfully'])) {
     echo $_SESSION['AppllySuccessfully'];
-}else{echo 0;}
+} else {
+    echo 0;
+}
 ?>' == '1') {
             var d = new PNotify({
                 title: 'Job apply successfully',
                 type: 'success',
                 styling: 'bootstrap3'
             });
-            <?php $_SESSION['AppllySuccessfully'] = 0; ?>
-        }else if('<?php
+<?php $_SESSION['AppllySuccessfully'] = 0; ?>
+        } else if ('<?php
 if (isset($_SESSION['AppllySuccessfully'])) {
     echo $_SESSION['AppllySuccessfully'];
-}else{echo 0;}
-?>' == '2'){
+} else {
+    echo 0;
+}
+?>' == '2') {
             var d = new PNotify({
                 title: 'You have allready apply on this job',
                 type: 'info',
                 styling: 'bootstrap3'
             });
-            <?php $_SESSION['AppllySuccessfully'] = 0; ?>
+<?php $_SESSION['AppllySuccessfully'] = 0; ?>
         }
     });
-</script>
-<script>
-    $(document).ready(function () {
-       
-        $('#summernote').summernote({
-            height: 200,
-            toolbar: [
-              // [groupName, [list of button]]
-              ['style', ['bold', 'italic', 'underline', 'clear']],
-              ['font', ['strikethrough', 'superscript', 'subscript']],
-              ['fontsize', ['fontsize']],
-              ['color', ['color']],
-              ['para', ['ul', 'ol', 'paragraph']],
-              ['height', ['height']],              
-            ],
-            disableDragAndDrop: true            
-          });
-          
-           $('.note-group-select-from-files').remove();
-        
-    });
-    
-    
-    
-$(".add-fav").click(function(){
-    var id = $(this).attr("data-id");
-    var type = $(this).attr("data-type");
-    var data = {};
-    data['type'] =type;
-     var urlreq = '<?php echo BASE_URL; ?>' + 'user_add_fav_job/' + id;
-                $.ajax({type: "POST",
-                    dataType: "json",
-                    url: urlreq,
-                    data:data,
-                    success: function (_returnData) {
-                        if (_returnData.success = "success"){
-                            if(type == 'fav'){
-                            $(".addfav"+id).hide();
-                            $(".removefav"+id).show();
-                        }else{
-                            $(".removefav"+id).hide();
-                            $(".addfav"+id).show();
-                        }
-                            return false;
-                        }
-                           
-                    }
-                });
-});
-//$( function() {
-//    var availableTags = [
-//      "ActionScript",
-//      "AppleScript",
-//      "Asp",
-//      "BASIC",
-//      "C",
-//      "C++",
-//      "Clojure",
-//      "COBOL",
-//      "ColdFusion",
-//      "Erlang",
-//      "Fortran",
-//      "Groovy",
-//      "Haskell",
-//      "Java",
-//      "JavaScript",
-//      "Lisp",
-//      "Perl",
-//      "PHP",
-//      "Python",
-//      "Ruby",
-//      "Scala",
-//      "Scheme"
-//    ];
-//    $( "#tags" ).autocomplete({
-//      source: availableTags
-//    });
-//  } );
-  
-  $("#jobtitletags").keypress(function(){
-   
-     var urlreq = '<?php echo BASE_URL; ?>' + 'get_job_key_word';
-                $.ajax({type: "POST",
-                    dataType: "json",
-                    url: urlreq,
-                    success: function (_returnData) {
-                        if (_returnData.success = "success"){
-                            console.log(_returnData.Result);
-                            var availableTags = _returnData.Result;
-                                $( "#jobtitletags" ).autocomplete({
-                                  source: availableTags
-                                });
-                            return false;
-                        }
-                           
-                    }
-                });
-});
-
-  $("#jobcitiestags").keypress(function(){
-   
-     var urlreq = '<?php echo BASE_URL; ?>' + 'get_job_cities';
-                $.ajax({type: "POST",
-                    dataType: "json",
-                    url: urlreq,
-                    success: function (_returnData) {
-                        if (_returnData.success = "success"){
-                            console.log(_returnData.Result);
-                            var availableTags = _returnData.Result;
-                                $( "#jobcitiestags" ).autocomplete({
-                                  source: availableTags
-                                });
-                            return false;
-                        }
-                           
-                    }
-                });
-});
 </script>
 </body>
 </html>

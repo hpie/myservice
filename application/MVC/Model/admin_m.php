@@ -268,7 +268,14 @@ class admin_m extends Models {
         }
         return false;
     }
-
+    public function itemList($itemMakeCode) {
+        $q = "SELECT * FROM service_item WHERE item_make_code='$itemMakeCode'";
+        $result = $this->query->select($q);
+        if ($data = $this->query->fetch_array($result)) {
+            return $data;
+        }
+        return false;
+    }
     public function addItem($params) {
         $columns = $this->insertMaker($params, $values);
         if ($columns) {

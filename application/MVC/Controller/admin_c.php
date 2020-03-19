@@ -15,9 +15,6 @@ class admin_c extends Controllers {
         $this->data['TITLE'] = TITLE_DASHBOARD;
         loadview('dashboard/', 'dashboard.php', $this->data);
     }
-
-    
-    
     public function complainList() {
         $this->data['TITLE'] = TITLE_COMPLAIN_LIST;
         loadview('complain/', 'list.php', $this->data);
@@ -171,7 +168,6 @@ class admin_c extends Controllers {
         $this->data['TITLE'] = TITLE_ITEM_MAKE_LIST;
         loadview('service/', 'makeItemList.php', $this->data);
     }
-
     public function editItemMakeForm($itemId) {
         $result = $this->admin_m->getSingleItemMake($itemId);
         $this->data['result'] = $result;
@@ -179,7 +175,6 @@ class admin_c extends Controllers {
         $this->data['TITLE'] = TITLE_EDIT_ITEM_MAKE;
         loadview('service/', 'editItemMake.php', $this->data);
     }
-
     public function editItemMake($code) {
         $result = $this->admin_m->editItemMake($_POST, $code);
         if ($result) {
@@ -190,15 +185,14 @@ class admin_c extends Controllers {
             redirect(ADMIN_EDIT_ITEM_MAKE_FORM_LINK . $code);
         }
     }
-
+                
     public function addItemForm() {
         $result = $this->admin_m->getItemMake();
-        $this->data['result'] = $result;
+        $this->data['serviceItemMake'] = $result;
         $this->data['TITLE'] = TITLE_ADD_ITEM_MAKE;
         loadview('service/', 'addItem.php', $this->data);
     }
-
-    public function addItem() {
+    public function addItem() {        
         $res = $this->admin_m->addItem($_POST);
         if (!empty($res)) {
             $_SESSION['addData'] = 1;
@@ -206,22 +200,19 @@ class admin_c extends Controllers {
         }
         redirect(ADMIN_ADD_ITEM_FORM_LINK);
     }
-
     public function itemList() {
         $this->data['TITLE'] = TITLE_ITEM_LIST;
         loadview('service/', 'itemList.php', $this->data);
     }
-
     public function editItemForm($itemId) {
         $singleItem = $this->admin_m->getSingleItem($itemId);
         $result = $this->admin_m->getItemMake();
         $this->data['singleItem'] = $singleItem;
-        $this->data['result'] = $result;
+        $this->data['serviceItemMake'] = $result;
         $this->data['itemId'] = $itemId;
         $this->data['TITLE'] = TITLE_EDIT_ITEM;
         loadview('service/', 'editItem.php', $this->data);
     }
-
     public function editItem($code) {
         $result = $this->admin_m->editItem($_POST, $code);
         if ($result) {
@@ -232,7 +223,6 @@ class admin_c extends Controllers {
             redirect(ADMIN_EDIT_ITEM_FORM_LINK . $code);
         }
     }
-
     public function addTicketForm() {
         $serviceItem = $this->admin_m->getServiceItem();
         $serviceItemMake = $this->admin_m->getServiceItemMake();

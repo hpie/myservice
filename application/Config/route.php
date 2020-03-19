@@ -25,6 +25,7 @@ $route['edit-item-make-form/(:any)'] = 'admin_c/editItemMakeForm';
 $route['edit-item-make/(:any)'] = 'admin_c/editItemMake';
 
 
+$route['ajax-item-list'] = 'login_c/ajaxItemList';
 $route['add-item-form'] = 'admin_c/addItemForm';
 $route['add-item'] = 'admin_c/addItem';
 $route['item-list'] = 'admin_c/itemList';

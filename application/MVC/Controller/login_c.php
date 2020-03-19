@@ -50,7 +50,17 @@ class login_c extends Controllers {
     public function logoutEmployee() {
         sessionDestroy();
         redirect(FRONT_EMPLOYEE_LOGIN_LINK);
-    }    
+    } 
+    
+    public function ajaxItemList() {
+        $itemMakeCode = $_REQUEST['id'];
+        $result = $this->admin_m->itemList($itemMakeCode);        
+        $newArray = array();
+        $newArray['result'] = 'success';
+        $newArray['commodity'] = $result;        
+        echo json_encode($newArray);
+        die;
+    } 
 }
 
 ?>

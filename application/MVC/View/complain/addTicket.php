@@ -57,8 +57,8 @@
                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_make_code">Service Item Make<span class="required">*</span>
                                 </label>
                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <select class="form-control" required="">                                              
-                                        <option class="" value="" selected="" disabled=""i>Select Service Item Make</option>       
+                                    <select class="form-control" required="" name="item_make_code" id="item_make_code">                                              
+                                        <option class="" value="" selected="" disabled="">Select Service Item Make</option>       
                                         <?php
                                         if ($serviceItemMake) {
                                             foreach ($serviceItemMake  as $row) {
@@ -75,17 +75,8 @@
                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service_item_id">Service Item<span class="required">*</span>
                                 </label>
                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="service_item_id" required="">                                              
-                                        <option class="" value="" selected="" disabled=""i>Select Service Item</option>       
-                                        <?php
-                                        if ($serviceItem) {
-                                            foreach ($serviceItem  as $row) {
-                                                ?>
-                                                <option class="" value="<?php echo $row['item_code']; ?>"><?php echo $row['item_name'].' ['.$row['item_code'].']'; ?></option>   
-                                                <?php
-                                            }
-                                        }
-                                        ?>                                           
+                                    <select class="form-control" name="service_item_id" required="" id="service_item_id">                                              
+                                        <option class="" value="" selected="" disabled=""i>Select Service Item</option>                                              
                                     </select>
                                 </div>
                             </div>

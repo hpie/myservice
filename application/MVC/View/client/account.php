@@ -5,11 +5,7 @@
         <div class="row">         
             <div class="col-md-12">
                 <div class="breadcrumb-wrapper">
-                    <h2 class="product-title">My Account</h2>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="ti-home"></i> Home</a></li>
-                        <li class="current">My Account</li>
-                    </ol>
+                    <h2 class="product-title">Login</h2>                    
                 </div>
             </div>
         </div>

@@ -180,6 +180,28 @@ if (isset($_SESSION['assignComplain'])) {
                 format: 'HH:mm'
             });
 
+            $('#item_make_code').on('change', function () {                        
+            var urlReq = '<?php echo AJAX_ITEM_LIST_LINK ?>';
+            var id = this.value;            
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: {'id': id},
+                url: urlReq,
+                success: function (_returnData) {
+                    if (_returnData.result == "success") {
+                        $('#service_item_id option').remove();
+                        $('#service_item_id').append('<option class="" value="" selected="" disabled=""i>Select Service Item</option>');
+                        $.each(_returnData.commodity, function (key, value) {                          
+                            $('#service_item_id').append($("<option></option>").attr("value", value['item_code']).text(value['item_name']+' ['+value['item_code']+']'));
+                        });                        
+                    }
+                }
+            });                  
+        });
+
+
+
 
 <?php } ?>
     });

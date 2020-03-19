@@ -13,6 +13,24 @@
                         <br />
                         <form class="form-horizontal form-label-left" method="post" name="addItemMake" action="<?php echo ADMIN_ADD_ITEM_LINK; ?>">                                                                                                                                                                                                                              
                             <div class="form-group">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_make_code">Service Item Make<span class="required">*</span>
+                                </label>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <select class="form-control" required="" name="item_make_code">                                              
+                                        <option class="" value="" selected="" disabled=""i>Select Service Item Make</option>       
+                                        <?php
+                                        if ($serviceItemMake) {
+                                            foreach ($serviceItemMake  as $row) {
+                                                ?>
+                                                <option class="" value="<?php echo $row['item_make_code']; ?>"><?php echo $row['item_make_code']; ?></option>   
+                                                <?php
+                                            }
+                                        }
+                                        ?>                                           
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_code">Item Code<span class="required">*</span>
                                 </label>
                                 <div class="col-md-4 col-sm-6 col-xs-12">
